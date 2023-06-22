@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kubus\\source\\repos\\Gym Tracker\\Gym Tracker\\Gym Tracker.csproj": {}
+    "C:\\Users\\kubus\\Documents\\GitHub\\Gym_tracker\\Gym Tracker\\Gym Tracker.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kubus\\source\\repos\\Gym Tracker\\Gym Tracker\\Gym Tracker.csproj": {
+    "C:\\Users\\kubus\\Documents\\GitHub\\Gym_tracker\\Gym Tracker\\Gym Tracker.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kubus\\source\\repos\\Gym Tracker\\Gym Tracker\\Gym Tracker.csproj",
+        "projectUniqueName": "C:\\Users\\kubus\\Documents\\GitHub\\Gym_tracker\\Gym Tracker\\Gym Tracker.csproj",
         "projectName": "Gym Tracker",
-        "projectPath": "C:\\Users\\kubus\\source\\repos\\Gym Tracker\\Gym Tracker\\Gym Tracker.csproj",
+        "projectPath": "C:\\Users\\kubus\\Documents\\GitHub\\Gym_tracker\\Gym Tracker\\Gym Tracker.csproj",
         "packagesPath": "C:\\Users\\kubus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kubus\\source\\repos\\Gym Tracker\\Gym Tracker\\obj\\",
+        "outputPath": "C:\\Users\\kubus\\Documents\\GitHub\\Gym_tracker\\Gym Tracker\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [

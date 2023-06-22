@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JqQg2t5zbfJqQTHCVs0OGlI3uw4Mw3SxCJ7nlel/tRj+7UbLqQu3Tl+C5H/jaHQhvcA3dGg+CzvQ9dqB/Z6yyQ==",
+  "dgSpecHash": "o7JMrKqB9PPLa7LULQb2j53yQ/B+7sO0sWLib0I4LyMxYaF3y3rxObDFkIHeaS5fyV6BOiAokDbQwsCCWMWCfw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\kubus\\source\\repos\\Gym Tracker\\Gym Tracker\\Gym Tracker.csproj",
+  "projectFilePath": "C:\\Users\\kubus\\Documents\\GitHub\\Gym_tracker\\Gym Tracker\\Gym Tracker.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kubus\\.nuget\\packages\\googlegson\\2.9.1.1\\googlegson.2.9.1.1.nupkg.sha512",
     "C:\\Users\\kubus\\.nuget\\packages\\microsoft.extensions.configuration\\7.0.0\\microsoft.extensions.configuration.7.0.0.nupkg.sha512",

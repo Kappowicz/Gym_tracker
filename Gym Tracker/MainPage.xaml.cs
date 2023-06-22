@@ -10,6 +10,8 @@ public partial class MainPage : ContentPage
     {
         InitializeComponent();
 
+        UIManager.Instance.CurrentMainPage = this;
+
         stackLayout = (VerticalStackLayout)FindByName("MainPageVerticalStackLayout");
 
         InitializeWorkoutButtons();
@@ -18,7 +20,7 @@ public partial class MainPage : ContentPage
 
     public void InitializeWorkoutButtons()
     {
-        for (int i = 0; i < WorkoutManager.Instance.Workouts.Count; i++)
+        for (int i = WorkoutManager.Instance.Workouts.Count - 1; i >= 0; i--) //Show the workouts from new to last
         {
             Button currentButton = new()
             {
@@ -56,6 +58,18 @@ public partial class MainPage : ContentPage
     {
         //There will be code to open specified workout
         Debug.WriteLine("This button index: " + index);
+    }
+
+    public void AddButtonForCreatedWorkout()
+    {
+        Button currentButton = new()
+        {
+            Text = WorkoutManager.Instance.Workouts[^1].Name, //^1 is equal to WorkoutManager.Instance.Workouts.Count - 1
+            HorizontalOptions = LayoutOptions.Center,
+
+        };
+
+        stackLayout.Children.Insert(1, currentButton);
     }
 }
 
