@@ -69,6 +69,12 @@
                 Name = name;
                 Exercises = exercises;
             }
+
+            public Workout()
+            {
+                Name = "";
+                Exercises = new List<Exercise>();
+            }
         }
         public struct Exercise
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Gym_Tracker
 {
-    interface IChooseExercise
+    public interface IChooseExercise
     {
         void ExerciseChoosen(int exerciseIndex);
     }

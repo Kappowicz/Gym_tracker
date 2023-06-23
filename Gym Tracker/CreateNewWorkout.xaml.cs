@@ -29,9 +29,11 @@ public partial class CreateNewWorkout : ContentPage, IChooseExercise
             ));
 
             UIManager.Instance.CurrentMainPage.AddButtonForCreatedWorkout();
-            Debug.WriteLine(WorkoutManager.Instance.Workouts.Count);
 
-            //There should be code to save created workout
+            CurrentlyCreatedWorkout.Name = WorkoutName.Text;
+
+            WorkoutManager.Instance.Workouts.Add(CurrentlyCreatedWorkout);
+
             Navigation.PopAsync();
         }
     }
@@ -59,7 +61,7 @@ public partial class CreateNewWorkout : ContentPage, IChooseExercise
 
     public void AddNewExerciseButtonClicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new ChooseExercise());
+        Navigation.PushAsync(new ChooseExercise(this));
     }
 
     public async void DisplayPopupWorkoutNameTaken()
@@ -75,5 +77,13 @@ public partial class CreateNewWorkout : ContentPage, IChooseExercise
     public void ExerciseChoosen(int exerciseIndex)
     {
         CurrentlyCreatedWorkout.Exercises.Add(WorkoutManager.Instance.SavedExercies[exerciseIndex]);
+
+        Button currentButton = new()
+        {
+            Text = WorkoutManager.Instance.SavedExercies[exerciseIndex].Name,
+            HorizontalOptions = LayoutOptions.Fill
+        };
+
+        stackLayout.Insert(2, currentButton);
     }
 }
