@@ -3,15 +3,16 @@ using static Gym_Tracker.WorkoutManager;
 
 namespace Gym_Tracker;
 
-public partial class CreateNewWorkout : ContentPage
+public partial class CreateNewWorkout : ContentPage, IChooseExercise
 {
     private readonly VerticalStackLayout stackLayout;
-
+    private Workout CurrentlyCreatedWorkout;
     public CreateNewWorkout()
     {
         InitializeComponent();
 
         stackLayout = (VerticalStackLayout)FindByName("CreatenewWorkoutVerticalStackLayout");
+        CurrentlyCreatedWorkout = new Workout();
     }
 
     public void SaveAndGoBackButtonClicked(object sender, EventArgs e)
@@ -69,5 +70,10 @@ public partial class CreateNewWorkout : ContentPage
     public async void DisplayPopupEmptyWorkoutName()
     {
         await DisplayAlert("Workout Name", "Workout name cannot be empty.", "OK");
+    }
+
+    public void ExerciseChoosen(int exerciseIndex)
+    {
+        CurrentlyCreatedWorkout.Exercises.Add(WorkoutManager.Instance.SavedExercies[exerciseIndex]);
     }
 }

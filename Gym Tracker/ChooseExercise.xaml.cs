@@ -1,5 +1,7 @@
 using Microsoft.Maui.Controls;
-
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Graphics;
+using System.Threading.Tasks;
 namespace Gym_Tracker;
 
 public partial class ChooseExercise : ContentPage
