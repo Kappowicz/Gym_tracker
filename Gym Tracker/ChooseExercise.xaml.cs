@@ -1,6 +1,7 @@
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
+using System.Diagnostics;
 using System.Threading.Tasks;
 namespace Gym_Tracker;
 
@@ -17,6 +18,11 @@ public partial class ChooseExercise : ContentPage
 
         this.chooseExerciseHandler = chooseExerciseHandler;
 
+        GenerateAllExercisesGrids();
+    }
+
+    public void GenerateAllExercisesGrids()
+    {
         for (int i = 0; i < WorkoutManager.Instance.SavedExercies.Count; i++)
         {
             //Creates grid with a small image on the left and a button with name on the right 
@@ -53,10 +59,76 @@ public partial class ChooseExercise : ContentPage
         }
     }
 
+    public void DeleteAllExerciseGrids()
+    {
+        for (int i = stackLayout.Children.Count - 1; i >= 1; i--) //the first element is Entry
+        {
+            stackLayout.Children.RemoveAt(i);
+        }
+    }
+
     public void OnChoosenExerciseButtonClicked(int exerciseIndex)
     {
         chooseExerciseHandler.ExerciseChoosen(exerciseIndex);
 
         Navigation.PopAsync();
+    }
+
+    /*
+     * if (((Button)((Grid)stackLayout.Children[i]).Children[1]).Text.Contains(((Entry)sender).Text) == false)
+            {
+                continue;
+            }
+     * 
+     */
+
+    public void OnExerciseNameSearchTextChanged(object sender, TextChangedEventArgs e)
+    {
+        //TODO: It has a lot of room for improvement, for example save each added character and deleted buttons to set, and add deleted buttons when character deleted,
+        DeleteAllExerciseGrids();
+        //Debug.WriteLine(stackLayout.Children.Count);
+        
+        for (int i = 0; i < WorkoutManager.Instance.SavedExercies.Count; i++)
+        {
+
+            if (WorkoutManager.Instance.SavedExercies[i].Name.ToLower().Contains(((Entry)sender).Text.ToLower()) == false)
+            {
+                continue;
+            }
+            
+            //Creates grid with a small image on the left and a button with name on the right 
+            Button currentButton = new()
+            {
+                Text = WorkoutManager.Instance.SavedExercies[i].Name,
+                HorizontalOptions = LayoutOptions.Fill
+            };
+            Debug.WriteLine(currentButton.Text);
+
+            int currentIndex = i; //this makes pass to function actual index of currently created button
+            currentButton.Clicked += (sender, e) => OnChoosenExerciseButtonClicked(currentIndex);
+
+            Image currentImage = new()
+            {
+                Source = ImageSource.FromFile(WorkoutManager.Instance.SavedExercies[i].ImagePath),
+                MaximumHeightRequest = 50,
+                MaximumWidthRequest = 50,
+            };
+
+            Grid grid = new();
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto }); // Image column
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star }); // Button column
+
+            grid.Children.Add(currentImage);
+            grid.Children.Add(currentButton);
+
+            Grid.SetRow(currentImage, 0);
+            Grid.SetColumn(currentImage, 0);
+
+            Grid.SetRow(currentButton, 0);
+            Grid.SetColumn(currentButton, 1);
+
+            stackLayout.Children.Add(grid);
+        }
+        //Debug.WriteLine(stackLayout.Children.Count);
     }
 }
