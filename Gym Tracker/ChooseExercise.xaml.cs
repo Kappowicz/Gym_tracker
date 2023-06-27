@@ -1,8 +1,6 @@
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Graphics;
-using System.Diagnostics;
-using System.Threading.Tasks;
+using static Gym_Tracker.WorkoutManager;
+using System.Collections.ObjectModel;
+
 namespace Gym_Tracker;
 
 public partial class ChooseExercise : ContentPage
@@ -11,8 +9,8 @@ public partial class ChooseExercise : ContentPage
     private readonly IChooseExercise chooseExerciseHandler;
 
     public ChooseExercise(IChooseExercise chooseExerciseHandler)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         stackLayout = (VerticalStackLayout)FindByName("ChooseExerciseVerticalStackLayout");
 
@@ -23,40 +21,7 @@ public partial class ChooseExercise : ContentPage
 
     public void GenerateAllExercisesGrids()
     {
-        for (int i = 0; i < WorkoutManager.Instance.SavedExercies.Count; i++)
-        {
-            //Creates grid with a small image on the left and a button with name on the right 
-            Button currentButton = new()
-            {
-                Text = WorkoutManager.Instance.SavedExercies[i].Name,
-                HorizontalOptions = LayoutOptions.Fill
-            };
-
-            int currentIndex = i; //this makes pass to function actual index of currently created button
-            currentButton.Clicked += (sender, e) => OnChoosenExerciseButtonClicked(currentIndex);
-
-            Image currentImage = new()
-            {
-                Source = ImageSource.FromFile(WorkoutManager.Instance.SavedExercies[i].ImagePath),
-                MaximumHeightRequest = 50,
-                MaximumWidthRequest = 50,
-            };
-
-            Grid grid = new();
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto }); // Image column
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star }); // Button column
-
-            grid.Children.Add(currentImage);
-            grid.Children.Add(currentButton);
-
-            Grid.SetRow(currentImage, 0);
-            Grid.SetColumn(currentImage, 0);
-
-            Grid.SetRow(currentButton, 0);
-            Grid.SetColumn(currentButton, 1);
-
-            stackLayout.Children.Add(grid);
-        }
+        GenerateExerciseGrid(WorkoutManager.Instance.SavedExercies);
     }
 
     public void DeleteAllExerciseGrids()
@@ -74,42 +39,38 @@ public partial class ChooseExercise : ContentPage
         Navigation.PopAsync();
     }
 
-    /*
-     * if (((Button)((Grid)stackLayout.Children[i]).Children[1]).Text.Contains(((Entry)sender).Text) == false)
-            {
-                continue;
-            }
-     * 
-     */
-
     public void OnExerciseNameSearchTextChanged(object sender, TextChangedEventArgs e)
     {
+        string searchText = ((Entry)sender).Text.ToLower();
+
+        // Filter exercises based on the search text
+        List<Exercise> filteredExercises = WorkoutManager.Instance.SavedExercies
+            .Where(exercise => exercise.Name.ToLower().Contains(searchText))
+            .ToList();
+
         //TODO: It has a lot of room for improvement, for example save each added character and deleted buttons to set, and add deleted buttons when character deleted,
         DeleteAllExerciseGrids();
-        //Debug.WriteLine(stackLayout.Children.Count);
-        
-        for (int i = 0; i < WorkoutManager.Instance.SavedExercies.Count; i++)
-        {
 
-            if (WorkoutManager.Instance.SavedExercies[i].Name.ToLower().Contains(((Entry)sender).Text.ToLower()) == false)
-            {
-                continue;
-            }
-            
-            //Creates grid with a small image on the left and a button with name on the right 
+        GenerateExerciseGrid(filteredExercises);
+    }
+
+    public void GenerateExerciseGrid(List<Exercise> exercises)
+    {
+        for (int i = 0; i < exercises.Count; i++)
+        {
+            // Creates grid with a small image on the left and a button with name on the right 
             Button currentButton = new()
             {
-                Text = WorkoutManager.Instance.SavedExercies[i].Name,
+                Text = exercises[i].Name,
                 HorizontalOptions = LayoutOptions.Fill
             };
-            Debug.WriteLine(currentButton.Text);
 
-            int currentIndex = i; //this makes pass to function actual index of currently created button
+            int currentIndex = i; // Capture the current index value
             currentButton.Clicked += (sender, e) => OnChoosenExerciseButtonClicked(currentIndex);
 
             Image currentImage = new()
             {
-                Source = ImageSource.FromFile(WorkoutManager.Instance.SavedExercies[i].ImagePath),
+                Source = ImageSource.FromFile(exercises[i].ImagePath),
                 MaximumHeightRequest = 50,
                 MaximumWidthRequest = 50,
             };
@@ -129,6 +90,5 @@ public partial class ChooseExercise : ContentPage
 
             stackLayout.Children.Add(grid);
         }
-        //Debug.WriteLine(stackLayout.Children.Count);
     }
 }

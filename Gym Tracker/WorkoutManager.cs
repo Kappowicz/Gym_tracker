@@ -1,48 +1,53 @@
 ﻿namespace Gym_Tracker
 {
-    internal class WorkoutManager
+    public class WorkoutManager
     {
         private static WorkoutManager instance;
-        public List<Workout> Workouts;
-        public List<Exercise> SavedExercies;
-
         private const string defaultImagePath = "icon_workout.png";
+
+        //TODO: These Saved values will be loaded from save file 
+        public List<Workout> SavedWorkouts { get; }
+        public List<Exercise> SavedExercies { get; }
 
         private WorkoutManager()
         {
-            Workouts = new List<Workout> //Default Workout
+            SavedWorkouts = new List<Workout> //Default workouts
             {
                 new Workout(
                     "Full Body Workout",
-                    new List<Exercise> { new Exercise(
-                        "Bench Press",
-                        new List<Series> { new Series(1, 2) }
+                    new List<Exercise> { 
+                        new Exercise(
+                            "Bench Press",
+                            new List<Series> { new Series(1, 2) }
                     )}
                 ),
                 new Workout(
                     "Leg Workout",
-                    new List<Exercise> { new Exercise(
-                        "Bench Press",
-                        new List<Series> { new Series(1, 2) }
+                    new List<Exercise> { 
+                        new Exercise(
+                            "Bench Press",
+                            new List<Series> { new Series(1, 2) }
                     )}
                 ),
                 new Workout(
                     "Calves Workout",
-                    new List<Exercise> { new Exercise(
-                        "Bench Press",
-                        new List<Series> { new Series(1, 2) }
+                    new List<Exercise> { 
+                        new Exercise(
+                            "Bench Press",
+                            new List<Series> { new Series(1, 2) }
                     )}
                 ),
                 new Workout(
                     "Chest Workout",
-                    new List<Exercise> { new Exercise(
-                        "Bench Press",
-                        new List<Series> { new Series(1, 2) }
+                    new List<Exercise> { 
+                        new Exercise(
+                            "Bench Press",
+                            new List<Series> { new Series(1, 2) }
                     )}
                 )
             };
 
-            SavedExercies = new List<Exercise>
+            SavedExercies = new List<Exercise> //Default exercises
             {
                 new Exercise("Bench Press"),
                 new Exercise("Some other exercise"),
@@ -61,8 +66,8 @@
 
         public struct Workout
         {
-            public string Name;
-            public List<Exercise> Exercises;
+            public string Name { get; set; }
+            public List<Exercise> Exercises { get; set; }
 
             public Workout(string name, List<Exercise> exercises)
             {
@@ -78,9 +83,9 @@
         }
         public struct Exercise
         {
-            public string Name;
-            public List<Series> Series;
-            public string ImagePath;
+            public string Name { get; set; }
+            public List<Series> Series { get; set; }
+            public string ImagePath { get; set; }
 
             public Exercise(string name, List<Series> series, string imagePath)
             {
@@ -99,7 +104,7 @@
             public Exercise(string name, string imagePath)
             {
                 Name = name;
-                Series = new List<Series>() { new Series(1,2), new Series(1, 2), new Series(1, 2)};
+                Series = new List<Series>() { new Series(1, 2), new Series(1, 2), new Series(1, 2) };
                 ImagePath = imagePath;
             }
 
@@ -113,8 +118,8 @@
 
         public struct Series
         {
-            public int AmountOfReps;
-            public float WeightOnRep;
+            public int AmountOfReps { get; set; }
+            public float WeightOnRep { get; set; }
 
             public Series(int amountOfReps, float weightOnRep)
             {

@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using static Gym_Tracker.WorkoutManager;
 
 namespace Gym_Tracker;
@@ -7,53 +6,48 @@ public partial class CreateNewWorkout : ContentPage, IChooseExercise
 {
     private readonly VerticalStackLayout stackLayout;
     private Workout CurrentlyCreatedWorkout;
+
     public CreateNewWorkout()
     {
         InitializeComponent();
 
         stackLayout = (VerticalStackLayout)FindByName("CreatenewWorkoutVerticalStackLayout");
+
         CurrentlyCreatedWorkout = new Workout();
     }
 
     public void SaveAndGoBackButtonClicked(object sender, EventArgs e)
     {
-        if (IsWorkoutNameCorrectAndAvaliable())
-        {
-            WorkoutManager.Instance.Workouts.Add(
-            new Workout(
-            WorkoutName.Text,
-            new List<Exercise> { new Exercise(
-                        "Bench Press",
-                        new List<Series> { new Series(1, 2) }
-                    )}
-            ));
+        if (!IsWorkoutNameCorrectAndAvaliable()) return;
 
-            UIManager.Instance.CurrentMainPage.AddButtonForCreatedWorkout();
+        SaveWorkout();
 
-            CurrentlyCreatedWorkout.Name = WorkoutName.Text;
+        UIManager.Instance.CurrentMainPage.AddButtonForCreatedWorkout();
 
-            WorkoutManager.Instance.Workouts.Add(CurrentlyCreatedWorkout);
+        Navigation.PopAsync();
+    }
 
-            Navigation.PopAsync();
-        }
+    public void SaveWorkout()
+    {
+        CurrentlyCreatedWorkout.Name = WorkoutName.Text;
+
+        WorkoutManager.Instance.SavedWorkouts.Add(CurrentlyCreatedWorkout);
     }
 
     private bool IsWorkoutNameCorrectAndAvaliable()
     {
         if (string.IsNullOrEmpty(WorkoutName.Text))
         {
-            DisplayPopupEmptyWorkoutName();
-            
+            DisplayPopupEmptyWorkoutName().ConfigureAwait(false);
+
             return false;
         }
 
-        for (int i = 0; i < WorkoutManager.Instance.Workouts.Count; i++)
+        if (WorkoutManager.Instance.SavedWorkouts.Any(workout => workout.Name == WorkoutName.Text))
         {
-            if (WorkoutName.Text == WorkoutManager.Instance.Workouts[i].Name)
-            {
-                DisplayPopupWorkoutNameTaken();
-                return false;
-            }
+            DisplayPopupWorkoutNameTaken().ConfigureAwait(false);
+
+            return false;
         }
 
         return true;
@@ -64,12 +58,12 @@ public partial class CreateNewWorkout : ContentPage, IChooseExercise
         Navigation.PushAsync(new ChooseExercise(this));
     }
 
-    public async void DisplayPopupWorkoutNameTaken()
+    public async Task DisplayPopupWorkoutNameTaken()
     {
         await DisplayAlert("Workout Name", "Workout name is taken.", "OK");
     }
 
-    public async void DisplayPopupEmptyWorkoutName()
+    public async Task DisplayPopupEmptyWorkoutName()
     {
         await DisplayAlert("Workout Name", "Workout name cannot be empty.", "OK");
     }

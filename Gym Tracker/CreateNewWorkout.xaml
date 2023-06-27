@@ -8,9 +8,8 @@
             Text="There will be whole ui to create new workout"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-
         <Entry x:Name="WorkoutName"
-        Placeholder="Enter workout name" />
+            Placeholder="Enter workout name" />
         <Button Text="Add New Exercise" Clicked="AddNewExerciseButtonClicked" />
         <Button Text="Save And Go Back" Clicked="SaveAndGoBackButtonClicked" />
     </VerticalStackLayout>

@@ -20,13 +20,12 @@ public partial class MainPage : ContentPage
 
     public void InitializeWorkoutButtons()
     {
-        for (int i = WorkoutManager.Instance.Workouts.Count - 1; i >= 0; i--) //Show the workouts from new to last
+        for (int i = WorkoutManager.Instance.SavedWorkouts.Count - 1; i >= 0; i--) //Show the workouts from new to last
         {
             Button currentButton = new()
             {
-                Text = WorkoutManager.Instance.Workouts[i].Name,
+                Text = WorkoutManager.Instance.SavedWorkouts[i].Name,
                 HorizontalOptions = LayoutOptions.Center,
-
             };
 
             stackLayout.Children.Add(currentButton);
@@ -56,7 +55,7 @@ public partial class MainPage : ContentPage
 
     public void OnLoadWorkoutButtonClicked(int index)
     {
-        //There will be code to open specified workout
+        //TODO: There will be code to open specified workout
         Debug.WriteLine("This button index: " + index);
     }
 
@@ -64,9 +63,8 @@ public partial class MainPage : ContentPage
     {
         Button currentButton = new()
         {
-            Text = WorkoutManager.Instance.Workouts[^1].Name, //^1 is equal to WorkoutManager.Instance.Workouts.Count - 1
+            Text = WorkoutManager.Instance.SavedWorkouts[^1].Name, //^1 is equal to WorkoutManager.Instance.SavedWorkouts.Count - 1
             HorizontalOptions = LayoutOptions.Center,
-
         };
 
         stackLayout.Children.Insert(1, currentButton);

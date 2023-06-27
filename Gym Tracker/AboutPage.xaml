@@ -8,7 +8,6 @@
             <Label FontSize="22" FontAttributes="Bold" Text="GymTracker Application" VerticalOptions="End" />
             <Label FontSize="22" Text="v0.01" VerticalOptions="End" />
         </HorizontalStackLayout>
-
         <Label Text="This app is open source project written in XAML and C# with .NET MAUI." />
         <Button Text="Github Link" Clicked="OpenGithubLinkButtonClicked" />
         <Button Text="Stadistics icons created by Freepik - Flaticon" Clicked="StadisticsIconButtonClicked" />

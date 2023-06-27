@@ -5,18 +5,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Gym_Tracker"
     Shell.FlyoutBehavior="Disabled">
-
     <TabBar>
         <ShellContent
             Title="Workout"
             ContentTemplate="{DataTemplate local:MainPage}"
             Icon="{OnPlatform 'icon_notes.png', iOS='icon_notes_ios.png', MacCatalyst='icon_notes_ios.png'}" />
-
         <ShellContent
             Title="Progress"
             ContentTemplate="{DataTemplate local:Progress}"
             Icon="{OnPlatform 'icon_progress.png', iOS='icon_progress.png', MacCatalyst='icon_progress.png'}" />
-
         <ShellContent
             Title="About"
             ContentTemplate="{DataTemplate local:AboutPage}"

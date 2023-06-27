@@ -2,19 +2,14 @@
 {
     internal class UIManager
     {
-        public MainPage CurrentMainPage;
+        private static readonly Lazy<UIManager> lazyInstance = new(() => new UIManager()); //Singleton
 
-        private static UIManager instance;
+        public static UIManager Instance => lazyInstance.Value;
 
-        public static UIManager Instance //Singleton
+        public MainPage CurrentMainPage { get; set; }
+
+        private UIManager()
         {
-            get
-            {
-                instance ??= new UIManager();
-                return instance;
-            }
         }
     }
-
-
 }
