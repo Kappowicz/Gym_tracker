@@ -56,7 +56,9 @@ public partial class MainPage : ContentPage
     public void OnLoadWorkoutButtonClicked(int index)
     {
         //TODO: There will be code to open specified workout
-        Debug.WriteLine("This button index: " + index);
+        Console.WriteLine("This button index: " + index);
+
+        Navigation.PushAsync(new LoadWorkout(index));
     }
 
     public void AddButtonForCreatedWorkout()
@@ -67,7 +69,8 @@ public partial class MainPage : ContentPage
             HorizontalOptions = LayoutOptions.Center,
         };
 
-        stackLayout.Children.Insert(1, currentButton);
+        currentButton.Clicked += (sender, e) => OnLoadWorkoutButtonClicked(WorkoutManager.Instance.SavedWorkouts.Count - 1);
+        stackLayout.Children.Insert(UIManager.NewWorkoutButtonInMainMenuIndex, currentButton);
     }
 }
 

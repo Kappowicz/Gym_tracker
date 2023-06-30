@@ -6,9 +6,9 @@ namespace Gym_Tracker;
 public partial class ChooseExercise : ContentPage
 {
     private readonly VerticalStackLayout stackLayout;
-    private readonly IChooseExercise chooseExerciseHandler;
+    private readonly IChosenIndex chooseExerciseHandler;
 
-    public ChooseExercise(IChooseExercise chooseExerciseHandler)
+    public ChooseExercise(IChosenIndex chooseExerciseHandler)
     {
         InitializeComponent();
 
@@ -34,7 +34,7 @@ public partial class ChooseExercise : ContentPage
 
     public void OnChoosenExerciseButtonClicked(int exerciseIndex)
     {
-        chooseExerciseHandler.ExerciseChoosen(exerciseIndex);
+        chooseExerciseHandler.IndexChosen(exerciseIndex);
 
         Navigation.PopAsync();
     }

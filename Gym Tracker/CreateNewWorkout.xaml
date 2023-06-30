@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Gym_Tracker.CreateNewWorkout"
              Title="CreateNewWorkout">
-    <VerticalStackLayout x:Name="CreatenewWorkoutVerticalStackLayout">
+    <VerticalStackLayout x:Name="CreateNewWorkoutVerticalStackLayout">
         <Label 
             Text="There will be whole ui to create new workout"
             VerticalOptions="Center" 

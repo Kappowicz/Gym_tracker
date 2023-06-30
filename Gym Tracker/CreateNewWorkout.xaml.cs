@@ -2,7 +2,7 @@ using static Gym_Tracker.WorkoutManager;
 
 namespace Gym_Tracker;
 
-public partial class CreateNewWorkout : ContentPage, IChooseExercise
+public partial class CreateNewWorkout : ContentPage, IChosenIndex
 {
     private readonly VerticalStackLayout stackLayout;
     private Workout CurrentlyCreatedWorkout;
@@ -11,7 +11,7 @@ public partial class CreateNewWorkout : ContentPage, IChooseExercise
     {
         InitializeComponent();
 
-        stackLayout = (VerticalStackLayout)FindByName("CreatenewWorkoutVerticalStackLayout");
+        stackLayout = (VerticalStackLayout)FindByName("CreateNewWorkoutVerticalStackLayout");
 
         CurrentlyCreatedWorkout = new Workout();
     }
@@ -68,7 +68,7 @@ public partial class CreateNewWorkout : ContentPage, IChooseExercise
         await DisplayAlert("Workout Name", "Workout name cannot be empty.", "OK");
     }
 
-    public void ExerciseChoosen(int exerciseIndex)
+    public void IndexChosen(int exerciseIndex)
     {
         CurrentlyCreatedWorkout.Exercises.Add(WorkoutManager.Instance.SavedExercies[exerciseIndex]);
 
@@ -78,6 +78,6 @@ public partial class CreateNewWorkout : ContentPage, IChooseExercise
             HorizontalOptions = LayoutOptions.Fill
         };
 
-        stackLayout.Insert(2, currentButton);
+        stackLayout.Insert(UIManager.NewExerciseButtonInCreateNewWorkoutIndex, currentButton);
     }
 }
