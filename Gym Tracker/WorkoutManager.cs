@@ -9,6 +9,8 @@
         public List<Workout> SavedWorkouts { get; }
         public List<Exercise> SavedExercies { get; }
 
+        public List<Workout> DoneWorkouts { get; set; }
+
         private WorkoutManager()
         {
             SavedWorkouts = new List<Workout> //Default workouts
@@ -52,6 +54,17 @@
                 new Exercise("Bench Press"),
                 new Exercise("Some other exercise"),
                 new Exercise("Yes")
+            };
+
+            DoneWorkouts = new List<Workout> { new Workout(
+                "Full Body Workout",
+                new List<Exercise>()
+                {
+                    new Exercise(SavedExercies[1], new List<Series>()
+                    {
+                        new Series(1, 2)
+                    })
+                })
             };
         }
 
@@ -113,6 +126,13 @@
                 Name = name;
                 Series = new List<Series>() { new Series(1, 2), new Series(1, 2), new Series(1, 2) };
                 ImagePath = defaultImagePath;
+            }
+
+            public Exercise(Exercise exercise, List<Series> series)
+            {
+                Name = exercise.Name;
+                Series = series;
+                ImagePath = exercise.ImagePath;
             }
         }
 

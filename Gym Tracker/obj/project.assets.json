@@ -24019,11 +24019,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kubus\\Documents\\GitHub\\Gym_tracker\\Gym Tracker\\Gym Tracker.csproj",
+      "projectUniqueName": "C:\\Users\\kubus\\OneDrive\\Documents\\GitHub\\Gym_tracker\\Gym Tracker\\Gym Tracker.csproj",
       "projectName": "Gym Tracker",
-      "projectPath": "C:\\Users\\kubus\\Documents\\GitHub\\Gym_tracker\\Gym Tracker\\Gym Tracker.csproj",
+      "projectPath": "C:\\Users\\kubus\\OneDrive\\Documents\\GitHub\\Gym_tracker\\Gym Tracker\\Gym Tracker.csproj",
       "packagesPath": "C:\\Users\\kubus\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kubus\\Documents\\GitHub\\Gym_tracker\\Gym Tracker\\obj\\",
+      "outputPath": "C:\\Users\\kubus\\OneDrive\\Documents\\GitHub\\Gym_tracker\\Gym Tracker\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [
