@@ -1,39 +1,55 @@
-using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore;
-using LiveChartsCore.SkiaSharpView.Painting;
-using SkiaSharp;
-using LiveChartsCore.SkiaSharpView.VisualElements;
 using LiveChartsCore.Defaults;
+using LiveChartsCore.SkiaSharpView;
+using Microsoft.Maui.Controls;
+using SkiaSharp;
+using System;
 using System.Collections.ObjectModel;
 
-
-namespace Gym_Tracker;
-
-public partial class Progress : ContentPage
+namespace Gym_Tracker
 {
-    public Progress()
+    public partial class Progress : ContentPage
     {
-        InitializeComponent();
-
-        BindingContext = this;
-    }
-
-    public ISeries[] Series { get; set; } =
-    {
-        new LineSeries<double>
+        public Progress()
         {
-            Values = new List<double> { 2, 1, 3, 5, 3, 4, 6 },
-            Fill = null
+            InitializeComponent();
+
+            Random random = new Random();
+
+            ObservableCollection<double> values = new ObservableCollection<double>();
+
+            // Add initial random values to the series
+            values.Add(random.Next(101));
+            values.Add(random.Next(101));
+            values.Add(random.Next(101));
+
+            // Create a line series with the values collection
+            var lineSeries = new LineSeries<double>
+            {
+                Values = values,
+                Fill = null
+            };
+
+            // Set the series as an array
+            Series = new ISeries[] { lineSeries };
+
+            BindingContext = this;
         }
-    };
 
-    public void AddSeries()
-    {
-        //TODO: there should be code to add new values
-    }
+        public ISeries[] Series { get; set; }
 
-    public void AddSeriesButtonClicked(object sender, EventArgs e)
-    {
-        AddSeries();
+        public void AddSeries()
+        {
+            Random random = new Random();
+
+            // Add a new random value to the series
+            double newValue = random.Next(101);
+            ((ObservableCollection<double>)((LineSeries<double>)Series[0]).Values).Add(newValue);
+        }
+
+        public void AddSeriesButtonClicked(object sender, EventArgs e)
+        {
+            AddSeries();
+        }
     }
 }
