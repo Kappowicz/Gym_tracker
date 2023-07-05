@@ -21,4 +21,9 @@ public partial class AboutPage : ContentPage
     {
         await Launcher.Default.OpenAsync("https://www.flaticon.com/free-icons/workout");
     }
+
+    private async void ProgressChartsButtonClicked(Object sender, EventArgs e)
+    {
+        await Launcher.Default.OpenAsync("https://lvcharts.com/"); //That's cool stuff, i'll leave it there even if i dont have to
+    }
 }

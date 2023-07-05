@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-
+using SkiaSharp.Views.Maui.Controls.Hosting;
 namespace Gym_Tracker;
 
 public static class MauiProgram
@@ -8,6 +8,7 @@ public static class MauiProgram
     {
         var builder = MauiApp.CreateBuilder();
         builder
+            .UseSkiaSharp(true)
             .UseMauiApp<App>()
             .ConfigureFonts(fonts =>
             {
