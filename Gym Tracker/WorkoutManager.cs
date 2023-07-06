@@ -64,6 +64,24 @@
                     {
                         new Series(1, 2)
                     })
+                }),
+                new Workout(
+                "Full Body Workout",
+                new List<Exercise>()
+                {
+                    new Exercise(SavedExercies[1], new List<Series>()
+                    {
+                        new Series(10, 2)
+                    })
+                }),
+                new Workout(
+                "Full Body Workout",
+                new List<Exercise>()
+                {
+                    new Exercise(SavedExercies[1], new List<Series>()
+                    {
+                        new Series(10, 20)
+                    })
                 })
             };
         }
