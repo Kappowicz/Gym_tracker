@@ -31,7 +31,7 @@ public partial class ChooseExercise : ContentPage
         }
     }
 
-    public void OnChoosenExerciseButtonClicked(int exerciseIndex)
+    public void OnChosenExerciseButtonClicked(int exerciseIndex)
     {
         chooseExerciseHandler.IndexChosen(exerciseIndex);
 
@@ -65,7 +65,7 @@ public partial class ChooseExercise : ContentPage
             };
 
             int currentIndex = i; // Capture the current index value
-            currentButton.Clicked += (sender, e) => OnChoosenExerciseButtonClicked(currentIndex);
+            currentButton.Clicked += (sender, e) => OnChosenExerciseButtonClicked(currentIndex);
 
             Image currentImage = new()
             {

@@ -38,14 +38,14 @@ public partial class CreateNewWorkout : ContentPage, IChosenIndex
     {
         if (string.IsNullOrEmpty(WorkoutName.Text))
         {
-            DisplayPopupEmptyWorkoutName().ConfigureAwait(false);
+            DisplayPopUpEmptyWorkoutName().ConfigureAwait(false);
 
             return false;
         }
 
         if (WorkoutManager.Instance.SavedWorkouts.Any(workout => workout.Name == WorkoutName.Text))
         {
-            DisplayPopupWorkoutNameTaken().ConfigureAwait(false);
+            DisplayPopUpWorkoutNameTaken().ConfigureAwait(false);
 
             return false;
         }
@@ -58,12 +58,12 @@ public partial class CreateNewWorkout : ContentPage, IChosenIndex
         Navigation.PushAsync(new ChooseExercise(this));
     }
 
-    public async Task DisplayPopupWorkoutNameTaken()
+    public async Task DisplayPopUpWorkoutNameTaken()
     {
         await DisplayAlert("Workout Name", "Workout name is taken.", "OK");
     }
 
-    public async Task DisplayPopupEmptyWorkoutName()
+    public async Task DisplayPopUpEmptyWorkoutName()
     {
         await DisplayAlert("Workout Name", "Workout name cannot be empty.", "OK");
     }

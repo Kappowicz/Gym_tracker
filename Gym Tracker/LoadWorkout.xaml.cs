@@ -1,30 +1,3 @@
-
-/* Unmerged change from project 'Gym Tracker (net7.0-windows10.0.19041.0)'
-Before:
-using System.Diagnostics;
-using System;
-After:
-using System;
-using System.Diagnostics;
-*/
-
-/* Unmerged change from project 'Gym Tracker (net7.0-android)'
-Before:
-using System.Diagnostics;
-using System;
-After:
-using System;
-using System.Diagnostics;
-*/
-
-/* Unmerged change from project 'Gym Tracker (net7.0-ios)'
-Before:
-using System.Diagnostics;
-using System;
-After:
-using System;
-using System.Diagnostics;
-*/
 namespace Gym_Tracker;
 
 public partial class LoadWorkout : ContentPage

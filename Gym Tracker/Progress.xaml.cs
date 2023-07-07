@@ -6,8 +6,8 @@ namespace Gym_Tracker
 {
     public partial class Progress : ContentPage
     {
-        ObservableCollection<double> ValuesOnChart;
-
+        private readonly ObservableCollection<double> ValuesOnChart;
+        
         public Progress()
         {
             InitializeComponent();
@@ -57,12 +57,12 @@ namespace Gym_Tracker
                     OptionsButton.Text = "Bench Press One Rep Max";
                     AddRandomValue();
                     break;
-                default: //just cancel the DisplayActionSheet when "Calcel" or outside of the Sheet's window is clicked
+                default: //just cancel the DisplayActionSheet when "Cancel" or outside of the Sheet's window is clicked
                     break;
             }
         }
 
-        //TODO: Optimize to calculate workout volume after saving workout, dont need to do this all here
+        //TODO: Optimize to calculate workout volume after saving workout, don't need to do this all here
         public void GenerateWorkoutVolumePoints()
         {
             double valueToAdd;

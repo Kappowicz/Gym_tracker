@@ -24,6 +24,6 @@ public partial class AboutPage : ContentPage
 
     private async void ProgressChartsButtonClicked(Object sender, EventArgs e)
     {
-        await Launcher.Default.OpenAsync("https://lvcharts.com/"); //That's cool stuff, i'll leave it there even if i dont have to
+        await Launcher.Default.OpenAsync("https://lvcharts.com/"); //That's cool stuff, I'll leave it there even if i don't have to
     }
 }
