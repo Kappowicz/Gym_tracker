@@ -44,6 +44,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = Gym_Tracker.CreateNewWorko
 build_metadata.AdditionalFiles.TargetPath = CreateNewWorkout.xaml
 build_metadata.AdditionalFiles.RelativePath = CreateNewWorkout.xaml
 
+[C:/Users/kubus/OneDrive/Documents/GitHub/Gym_tracker/Gym Tracker/LoadExercise.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Gym_Tracker.LoadExercise.xaml
+build_metadata.AdditionalFiles.TargetPath = LoadExercise.xaml
+build_metadata.AdditionalFiles.RelativePath = LoadExercise.xaml
+
 [C:/Users/kubus/OneDrive/Documents/GitHub/Gym_tracker/Gym Tracker/LoadWorkout.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Gym_Tracker.LoadWorkout.xaml

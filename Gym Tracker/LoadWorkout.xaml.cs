@@ -32,9 +32,8 @@ public partial class LoadWorkout : ContentPage
         }
     }
 
-    public void LoadExerciseButtonClicked(int index)
+    public void LoadExerciseButtonClicked(int exerciseIndex)
     {
-        //TODO: There will be code to open specified exercise
-        Console.WriteLine("This button index: " + index);
+        Navigation.PushAsync(new LoadExercise(thisWorkoutIndex, exerciseIndex));
     }
 }
