@@ -6,10 +6,9 @@
         private const string defaultImagePath = "icon_workout.png";
 
         //TODO: These Saved values will be loaded from save file 
-        public List<Workout> SavedWorkouts { get; }
-        public List<Exercise> SavedExercies { get; }
-
         public List<Workout> DoneWorkouts { get; set; }
+        public List<Workout> SavedWorkouts { get; }
+        public List<Exercise> SavedExercises { get; }
 
         private WorkoutManager()
         {
@@ -17,7 +16,7 @@
             {
                 new Workout(
                     "Full Body Workout",
-                    new List<Exercise> { 
+                    new List<Exercise> {
                         new Exercise(
                             "Bench Press",
                             new List<Series> { new Series(1, 2) }
@@ -25,7 +24,7 @@
                 ),
                 new Workout(
                     "Leg Workout",
-                    new List<Exercise> { 
+                    new List<Exercise> {
                         new Exercise(
                             "Bench Press",
                             new List<Series> { new Series(1, 2) }
@@ -33,7 +32,7 @@
                 ),
                 new Workout(
                     "Calves Workout",
-                    new List<Exercise> { 
+                    new List<Exercise> {
                         new Exercise(
                             "Bench Press",
                             new List<Series> { new Series(1, 2) }
@@ -41,7 +40,7 @@
                 ),
                 new Workout(
                     "Chest Workout",
-                    new List<Exercise> { 
+                    new List<Exercise> {
                         new Exercise(
                             "Bench Press",
                             new List<Series> { new Series(1, 2) }
@@ -49,7 +48,7 @@
                 )
             };
 
-            SavedExercies = new List<Exercise> //Default exercises
+            SavedExercises = new List<Exercise> //Default exercises
             {
                 new Exercise("Bench Press"),
                 new Exercise("Some other exercise"),
@@ -60,7 +59,7 @@
                 "Full Body Workout",
                 new List<Exercise>()
                 {
-                    new Exercise(SavedExercies[1], new List<Series>()
+                    new Exercise(SavedExercises[1], new List<Series>()
                     {
                         new Series(1, 2)
                     })
@@ -69,7 +68,7 @@
                 "Full Body Workout",
                 new List<Exercise>()
                 {
-                    new Exercise(SavedExercies[1], new List<Series>()
+                    new Exercise(SavedExercises[1], new List<Series>()
                     {
                         new Series(10, 2)
                     })
@@ -78,7 +77,7 @@
                 "Full Body Workout",
                 new List<Exercise>()
                 {
-                    new Exercise(SavedExercies[1], new List<Series>()
+                    new Exercise(SavedExercises[1], new List<Series>()
                     {
                         new Series(10, 20)
                     })

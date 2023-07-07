@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace Gym_Tracker;
+﻿namespace Gym_Tracker;
 
 public partial class MainPage : ContentPage
 {

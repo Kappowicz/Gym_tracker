@@ -70,11 +70,11 @@ public partial class CreateNewWorkout : ContentPage, IChosenIndex
 
     public void IndexChosen(int exerciseIndex)
     {
-        CurrentlyCreatedWorkout.Exercises.Add(WorkoutManager.Instance.SavedExercies[exerciseIndex]);
+        CurrentlyCreatedWorkout.Exercises.Add(WorkoutManager.Instance.SavedExercises[exerciseIndex]);
 
         Button currentButton = new()
         {
-            Text = WorkoutManager.Instance.SavedExercies[exerciseIndex].Name,
+            Text = WorkoutManager.Instance.SavedExercises[exerciseIndex].Name,
             HorizontalOptions = LayoutOptions.Fill
         };
 

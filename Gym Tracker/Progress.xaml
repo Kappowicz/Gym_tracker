@@ -6,7 +6,7 @@
              Title="Progress">
     <Grid>
         <lvc:CartesianChart Series="{Binding Series}" />
-        <Button x:Name="OptionsButton" Margin="6" Text="Options" Clicked="OptionsButtonClicked"
+        <Button x:Name="OptionsButton" Margin="6" Text="Workout Volume" Clicked="OptionsButtonClicked"
                 HorizontalOptions="Start" VerticalOptions="Start"
                 TextColor="Black"
                 WidthRequest="NaN" HeightRequest="50"/>

@@ -1,5 +1,4 @@
 using static Gym_Tracker.WorkoutManager;
-using System.Collections.ObjectModel;
 
 namespace Gym_Tracker;
 
@@ -21,7 +20,7 @@ public partial class ChooseExercise : ContentPage
 
     public void GenerateAllExercisesGrids()
     {
-        GenerateExerciseGrid(WorkoutManager.Instance.SavedExercies);
+        GenerateExerciseGrid(WorkoutManager.Instance.SavedExercises);
     }
 
     public void DeleteAllExerciseGrids()
@@ -44,7 +43,7 @@ public partial class ChooseExercise : ContentPage
         string searchText = ((Entry)sender).Text.ToLower();
 
         // Filter exercises based on the search text
-        List<Exercise> filteredExercises = WorkoutManager.Instance.SavedExercies
+        List<Exercise> filteredExercises = WorkoutManager.Instance.SavedExercises
             .Where(exercise => exercise.Name.ToLower().Contains(searchText))
             .ToList();
 
