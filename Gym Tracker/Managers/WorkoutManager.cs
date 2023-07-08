@@ -3,7 +3,7 @@
     public class WorkoutManager
     {
         private static WorkoutManager instance;
-        private const string defaultImagePath = "icon_workout.png";
+        
 
         //TODO: These Saved values will be loaded from save file 
         public List<Workout> DoneWorkouts { get; set; }
@@ -128,7 +128,7 @@
             {
                 Name = name;
                 Series = series;
-                ImagePath = defaultImagePath;
+                ImagePath = UIManager.defaultImagePath;
             }
 
             public Exercise(string name, string imagePath)
@@ -142,7 +142,7 @@
             {
                 Name = name;
                 Series = new List<Series>() { new Series(1, 2), new Series(1, 2), new Series(1, 2) };
-                ImagePath = defaultImagePath;
+                ImagePath = UIManager.defaultImagePath;
             }
 
             public Exercise(Exercise exercise, List<Series> series)

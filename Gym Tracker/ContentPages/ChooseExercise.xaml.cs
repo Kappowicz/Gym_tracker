@@ -1,3 +1,4 @@
+using Gym_Tracker.Buttons;
 using static Gym_Tracker.WorkoutManager;
 
 namespace Gym_Tracker;
@@ -28,10 +29,8 @@ public partial class ChooseExercise : ContentPage
         }
     }
 
-    public void OnChosenExerciseButtonClicked(int exerciseIndex)
+    public void OnChosenExerciseButtonClicked()
     {
-        chooseExerciseHandler.IndexChosen(exerciseIndex);
-
         Navigation.PopAsync();
     }
 
@@ -54,37 +53,11 @@ public partial class ChooseExercise : ContentPage
     {
         for (int i = 0; i < exercises.Count; i++)
         {
-            // Creates grid with a small image on the left and a button with name on the right 
-            Button currentButton = new()
-            {
-                Text = exercises[i].Name,
-                HorizontalOptions = LayoutOptions.Fill
-            };
+            WorkoutManager.Exercise thisExercise = exercises[i];
 
-            int currentIndex = i; // Capture the current index value
-            currentButton.Clicked += (sender, e) => OnChosenExerciseButtonClicked(currentIndex);
+            ExerciseButton thisExerciseButton = new(thisExercise.Name, i, chooseExerciseHandler, thisExercise.ImagePath);
 
-            Image currentImage = new()
-            {
-                Source = ImageSource.FromFile(exercises[i].ImagePath),
-                MaximumHeightRequest = 50,
-                MaximumWidthRequest = 50,
-            };
-
-            Grid grid = new();
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto }); // Image column
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star }); // Button column
-
-            grid.Children.Add(currentImage);
-            grid.Children.Add(currentButton);
-
-            Grid.SetRow(currentImage, 0);
-            Grid.SetColumn(currentImage, 0);
-
-            Grid.SetRow(currentButton, 0);
-            Grid.SetColumn(currentButton, 1);
-
-            ChooseExerciseVerticalStackLayout.Children.Add(grid);
+            ChooseExerciseVerticalStackLayout.Children.Add(thisExerciseButton.ExerciseButtonGrid);
         }
     }
 }
