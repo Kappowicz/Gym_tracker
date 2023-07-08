@@ -7,7 +7,7 @@ namespace Gym_Tracker
     public partial class Progress : ContentPage
     {
         private readonly ObservableCollection<double> ValuesOnChart;
-        
+
         public Progress()
         {
             InitializeComponent();
