@@ -54,22 +54,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="AboutPage.xaml">
+	  <MauiXaml Update="ContentPages\AboutPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ChooseExercise.xaml">
+	  <MauiXaml Update="ContentPages\ChooseExercise.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="CreateNewWorkout.xaml">
+	  <MauiXaml Update="ContentPages\CreateNewWorkout.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="LoadExercise.xaml">
+	  <MauiXaml Update="ContentPages\LoadExercise.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="LoadWorkout.xaml">
+	  <MauiXaml Update="ContentPages\LoadWorkout.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Progress.xaml">
+	  <MauiXaml Update="ContentPages\Progress.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

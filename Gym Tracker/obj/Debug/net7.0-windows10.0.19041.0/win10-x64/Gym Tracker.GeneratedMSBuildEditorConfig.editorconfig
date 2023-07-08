@@ -10,12 +10,6 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Gym_Tracker
 build_property.ProjectDir = C:\Users\kubus\OneDrive\Documents\GitHub\Gym_tracker\Gym Tracker\
 
-[C:/Users/kubus/OneDrive/Documents/GitHub/Gym_tracker/Gym Tracker/AboutPage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = Gym_Tracker.AboutPage.xaml
-build_metadata.AdditionalFiles.TargetPath = AboutPage.xaml
-build_metadata.AdditionalFiles.RelativePath = AboutPage.xaml
-
 [C:/Users/kubus/OneDrive/Documents/GitHub/Gym_tracker/Gym Tracker/App.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Gym_Tracker.App.xaml
@@ -28,41 +22,47 @@ build_metadata.AdditionalFiles.ManifestResourceName = Gym_Tracker.AppShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
-[C:/Users/kubus/OneDrive/Documents/GitHub/Gym_tracker/Gym Tracker/ChooseExercise.xaml]
+[C:/Users/kubus/OneDrive/Documents/GitHub/Gym_tracker/Gym Tracker/ContentPages/AboutPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = Gym_Tracker.ChooseExercise.xaml
-build_metadata.AdditionalFiles.TargetPath = ChooseExercise.xaml
-build_metadata.AdditionalFiles.RelativePath = ChooseExercise.xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Gym_Tracker.ContentPages.AboutPage.xaml
+build_metadata.AdditionalFiles.TargetPath = ContentPages\AboutPage.xaml
+build_metadata.AdditionalFiles.RelativePath = ContentPages\AboutPage.xaml
 
-[C:/Users/kubus/OneDrive/Documents/GitHub/Gym_tracker/Gym Tracker/CreateNewWorkout.xaml]
+[C:/Users/kubus/OneDrive/Documents/GitHub/Gym_tracker/Gym Tracker/ContentPages/ChooseExercise.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = Gym_Tracker.CreateNewWorkout.xaml
-build_metadata.AdditionalFiles.TargetPath = CreateNewWorkout.xaml
-build_metadata.AdditionalFiles.RelativePath = CreateNewWorkout.xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Gym_Tracker.ContentPages.ChooseExercise.xaml
+build_metadata.AdditionalFiles.TargetPath = ContentPages\ChooseExercise.xaml
+build_metadata.AdditionalFiles.RelativePath = ContentPages\ChooseExercise.xaml
 
-[C:/Users/kubus/OneDrive/Documents/GitHub/Gym_tracker/Gym Tracker/LoadExercise.xaml]
+[C:/Users/kubus/OneDrive/Documents/GitHub/Gym_tracker/Gym Tracker/ContentPages/CreateNewWorkout.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = Gym_Tracker.LoadExercise.xaml
-build_metadata.AdditionalFiles.TargetPath = LoadExercise.xaml
-build_metadata.AdditionalFiles.RelativePath = LoadExercise.xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Gym_Tracker.ContentPages.CreateNewWorkout.xaml
+build_metadata.AdditionalFiles.TargetPath = ContentPages\CreateNewWorkout.xaml
+build_metadata.AdditionalFiles.RelativePath = ContentPages\CreateNewWorkout.xaml
 
-[C:/Users/kubus/OneDrive/Documents/GitHub/Gym_tracker/Gym Tracker/LoadWorkout.xaml]
+[C:/Users/kubus/OneDrive/Documents/GitHub/Gym_tracker/Gym Tracker/ContentPages/LoadExercise.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = Gym_Tracker.LoadWorkout.xaml
-build_metadata.AdditionalFiles.TargetPath = LoadWorkout.xaml
-build_metadata.AdditionalFiles.RelativePath = LoadWorkout.xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Gym_Tracker.ContentPages.LoadExercise.xaml
+build_metadata.AdditionalFiles.TargetPath = ContentPages\LoadExercise.xaml
+build_metadata.AdditionalFiles.RelativePath = ContentPages\LoadExercise.xaml
 
-[C:/Users/kubus/OneDrive/Documents/GitHub/Gym_tracker/Gym Tracker/MainPage.xaml]
+[C:/Users/kubus/OneDrive/Documents/GitHub/Gym_tracker/Gym Tracker/ContentPages/LoadWorkout.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = Gym_Tracker.MainPage.xaml
-build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
-build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Gym_Tracker.ContentPages.LoadWorkout.xaml
+build_metadata.AdditionalFiles.TargetPath = ContentPages\LoadWorkout.xaml
+build_metadata.AdditionalFiles.RelativePath = ContentPages\LoadWorkout.xaml
 
-[C:/Users/kubus/OneDrive/Documents/GitHub/Gym_tracker/Gym Tracker/Progress.xaml]
+[C:/Users/kubus/OneDrive/Documents/GitHub/Gym_tracker/Gym Tracker/ContentPages/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = Gym_Tracker.Progress.xaml
-build_metadata.AdditionalFiles.TargetPath = Progress.xaml
-build_metadata.AdditionalFiles.RelativePath = Progress.xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Gym_Tracker.ContentPages.MainPage.xaml
+build_metadata.AdditionalFiles.TargetPath = ContentPages\MainPage.xaml
+build_metadata.AdditionalFiles.RelativePath = ContentPages\MainPage.xaml
+
+[C:/Users/kubus/OneDrive/Documents/GitHub/Gym_tracker/Gym Tracker/ContentPages/Progress.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Gym_Tracker.ContentPages.Progress.xaml
+build_metadata.AdditionalFiles.TargetPath = ContentPages\Progress.xaml
+build_metadata.AdditionalFiles.RelativePath = ContentPages\Progress.xaml
 
 [C:/Users/kubus/OneDrive/Documents/GitHub/Gym_tracker/Gym Tracker/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
