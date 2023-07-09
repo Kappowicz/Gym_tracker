@@ -9,7 +9,11 @@
         private Label WeightOnRepLabel { get; }
         private Button DoneButton { get; }
 
-        public SeriesButton(int amountOfReps, float weightOnRep, bool isSeriesDone = false)
+        private readonly int ThisWorkoutIndex;
+        private readonly int ThisExerciseIndex;
+        private readonly int ThisSeriesIndex;
+
+        public SeriesButton(int amountOfReps, float weightOnRep, int thisWorkoutIndex, int thisExerciseIndex, int thisSeriesIndex, bool isSeriesDone = false)
         {
             AmountOfRepsLabel = new()
             {
@@ -33,6 +37,9 @@
                 HorizontalOptions = LayoutOptions.Fill
             };
 
+            ThisWorkoutIndex = thisWorkoutIndex;
+            ThisExerciseIndex = thisExerciseIndex;
+            ThisSeriesIndex = thisSeriesIndex;
             IsSeriesDone = isSeriesDone;
 
             DoneButton.Clicked += (sender, e) => DoneButtonClicked();
@@ -59,6 +66,10 @@
 
         public void DoneButtonClicked()
         {
+            WorkoutManager.Series thisSeries = WorkoutManager.Instance.SavedWorkouts[ThisWorkoutIndex].Exercises[ThisExerciseIndex].Series[ThisSeriesIndex];
+            thisSeries.IsDone = !thisSeries.IsDone;
+            WorkoutManager.Instance.SavedWorkouts[ThisWorkoutIndex].Exercises[ThisExerciseIndex].Series[ThisSeriesIndex] = thisSeries;
+
             if (IsSeriesDone)
             {
                 AmountOfRepsLabel.BackgroundColor = Color.FromRgb(128, 128, 128);

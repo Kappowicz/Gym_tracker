@@ -12,6 +12,13 @@ public partial class MainPage : ContentPage
         InitializeCreateWorkoutButton();
     }
 
+    protected override void OnAppearing()
+    {
+        base.OnDisappearing();
+
+        WorkoutManager.Instance.CurrentWorkoutIndex = -1;
+    }
+
     public void InitializeWorkoutButtons()
     {
         for (int i = WorkoutManager.Instance.SavedWorkouts.Count - 1; i >= 0; i--) //Show the workouts from new to last

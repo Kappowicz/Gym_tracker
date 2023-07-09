@@ -10,7 +10,18 @@ public partial class LoadWorkout : ContentPage
 
         this.thisWorkoutIndex = thisWorkoutIndex;
 
+        WorkoutManager.Instance.CurrentWorkoutIndex = thisWorkoutIndex;
+
         GenerateWorkoutExercises();
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        float value = WorkoutManager.Instance.CalculateWorkoutVolume(WorkoutManager.Instance.CurrentWorkoutIndex);
+
+        LoadWorkoutVolumeText.Text = $"Workout Volume: {value}kg. Workout Index = {WorkoutManager.Instance.CurrentWorkoutIndex}";
     }
 
     public void GenerateWorkoutExercises()
@@ -23,7 +34,7 @@ public partial class LoadWorkout : ContentPage
                 HorizontalOptions = LayoutOptions.Center,
             };
 
-            LoadWorkoutVerticalStackLayout.Children.Add(currentButton);
+            LoadWorkoutVerticalStackLayout.Children.Insert(UIManager.NewExerciseInLoadWorkoutIndex, currentButton);
 
             int currentIndex = i; //this makes pass to function actual index of currently created button
             currentButton.Clicked += (sender, e) => LoadExerciseButtonClicked(currentIndex);

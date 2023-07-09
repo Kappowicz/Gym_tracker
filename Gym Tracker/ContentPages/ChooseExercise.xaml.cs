@@ -29,11 +29,6 @@ public partial class ChooseExercise : ContentPage
         }
     }
 
-    public void OnChosenExerciseButtonClicked()
-    {
-        Navigation.PopAsync();
-    }
-
     public void OnExerciseNameSearchTextChanged(object sender, TextChangedEventArgs e)
     {
         string searchText = ((Entry)sender).Text.ToLower();

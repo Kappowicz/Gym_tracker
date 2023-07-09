@@ -3,7 +3,8 @@
     public class WorkoutManager
     {
         private static WorkoutManager instance;
-        
+
+        public int CurrentWorkoutIndex = -1; // -1 = unset
 
         //TODO: These Saved values will be loaded from save file 
         public List<Workout> DoneWorkouts { get; set; }
@@ -157,12 +158,36 @@
         {
             public int AmountOfReps { get; set; }
             public float WeightOnRep { get; set; }
+            public bool IsDone { get; set; }
 
             public Series(int amountOfReps, float weightOnRep)
             {
                 AmountOfReps = amountOfReps;
                 WeightOnRep = weightOnRep;
+                IsDone = false;
             }
+        }
+
+        //TODO: There is still room for improvement
+        public float CalculateWorkoutVolume(int index)
+        {
+            if (index < 0) return 0; //when workout is not set
+
+            float sum = 0;
+
+            for (int i = 0; i < SavedWorkouts[index].Exercises.Count; i++)
+            {
+                for (int j = 0; j < SavedWorkouts[index].Exercises[i].Series.Count; j++)
+                {
+                    if (SavedWorkouts[index].Exercises[i].Series[j].IsDone)
+                    {
+                        sum += SavedWorkouts[index].Exercises[i].Series[j].WeightOnRep *
+                            SavedWorkouts[index].Exercises[i].Series[j].AmountOfReps;
+                    }
+                }
+            }
+
+            return sum;
         }
     }
 }

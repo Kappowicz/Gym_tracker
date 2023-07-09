@@ -5,5 +5,7 @@
              Title="LoadWorkout">
     <VerticalStackLayout x:Name="LoadWorkoutVerticalStackLayout">
 
+        <Label x:Name="LoadWorkoutVolumeText" Text="Workout Volume: 0kg." />
+        
     </VerticalStackLayout>
 </ContentPage>

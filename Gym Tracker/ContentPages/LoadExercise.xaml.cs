@@ -5,6 +5,7 @@ public partial class LoadExercise : ContentPage
     private readonly int thisWorkoutIndex;
     private readonly int thisExerciseIndex;
 
+    //TODO: Add "start workout" button and logic
     public LoadExercise(int workoutIndex, int exerciseIndex)
     {
         InitializeComponent();
@@ -23,7 +24,7 @@ public partial class LoadExercise : ContentPage
         {
             WorkoutManager.Series thisSeries = WorkoutManager.Instance.SavedWorkouts[thisWorkoutIndex].Exercises[thisExerciseIndex].Series[i];
 
-            SeriesButton thisSeriesButton = new(thisSeries.AmountOfReps, thisSeries.WeightOnRep);
+            SeriesButton thisSeriesButton = new(thisSeries.AmountOfReps, thisSeries.WeightOnRep, thisWorkoutIndex, thisExerciseIndex, i, thisSeries.IsDone);
 
             LoadExerciseVerticalStackLayout.Add(thisSeriesButton.SeriesButtonGrid);
         }
