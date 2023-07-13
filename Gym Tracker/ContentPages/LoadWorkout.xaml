@@ -3,9 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Gym_Tracker.LoadWorkout"
              Title="LoadWorkout">
-    <VerticalStackLayout x:Name="LoadWorkoutVerticalStackLayout">
-
-        <Label x:Name="LoadWorkoutVolumeText" Text="Workout Volume: 0kg." />
-        
-    </VerticalStackLayout>
+    <AbsoluteLayout>
+        <Label x:Name="LoadWorkoutVolumeText" Text="Workout Volume: 0kg."
+                 AbsoluteLayout.LayoutBounds="0.5,0"
+                 AbsoluteLayout.LayoutFlags="PositionProportional"  />
+        <VerticalStackLayout  x:Name="LoadWorkoutVerticalStackLayout" 
+                              AbsoluteLayout.LayoutBounds="0.5, 0.04" 
+                              AbsoluteLayout.LayoutFlags="PositionProportional">
+        </VerticalStackLayout>
+        <Button x:Name="StartWorkoutButton" Text="Start Workout" Clicked="StartWorkoutButtonClicked"
+                 AbsoluteLayout.LayoutBounds="0.5,1"
+                 AbsoluteLayout.LayoutFlags="PositionProportional"  />
+    </AbsoluteLayout>
 </ContentPage>

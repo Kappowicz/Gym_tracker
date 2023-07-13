@@ -56,8 +56,7 @@ public partial class MainPage : ContentPage
 
     public void OnLoadWorkoutButtonClicked(int index)
     {
-        //TODO: There will be code to open specified workout
-        Console.WriteLine("This button index: " + index);
+        Console.WriteLine("(Load Workout) This button index: " + index);
 
         Navigation.PushAsync(new LoadWorkout(index));
     }

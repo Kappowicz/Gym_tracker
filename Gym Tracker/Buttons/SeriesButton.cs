@@ -1,4 +1,6 @@
-﻿namespace Gym_Tracker
+﻿using System;
+
+namespace Gym_Tracker
 {
     internal class SeriesButton : ContentView
     {

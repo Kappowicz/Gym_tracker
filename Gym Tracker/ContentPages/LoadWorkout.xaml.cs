@@ -1,3 +1,5 @@
+using System;
+
 namespace Gym_Tracker;
 
 public partial class LoadWorkout : ContentPage
@@ -43,6 +45,13 @@ public partial class LoadWorkout : ContentPage
 
     public void LoadExerciseButtonClicked(int exerciseIndex)
     {
+        Console.WriteLine("(Load Exercise) This button index: " + exerciseIndex);
+
         Navigation.PushAsync(new LoadExercise(thisWorkoutIndex, exerciseIndex));
+    }
+    
+    public void StartWorkoutButtonClicked(object sender, EventArgs e)
+    {
+        //TODO: whole logic to control workout
     }
 }

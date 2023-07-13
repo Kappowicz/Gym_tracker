@@ -4,7 +4,8 @@
     {
         private static WorkoutManager instance;
 
-        public int CurrentWorkoutIndex = -1; // -1 = unset
+        public int CurrentWorkoutIndex { get; set; } // -1 = unset
+        public bool IsWorkoutStarted { get; set; }
 
         //TODO: These Saved values will be loaded from save file 
         public List<Workout> DoneWorkouts { get; set; }
@@ -13,6 +14,9 @@
 
         private WorkoutManager()
         {
+            IsWorkoutStarted = false;
+            CurrentWorkoutIndex = -1;
+
             SavedWorkouts = new List<Workout> //Default workouts
             {
                 new Workout(

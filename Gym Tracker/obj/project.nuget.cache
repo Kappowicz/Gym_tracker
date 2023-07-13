@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JtKgrN862P9yDgUPtic9XedIPaGRk+en5IRsUiGOotNSi0Wwh5IzPcnkrieSmcmusn9VbZdAGyP10mc3tgEfQA==",
+  "dgSpecHash": "Qg967ioI5VcZ2pjBpV+c2/c68EStF7lgAPFgGiES/6k0EgLU/hGNKGRLbt0uJmtt/jxxpLVRBbmrJBQQtqTSnw==",
   "success": true,
   "projectFilePath": "C:\\Users\\kubus\\OneDrive\\Documents\\GitHub\\Gym_tracker\\Gym Tracker\\Gym Tracker.csproj",
   "expectedPackageFiles": [
@@ -122,10 +122,10 @@
     "C:\\Users\\kubus\\.nuget\\packages\\xamarin.kotlin.stdlib.jdk8\\1.7.20.1\\xamarin.kotlin.stdlib.jdk8.1.7.20.1.nupkg.sha512",
     "C:\\Users\\kubus\\.nuget\\packages\\xamarin.kotlinx.coroutines.android\\1.6.4.1\\xamarin.kotlinx.coroutines.android.1.6.4.1.nupkg.sha512",
     "C:\\Users\\kubus\\.nuget\\packages\\xamarin.kotlinx.coroutines.core.jvm\\1.6.4.1\\xamarin.kotlinx.coroutines.core.jvm.1.6.4.1.nupkg.sha512",
-    "C:\\Users\\kubus\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.28\\microsoft.windows.sdk.net.ref.10.0.19041.28.nupkg.sha512",
-    "C:\\Users\\kubus\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\7.0.7\\microsoft.aspnetcore.app.runtime.win-x64.7.0.7.nupkg.sha512",
-    "C:\\Users\\kubus\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\7.0.7\\microsoft.windowsdesktop.app.runtime.win-x64.7.0.7.nupkg.sha512",
-    "C:\\Users\\kubus\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\7.0.7\\microsoft.netcore.app.runtime.win-x64.7.0.7.nupkg.sha512"
+    "C:\\Users\\kubus\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.29\\microsoft.windows.sdk.net.ref.10.0.19041.29.nupkg.sha512",
+    "C:\\Users\\kubus\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\7.0.9\\microsoft.aspnetcore.app.runtime.win-x64.7.0.9.nupkg.sha512",
+    "C:\\Users\\kubus\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\7.0.9\\microsoft.windowsdesktop.app.runtime.win-x64.7.0.9.nupkg.sha512",
+    "C:\\Users\\kubus\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\7.0.9\\microsoft.netcore.app.runtime.win-x64.7.0.9.nupkg.sha512"
   ],
   "logs": []
 }
