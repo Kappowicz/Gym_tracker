@@ -1,4 +1,6 @@
-﻿namespace Gym_Tracker;
+﻿using Gym_Tracker.Managers;
+
+namespace Gym_Tracker;
 
 public partial class MainPage : ContentPage
 {
@@ -51,14 +53,14 @@ public partial class MainPage : ContentPage
 
     public void OnCreateNewWorkoutButtonClicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new CreateNewWorkout());
+        _ = Navigation.PushAsync(new CreateNewWorkout());
     }
 
     public void OnLoadWorkoutButtonClicked(int index)
     {
         Console.WriteLine("(Load Workout) This button index: " + index);
 
-        Navigation.PushAsync(new LoadWorkout(index));
+        _ = Navigation.PushAsync(new LoadWorkout(index));
     }
 
     public void AddButtonForCreatedWorkout()

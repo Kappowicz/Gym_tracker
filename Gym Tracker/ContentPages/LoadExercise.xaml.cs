@@ -1,3 +1,6 @@
+using Gym_Tracker.Buttons;
+using Gym_Tracker.Managers;
+
 namespace Gym_Tracker;
 
 public partial class LoadExercise : ContentPage
@@ -10,7 +13,10 @@ public partial class LoadExercise : ContentPage
     {
         InitializeComponent();
 
-        if (LoadExerciseVerticalStackLayout.Count == 1) workoutIndex = 0;
+        if (LoadExerciseVerticalStackLayout.Count == 1)
+        {
+            workoutIndex = 0;
+        }
 
         _thisWorkoutIndex = workoutIndex;
         _thisExerciseIndex = exerciseIndex;

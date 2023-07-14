@@ -1,4 +1,4 @@
-﻿namespace Gym_Tracker
+﻿namespace Gym_Tracker.Managers
 {
     internal class UIManager
     {

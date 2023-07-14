@@ -1,4 +1,4 @@
-﻿namespace Gym_Tracker
+﻿namespace Gym_Tracker.Managers
 {
     public class WorkoutManager
     {
@@ -179,8 +179,10 @@
         //TODO: There is still room for improvement
         public float CalculateWorkoutVolume(int index)
         {
-            if ((index < 0) || (index >= SavedWorkouts.Count))
+            if (index < 0 || index >= SavedWorkouts.Count)
+            {
                 return -1; // when workout is not set or index is out of range
+            }
 
             return SavedWorkouts[index].Exercises
                 .SelectMany(exercise => exercise.Series)

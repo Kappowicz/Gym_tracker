@@ -1,4 +1,6 @@
-﻿namespace Gym_Tracker
+﻿using Gym_Tracker.Managers;
+
+namespace Gym_Tracker.Buttons
 {
     internal class SeriesButton : ContentView
     {

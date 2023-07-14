@@ -1,4 +1,7 @@
-﻿namespace Gym_Tracker.Buttons
+﻿using Gym_Tracker.Interfaces;
+using Gym_Tracker.Managers;
+
+namespace Gym_Tracker.Buttons
 {
     internal class ExerciseButton : ContentView
     {

@@ -1,3 +1,4 @@
+using Gym_Tracker.Managers;
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
 using System.Collections.ObjectModel;
@@ -15,7 +16,7 @@ namespace Gym_Tracker
             InitializeComponent();
 
             // Create a line series with the values collection
-            var lineSeries = new LineSeries<double>
+            LineSeries<double> lineSeries = new()
             {
                 Values = new ObservableCollection<double>(),
                 Fill = null

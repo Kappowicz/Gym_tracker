@@ -3091,3 +3091,5 @@ C:\Users\kubus\OneDrive\Documents\GitHub\Gym_tracker\Gym Tracker\obj\Debug\net7.
 C:\Users\kubus\OneDrive\Documents\GitHub\Gym_tracker\Gym Tracker\obj\Debug\net7.0-android\android\assets\System.Runtime.Extensions.dll
 C:\Users\kubus\OneDrive\Documents\GitHub\Gym_tracker\Gym Tracker\obj\Debug\net7.0-android\android\assets\System.Runtime.Serialization.Formatters.dll
 C:\Users\kubus\OneDrive\Documents\GitHub\Gym_tracker\Gym Tracker\obj\Debug\net7.0-android\android\assets\System.Xml.dll
+C:\Users\kubus\OneDrive\Documents\GitHub\Gym_tracker\Gym Tracker\obj\Debug\net7.0-android\android\src\crc642d4377c5d9a84494\MainActivity.java
+C:\Users\kubus\OneDrive\Documents\GitHub\Gym_tracker\Gym Tracker\obj\Debug\net7.0-android\android\src\crc642d4377c5d9a84494\MainApplication.java

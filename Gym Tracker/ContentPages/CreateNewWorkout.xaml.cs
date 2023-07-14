@@ -1,4 +1,6 @@
-using static Gym_Tracker.WorkoutManager;
+using Gym_Tracker.Interfaces;
+using Gym_Tracker.Managers;
+using static Gym_Tracker.Managers.WorkoutManager;
 
 namespace Gym_Tracker;
 
@@ -15,13 +17,16 @@ public partial class CreateNewWorkout : ContentPage, IChosenIndex
 
     public void SaveAndGoBackButtonClicked(object sender, EventArgs e)
     {
-        if (!IsWorkoutNameCorrectAndAvaliable()) return;
+        if (!IsWorkoutNameCorrectAndAvaliable())
+        {
+            return;
+        }
 
         SaveWorkout();
 
         UIManager.Instance.CurrentMainPage.AddButtonForCreatedWorkout();
 
-        Navigation.PopAsync();
+        _ = Navigation.PopAsync();
     }
 
     public void SaveWorkout()
@@ -35,14 +40,14 @@ public partial class CreateNewWorkout : ContentPage, IChosenIndex
     {
         if (string.IsNullOrEmpty(WorkoutName.Text))
         {
-            DisplayPopUpEmptyWorkoutName().ConfigureAwait(false);
+            _ = DisplayPopUpEmptyWorkoutName().ConfigureAwait(false);
 
             return false;
         }
 
         if (WorkoutManager.Instance.SavedWorkouts.Any(workout => workout.Name == WorkoutName.Text))
         {
-            DisplayPopUpWorkoutNameTaken().ConfigureAwait(false);
+            _ = DisplayPopUpWorkoutNameTaken().ConfigureAwait(false);
 
             return false;
         }
@@ -52,7 +57,7 @@ public partial class CreateNewWorkout : ContentPage, IChosenIndex
 
     public void AddNewExerciseButtonClicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new ChooseExercise(this));
+        _ = Navigation.PushAsync(new ChooseExercise(this));
     }
 
     public async Task DisplayPopUpWorkoutNameTaken()
@@ -67,7 +72,7 @@ public partial class CreateNewWorkout : ContentPage, IChosenIndex
 
     public void IndexChosen(int exerciseIndex)
     {
-        Navigation.PopAsync();
+        _ = Navigation.PopAsync();
 
         _currentlyCreatedWorkout.Exercises.Add(WorkoutManager.Instance.SavedExercises[exerciseIndex]);
 

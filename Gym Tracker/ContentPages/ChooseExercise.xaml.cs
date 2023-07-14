@@ -1,5 +1,7 @@
 using Gym_Tracker.Buttons;
-using static Gym_Tracker.WorkoutManager;
+using Gym_Tracker.Interfaces;
+using Gym_Tracker.Managers;
+using static Gym_Tracker.Managers.WorkoutManager;
 
 namespace Gym_Tracker;
 
@@ -7,11 +9,11 @@ public partial class ChooseExercise : ContentPage
 {
     private readonly IChosenIndex _chooseExerciseHandler;
 
-    public ChooseExercise(IChosenIndex _chooseExerciseHandler)
+    public ChooseExercise(IChosenIndex chooseExerciseHandler)
     {
         InitializeComponent();
 
-        this._chooseExerciseHandler = _chooseExerciseHandler;
+        _chooseExerciseHandler = chooseExerciseHandler;
 
         GenerateAllExercisesGrids();
     }
