@@ -6,7 +6,9 @@ namespace Gym_Tracker
 {
     public partial class Progress : ContentPage
     {
-        private readonly ObservableCollection<double> ValuesOnChart;
+        public ISeries[] Series { get; set; }
+
+        private readonly ObservableCollection<double> _valuesOnChart;
 
         public Progress()
         {
@@ -21,14 +23,12 @@ namespace Gym_Tracker
 
             Series = new ISeries[] { lineSeries };
 
-            ValuesOnChart = (ObservableCollection<double>)((LineSeries<double>)Series[0]).Values;
+            _valuesOnChart = (ObservableCollection<double>)((LineSeries<double>)Series[0]).Values;
 
             BindingContext = this;
 
             GenerateWorkoutVolumePoints();
         }
-
-        public ISeries[] Series { get; set; }
 
         public void AddRandomValue()
         {
@@ -36,7 +36,7 @@ namespace Gym_Tracker
 
             // Add a new random value to the series
             double newValue = random.Next(101);
-            ValuesOnChart.Add(newValue);
+            _valuesOnChart.Add(newValue);
         }
 
         private async void OptionsButtonClicked(object sender, EventArgs e)
@@ -46,14 +46,14 @@ namespace Gym_Tracker
             switch (selectedOption)
             {
                 case "Workout Volume":
-                    ValuesOnChart.Clear();
+                    _valuesOnChart.Clear();
                     OptionsButton.Text = "Workout Volume";
                     GenerateWorkoutVolumePoints();
                     break;
                 case "Bench Press One Rep Max":
                     //TODO: Add functionality of one rep max calculator with existing data, something like this:
                     //https://www.muscleandstrength.com/tools/bench-press-calculator
-                    ValuesOnChart.Clear();
+                    _valuesOnChart.Clear();
                     OptionsButton.Text = "Bench Press One Rep Max";
                     AddRandomValue();
                     break;
@@ -80,7 +80,7 @@ namespace Gym_Tracker
                     }
                 }
 
-                ValuesOnChart.Add(valueToAdd);
+                _valuesOnChart.Add(valueToAdd);
             }
         }
     }

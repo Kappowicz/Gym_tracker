@@ -4,13 +4,13 @@ namespace Gym_Tracker;
 
 public partial class CreateNewWorkout : ContentPage, IChosenIndex
 {
-    private Workout CurrentlyCreatedWorkout;
+    private Workout _currentlyCreatedWorkout;
 
     public CreateNewWorkout()
     {
         InitializeComponent();
 
-        CurrentlyCreatedWorkout = new Workout();
+        _currentlyCreatedWorkout = new Workout();
     }
 
     public void SaveAndGoBackButtonClicked(object sender, EventArgs e)
@@ -26,9 +26,9 @@ public partial class CreateNewWorkout : ContentPage, IChosenIndex
 
     public void SaveWorkout()
     {
-        CurrentlyCreatedWorkout.Name = WorkoutName.Text;
+        _currentlyCreatedWorkout.Name = WorkoutName.Text;
 
-        WorkoutManager.Instance.SavedWorkouts.Add(CurrentlyCreatedWorkout);
+        WorkoutManager.Instance.SavedWorkouts.Add(_currentlyCreatedWorkout);
     }
 
     private bool IsWorkoutNameCorrectAndAvaliable()
@@ -69,7 +69,7 @@ public partial class CreateNewWorkout : ContentPage, IChosenIndex
     {
         Navigation.PopAsync();
 
-        CurrentlyCreatedWorkout.Exercises.Add(WorkoutManager.Instance.SavedExercises[exerciseIndex]);
+        _currentlyCreatedWorkout.Exercises.Add(WorkoutManager.Instance.SavedExercises[exerciseIndex]);
 
         Button currentButton = new()
         {

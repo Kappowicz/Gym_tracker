@@ -5,13 +5,13 @@ namespace Gym_Tracker;
 
 public partial class ChooseExercise : ContentPage
 {
-    private readonly IChosenIndex chooseExerciseHandler;
+    private readonly IChosenIndex _chooseExerciseHandler;
 
-    public ChooseExercise(IChosenIndex chooseExerciseHandler)
+    public ChooseExercise(IChosenIndex _chooseExerciseHandler)
     {
         InitializeComponent();
 
-        this.chooseExerciseHandler = chooseExerciseHandler;
+        this._chooseExerciseHandler = _chooseExerciseHandler;
 
         GenerateAllExercisesGrids();
     }
@@ -50,7 +50,7 @@ public partial class ChooseExercise : ContentPage
         {
             WorkoutManager.Exercise thisExercise = exercises[i];
 
-            ExerciseButton thisExerciseButton = new(thisExercise.Name, i, chooseExerciseHandler, thisExercise.ImagePath);
+            ExerciseButton thisExerciseButton = new(thisExercise.Name, i, _chooseExerciseHandler, thisExercise.ImagePath);
 
             ChooseExerciseVerticalStackLayout.Children.Add(thisExerciseButton.ExerciseButtonGrid);
         }

@@ -1,23 +1,21 @@
-﻿using System;
-
-namespace Gym_Tracker
+﻿namespace Gym_Tracker
 {
     internal class SeriesButton : ContentView
     {
         public Grid SeriesButtonGrid { get; }
         public bool IsSeriesDone { get; set; }
 
-        private Label AmountOfRepsLabel { get; }
-        private Label WeightOnRepLabel { get; }
-        private Button DoneButton { get; }
+        private readonly Label _amountOfRepsLabel;
+        private readonly Label _weightOnRepLabel;
+        private readonly Button _doneButton;
 
-        private readonly int ThisWorkoutIndex;
-        private readonly int ThisExerciseIndex;
-        private readonly int ThisSeriesIndex;
+        private readonly int _thisWorkoutIndex;
+        private readonly int _thisExerciseIndex;
+        private readonly int _thisSeriesIndex;
 
         public SeriesButton(int amountOfReps, float weightOnRep, int thisWorkoutIndex, int thisExerciseIndex, int thisSeriesIndex, bool isSeriesDone = false)
         {
-            AmountOfRepsLabel = new()
+            _amountOfRepsLabel = new()
             {
                 Text = amountOfReps.ToString(),
                 TextColor = Color.FromRgb(255, 255, 255),
@@ -25,7 +23,7 @@ namespace Gym_Tracker
                 BackgroundColor = isSeriesDone ? Color.FromRgb(127, 255, 0) : Color.FromRgb(128, 128, 128)
             };
 
-            WeightOnRepLabel = new()
+            _weightOnRepLabel = new()
             {
                 Text = weightOnRep.ToString(),
                 TextColor = Color.FromRgb(255, 255, 255),
@@ -33,18 +31,18 @@ namespace Gym_Tracker
                 BackgroundColor = isSeriesDone ? Color.FromRgb(127, 255, 0) : Color.FromRgb(128, 128, 128)
             };
 
-            DoneButton = new()
+            _doneButton = new()
             {
                 Text = isSeriesDone ? "Cancel" : "Done",
                 HorizontalOptions = LayoutOptions.Fill
             };
 
-            ThisWorkoutIndex = thisWorkoutIndex;
-            ThisExerciseIndex = thisExerciseIndex;
-            ThisSeriesIndex = thisSeriesIndex;
+            _thisWorkoutIndex = thisWorkoutIndex;
+            _thisExerciseIndex = thisExerciseIndex;
+            _thisSeriesIndex = thisSeriesIndex;
             IsSeriesDone = isSeriesDone;
 
-            DoneButton.Clicked += (sender, e) => DoneButtonClicked();
+            _doneButton.Clicked += (sender, e) => DoneButtonClicked();
 
             SeriesButtonGrid = new Grid();
             SeriesButtonGrid.RowDefinitions.Add(new RowDefinition());
@@ -52,37 +50,37 @@ namespace Gym_Tracker
             SeriesButtonGrid.ColumnDefinitions.Add(new ColumnDefinition());
             SeriesButtonGrid.ColumnDefinitions.Add(new ColumnDefinition());
 
-            SeriesButtonGrid.Children.Add(AmountOfRepsLabel);
-            SeriesButtonGrid.Children.Add(WeightOnRepLabel);
-            SeriesButtonGrid.Children.Add(DoneButton);
+            SeriesButtonGrid.Children.Add(_amountOfRepsLabel);
+            SeriesButtonGrid.Children.Add(_weightOnRepLabel);
+            SeriesButtonGrid.Children.Add(_doneButton);
 
-            Grid.SetRow(AmountOfRepsLabel, 0);
-            Grid.SetColumn(AmountOfRepsLabel, 0);
+            Grid.SetRow(_amountOfRepsLabel, 0);
+            Grid.SetColumn(_amountOfRepsLabel, 0);
 
-            Grid.SetRow(WeightOnRepLabel, 0);
-            Grid.SetColumn(WeightOnRepLabel, 1);
+            Grid.SetRow(_weightOnRepLabel, 0);
+            Grid.SetColumn(_weightOnRepLabel, 1);
 
-            Grid.SetRow(DoneButton, 0);
-            Grid.SetColumn(DoneButton, 2);
+            Grid.SetRow(_doneButton, 0);
+            Grid.SetColumn(_doneButton, 2);
         }
 
         public void DoneButtonClicked()
         {
-            WorkoutManager.Series thisSeries = WorkoutManager.Instance.SavedWorkouts[ThisWorkoutIndex].Exercises[ThisExerciseIndex].Series[ThisSeriesIndex];
+            WorkoutManager.Series thisSeries = WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[_thisSeriesIndex];
             thisSeries.IsDone = !thisSeries.IsDone;
-            WorkoutManager.Instance.SavedWorkouts[ThisWorkoutIndex].Exercises[ThisExerciseIndex].Series[ThisSeriesIndex] = thisSeries;
+            WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[_thisSeriesIndex] = thisSeries;
 
             if (IsSeriesDone)
             {
-                AmountOfRepsLabel.BackgroundColor = Color.FromRgb(128, 128, 128);
-                WeightOnRepLabel.BackgroundColor = Color.FromRgb(128, 128, 128);
-                DoneButton.Text = "Done";
+                _amountOfRepsLabel.BackgroundColor = Color.FromRgb(128, 128, 128);
+                _weightOnRepLabel.BackgroundColor = Color.FromRgb(128, 128, 128);
+                _doneButton.Text = "Done";
             }
             else
             {
-                AmountOfRepsLabel.BackgroundColor = Color.FromRgb(127, 255, 0);
-                WeightOnRepLabel.BackgroundColor = Color.FromRgb(127, 255, 0);
-                DoneButton.Text = "Cancel";
+                _amountOfRepsLabel.BackgroundColor = Color.FromRgb(127, 255, 0);
+                _weightOnRepLabel.BackgroundColor = Color.FromRgb(127, 255, 0);
+                _doneButton.Text = "Cancel";
             }
 
             IsSeriesDone = !IsSeriesDone;

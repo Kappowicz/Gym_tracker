@@ -2,7 +2,7 @@
 {
     public class WorkoutManager
     {
-        private static WorkoutManager instance;
+        private static WorkoutManager _instance;
 
         public int CurrentWorkoutIndex { get; set; } // -1 = unset
         public bool IsWorkoutStarted { get; set; }
@@ -11,6 +11,15 @@
         public List<Workout> DoneWorkouts { get; set; }
         public List<Workout> SavedWorkouts { get; }
         public List<Exercise> SavedExercises { get; }
+
+        public static WorkoutManager Instance //Singleton
+        {
+            get
+            {
+                _instance ??= new WorkoutManager();
+                return _instance;
+            }
+        }
 
         private WorkoutManager()
         {
@@ -90,14 +99,7 @@
             };
         }
 
-        public static WorkoutManager Instance //Singleton
-        {
-            get
-            {
-                instance ??= new WorkoutManager();
-                return instance;
-            }
-        }
+        #region Workout structures
 
         public struct Workout
         {
@@ -172,26 +174,18 @@
             }
         }
 
+        #endregion
+
         //TODO: There is still room for improvement
         public float CalculateWorkoutVolume(int index)
         {
-            if (index < 0) return 0; //when workout is not set
+            if ((index < 0) || (index >= SavedWorkouts.Count))
+                return -1; // when workout is not set or index is out of range
 
-            float sum = 0;
-
-            for (int i = 0; i < SavedWorkouts[index].Exercises.Count; i++)
-            {
-                for (int j = 0; j < SavedWorkouts[index].Exercises[i].Series.Count; j++)
-                {
-                    if (SavedWorkouts[index].Exercises[i].Series[j].IsDone)
-                    {
-                        sum += SavedWorkouts[index].Exercises[i].Series[j].WeightOnRep *
-                            SavedWorkouts[index].Exercises[i].Series[j].AmountOfReps;
-                    }
-                }
-            }
-
-            return sum;
+            return SavedWorkouts[index].Exercises
+                .SelectMany(exercise => exercise.Series)
+                .Where(series => series.IsDone)
+                .Sum(series => series.WeightOnRep * series.AmountOfReps);
         }
     }
 }

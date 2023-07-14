@@ -1,16 +1,14 @@
-using System;
-
 namespace Gym_Tracker;
 
 public partial class LoadWorkout : ContentPage
 {
-    private readonly int thisWorkoutIndex;
+    private readonly int _thisWorkoutIndex;
 
     public LoadWorkout(int thisWorkoutIndex)
     {
         InitializeComponent();
 
-        this.thisWorkoutIndex = thisWorkoutIndex;
+        this._thisWorkoutIndex = thisWorkoutIndex;
 
         WorkoutManager.Instance.CurrentWorkoutIndex = thisWorkoutIndex;
 
@@ -21,18 +19,19 @@ public partial class LoadWorkout : ContentPage
     {
         base.OnAppearing();
 
+        //Update displayed workout volume
+        //TODO: Check if some series was done, if no then don't calculate volume
         float value = WorkoutManager.Instance.CalculateWorkoutVolume(WorkoutManager.Instance.CurrentWorkoutIndex);
-
         LoadWorkoutVolumeText.Text = $"Workout Volume: {value}kg. Workout Index = {WorkoutManager.Instance.CurrentWorkoutIndex}";
     }
 
     public void GenerateWorkoutExercises()
     {
-        for (int i = 0; i < WorkoutManager.Instance.SavedWorkouts[thisWorkoutIndex].Exercises.Count; i++)
+        for (int i = 0; i < WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises.Count; i++)
         {
             Button currentButton = new()
             {
-                Text = WorkoutManager.Instance.SavedWorkouts[thisWorkoutIndex].Exercises[i].Name,
+                Text = WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[i].Name,
                 HorizontalOptions = LayoutOptions.Center,
             };
 
@@ -47,9 +46,9 @@ public partial class LoadWorkout : ContentPage
     {
         Console.WriteLine("(Load Exercise) This button index: " + exerciseIndex);
 
-        Navigation.PushAsync(new LoadExercise(thisWorkoutIndex, exerciseIndex));
+        Navigation.PushAsync(new LoadExercise(_thisWorkoutIndex, exerciseIndex));
     }
-    
+
     public void StartWorkoutButtonClicked(object sender, EventArgs e)
     {
         //TODO: whole logic to control workout
