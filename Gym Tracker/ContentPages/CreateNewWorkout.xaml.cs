@@ -74,7 +74,8 @@ public partial class CreateNewWorkout : ContentPage, IChosenIndex
     {
         _ = Navigation.PopAsync();
 
-        _currentlyCreatedWorkout.Exercises.Add(WorkoutManager.Instance.SavedExercises[exerciseIndex]);
+        //there has to be copying constructor to correctly update exercise data later
+        _currentlyCreatedWorkout.Exercises.Add(new Exercise(WorkoutManager.Instance.SavedExercises[exerciseIndex]));
 
         Button currentButton = new()
         {

@@ -50,7 +50,11 @@
                         new Exercise(
                             "Bench Press",
                             new List<Series> { new Series(1, 2) }
-                    )}
+
+                    ),
+                                            new Exercise(
+                            "Bench Press",
+                            new List<Series> { new Series(1, 2) })}
                 )
             };
 
@@ -148,6 +152,14 @@
             {
                 Name = exercise.Name;
                 Series = series;
+                ImagePath = exercise.ImagePath;
+            }
+
+            // Copy constructor
+            public Exercise(Exercise exercise)
+            {
+                Name = exercise.Name;
+                Series = new List<Series>(exercise.Series); // Create a new list with copied series
                 ImagePath = exercise.ImagePath;
             }
         }
