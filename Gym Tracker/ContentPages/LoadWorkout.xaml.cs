@@ -5,6 +5,7 @@ namespace Gym_Tracker;
 public partial class LoadWorkout : ContentPage
 {
     private readonly int _thisWorkoutIndex;
+    private float _thisWorkoutVolume;
 
     public LoadWorkout(int thisWorkoutIndex)
     {
@@ -23,8 +24,18 @@ public partial class LoadWorkout : ContentPage
 
         //Update displayed workout volume
         //TODO: Check if some series was done, if no then don't calculate volume
-        float value = WorkoutManager.Instance.CalculateWorkoutVolume(WorkoutManager.Instance.CurrentWorkoutIndex);
-        LoadWorkoutVolumeText.Text = $"Workout Volume: {value}kg. Workout Index = {WorkoutManager.Instance.CurrentWorkoutIndex}";
+        _thisWorkoutVolume = WorkoutManager.Instance.CalculateWorkoutVolume(WorkoutManager.Instance.CurrentWorkoutIndex);
+        LoadWorkoutVolumeText.Text = $"Workout Volume: {_thisWorkoutVolume}kg. Workout Index = {WorkoutManager.Instance.CurrentWorkoutIndex}";
+
+        if (WorkoutManager.Instance.IsWorkoutStarted)
+        {
+            SetStopWorkoutText();
+        }
+    }
+
+    private void SetStopWorkoutText()
+    {
+        StartStopWorkoutButton.Text = _thisWorkoutVolume > 0 ? "Stop workout and save progress" : "Stop workout";
     }
 
     public void GenerateWorkoutExercises()
@@ -46,13 +57,47 @@ public partial class LoadWorkout : ContentPage
 
     public void LoadExerciseButtonClicked(int exerciseIndex)
     {
+        if (!WorkoutManager.Instance.IsWorkoutStarted)
+        {
+            return;
+        }
+
         Console.WriteLine("(Load Exercise) This button index: " + exerciseIndex);
 
         _ = Navigation.PushAsync(new LoadExercise(_thisWorkoutIndex, exerciseIndex));
     }
 
-    public void StartWorkoutButtonClicked(object sender, EventArgs e)
+    public void StartStopWorkoutButtonClicked(object sender, EventArgs e)
     {
-        //TODO: whole logic to control workout
+        if (WorkoutManager.Instance.IsWorkoutStarted)
+        {
+            StopWorkout();
+        }
+        else
+        {
+            StartWorkout();
+        }
+    }
+
+    private void StartWorkout()
+    {
+        WorkoutManager.Instance.IsWorkoutStarted = true;
+
+        SetStopWorkoutText();
+    }
+
+    private void StopWorkout()
+    {
+        WorkoutManager.Instance.IsWorkoutStarted = false;
+
+        StartStopWorkoutButton.Text = "Start workout";
+
+        if (_thisWorkoutVolume > 0)
+        {
+            //TODO: save workout and display overview
+            //InsertPageBefore 
+        }
+
+        _ = Navigation.PopAsync();
     }
 }
