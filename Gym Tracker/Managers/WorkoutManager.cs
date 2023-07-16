@@ -2,7 +2,8 @@
 {
     public class WorkoutManager
     {
-        private static WorkoutManager _instance;
+        private static readonly Lazy<WorkoutManager> lazyInstance = new(() => new WorkoutManager());
+        public static WorkoutManager Instance => lazyInstance.Value;
 
         public int CurrentWorkoutIndex { get; set; } // -1 = unset
         public bool IsWorkoutStarted { get; set; }
@@ -11,15 +12,6 @@
         public List<Workout> DoneWorkouts { get; set; }
         public List<Workout> SavedWorkouts { get; }
         public List<Exercise> SavedExercises { get; }
-
-        public static WorkoutManager Instance //Singleton
-        {
-            get
-            {
-                _instance ??= new WorkoutManager();
-                return _instance;
-            }
-        }
 
         private WorkoutManager()
         {
