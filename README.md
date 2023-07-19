@@ -21,3 +21,6 @@ Maybe later I'll add it also to the Iphone as Apple allows downloading apps from
 
 ### DONE:
 - Creating new workouts from existing exercises
+
+### KNOWN ISSUES:
+- You can click button which opens some contentpage several times, which opens several additional contentpages
