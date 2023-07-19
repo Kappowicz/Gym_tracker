@@ -94,8 +94,8 @@ public partial class LoadWorkout : ContentPage
 
         if (_thisWorkoutVolume > 0)
         {
-            //TODO: save workout and display overview
-            //InsertPageBefore 
+            //TODO: save workout and send to InsertPageBefore workout with exercises and series actually done
+            Navigation.InsertPageBefore(new WorkoutSummary(WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex]), this);
         }
 
         _ = Navigation.PopAsync();

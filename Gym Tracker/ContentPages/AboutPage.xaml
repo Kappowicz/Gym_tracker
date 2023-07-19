@@ -10,8 +10,9 @@
         </HorizontalStackLayout>
         <Label Text="This app is open source project written in XAML and C# with .NET MAUI." />
         <Button Text="Github Link" Clicked="OpenGithubLinkButtonClicked" />
-        <Button Text="Stadistics icons created by Freepik - Flaticon" Clicked="StadisticsIconButtonClicked" />
-        <Button Text="Workout icons created by ultimatearm - Flaticon" Clicked="WorkoutIconButtonClicked" /> 
         <Button Text="Progress charts created with LiveCharts2" Clicked="ProgressChartsButtonClicked" />
+        <Button Text="Stadistics icons created by Freepik - Flaticon" Clicked="StadisticsIconButtonClicked" />
+        <Button Text="Workout icons created by ultimatearm - Flaticon" Clicked="WorkoutIconButtonClicked" />
+        <Button Text="Up-arrow icons created by gungyoga04 - Flaticon" Clicked="UpDownArrowButtonClicked" />
     </VerticalStackLayout>
 </ContentPage>
