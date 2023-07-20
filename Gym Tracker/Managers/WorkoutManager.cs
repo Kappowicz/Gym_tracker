@@ -5,93 +5,64 @@
         private static readonly Lazy<WorkoutManager> lazyInstance = new(() => new WorkoutManager());
         public static WorkoutManager Instance => lazyInstance.Value;
 
-        public int CurrentWorkoutIndex { get; set; } // -1 = unset
-        public bool IsWorkoutStarted { get; set; }
+        public int CurrentWorkoutIndex { get; set; } = -1; // -1 = unset
+        public bool IsWorkoutStarted { get; set; } = false;
 
         //TODO: These Saved values will be loaded from save file 
         public List<Workout> DoneWorkouts { get; set; }
         public List<Workout> SavedWorkouts { get; }
-        public List<Exercise> SavedExercises { get; }
+        public List<ExerciseDetails> SavedExercises { get; set; }
 
         private WorkoutManager()
         {
-            IsWorkoutStarted = false;
-            CurrentWorkoutIndex = -1;
-
             SavedWorkouts = new List<Workout> //Default workouts
             {
                 new Workout(
                     "Full Body Workout",
-                    new List<Exercise> {
-                        new Exercise(
-                            "Bench Press",
-                            new List<Series> { new Series(1, 2) }
-                    )}
-                ),
+                    new List<Exercise>()
+                    {
+                        new Exercise(1)
+                    }),
                 new Workout(
-                    "Leg Workout",
-                    new List<Exercise> {
-                        new Exercise(
-                            "Bench Press",
-                            new List<Series> { new Series(1, 2) }
-                    )}
-                ),
+                    "Full Body Workout",
+                    new List<Exercise>()
+                    {
+                        new Exercise(1)
+                    }),
                 new Workout(
-                    "Calves Workout",
-                    new List<Exercise> {
-                        new Exercise(
-                            "Bench Press",
-                            new List<Series> { new Series(1, 2) }
-                    )}
-                ),
-                new Workout(
-                    "Chest Workout",
-                    new List<Exercise> {
-                        new Exercise(
-                            "Bench Press",
-                            new List<Series> { new Series(1, 2) }
-
-                    ),
-                                            new Exercise(
-                            "Bench Press",
-                            new List<Series> { new Series(1, 2) })}
-                )
+                    "Full Body Workout",
+                    new List<Exercise>()
+                    {
+                        new Exercise(1)
+                    }),
             };
 
-            SavedExercises = new List<Exercise> //Default exercises
+            SavedExercises = new List<ExerciseDetails> //Default exercises
             {
-                new Exercise("Bench Press"),
-                new Exercise("Some other exercise"),
-                new Exercise("Yes")
+                new ExerciseDetails("Bench Press", new List<float>(){10,10}),
+                new ExerciseDetails("Squats"),
+                new ExerciseDetails("Lat Pull ups")
             };
 
-            DoneWorkouts = new List<Workout> { new Workout(
-                "Full Body Workout",
-                new List<Exercise>()
-                {
-                    new Exercise(SavedExercises[1], new List<Series>()
-                    {
-                        new Series(1, 2)
-                    })
-                }),
+            DoneWorkouts = new List<Workout> {
                 new Workout(
-                "Full Body Workout",
-                new List<Exercise>()
-                {
-                    new Exercise(SavedExercises[1], new List<Series>()
+                    "Full Body Workout",
+                    new List<Exercise>()
                     {
-                        new Series(10, 2)
-                    })
-                }),
-                new Workout(
-                "Full Body Workout",
-                new List<Exercise>()
-                {
-                    new Exercise(SavedExercises[1], new List<Series>()
+                        new Exercise(1)
+                    }),
+               new Workout(
+                    "Full Body Workout",
+                    new List<Exercise>()
                     {
-                        new Series(10, 20)
-                    })
-                })
+                        new Exercise(1)
+                    }),
+               new Workout(
+                    "Full Body Workout",
+                    new List<Exercise>()
+                    {
+                        new Exercise(1)
+                    }),
             };
         }
 
@@ -114,84 +85,108 @@
                 Exercises = new List<Exercise>();
             }
         }
-        public struct Exercise
-        {
-            public string Name { get; set; }
-            public List<Series> Series { get; set; }
-            public string ImagePath { get; set; }
-
-            public Exercise(string name, List<Series> series, string imagePath)
-            {
-                Name = name;
-                Series = series;
-                ImagePath = imagePath;
-            }
-
-            public Exercise(string name, List<Series> series)
-            {
-                Name = name;
-                Series = series;
-                ImagePath = UIManager.defaultImagePath;
-            }
-
-            public Exercise(string name, string imagePath)
-            {
-                Name = name;
-                Series = new List<Series>() { new Series(1, 2), new Series(1, 2), new Series(1, 2) };
-                ImagePath = imagePath;
-            }
-
-            public Exercise(string name)
-            {
-                Name = name;
-                Series = new List<Series>() { new Series(1, 2), new Series(1, 2), new Series(1, 2) };
-                ImagePath = UIManager.defaultImagePath;
-            }
-
-            public Exercise(Exercise exercise, List<Series> series)
-            {
-                Name = exercise.Name;
-                Series = series;
-                ImagePath = exercise.ImagePath;
-            }
-
-            // Copy constructor
-            public Exercise(Exercise exercise)
-            {
-                Name = exercise.Name;
-                Series = new List<Series>(exercise.Series); // Create a new list with copied series
-                ImagePath = exercise.ImagePath;
-            }
-        }
 
         public struct Series
         {
             public int AmountOfReps { get; set; }
             public float WeightOnRep { get; set; }
-            public bool IsDone { get; set; }
+            public bool IsDone { get; set; } = false;
 
             public Series(int amountOfReps, float weightOnRep)
             {
                 AmountOfReps = amountOfReps;
                 WeightOnRep = weightOnRep;
-                IsDone = false;
+            }
+        }
+
+        public struct ExerciseDetails
+        {
+            public string Name { get; set; }
+
+            public string ImagePath { get; set; }
+
+            public List<float> PreviousThisExerciseVolume { get; set; }
+
+            public ExerciseDetails(string name)
+            {
+                Name = name;
+                ImagePath = UIManager.defaultImagePath;
+                PreviousThisExerciseVolume = new List<float>();
+            }
+
+            public ExerciseDetails(string name, string imagePath)
+            {
+                Name = name;
+                ImagePath = imagePath;
+                PreviousThisExerciseVolume = new List<float>();
+            }
+
+            public ExerciseDetails(string name, List<float> previousThisExerciseVolume)
+            {
+                Name = name;
+                ImagePath = UIManager.defaultImagePath;
+                PreviousThisExerciseVolume = previousThisExerciseVolume;
+            }
+
+            public ExerciseDetails(string name, string imagePath, List<float> previousThisExerciseVolume)
+            {
+                Name = name;
+                ImagePath = imagePath;
+                PreviousThisExerciseVolume = previousThisExerciseVolume;
+            }
+        }
+
+        public struct Exercise
+        {
+            public int ThisExerciseDetailsIndex { get; set; }
+
+            public List<Series> Series { get; set; }
+
+            public Exercise(int thisExerciseDetailIndex, List<Series> series)
+            {
+                ThisExerciseDetailsIndex = thisExerciseDetailIndex;
+                Series = series;
+            }
+
+            public Exercise(int thisExerciseDetailIndex)
+            {
+                ThisExerciseDetailsIndex = thisExerciseDetailIndex;
+                Series = new List<Series>()
+                {
+                    new Series(1,2),
+                    new Series(1,2),
+                    new Series(1,2)
+                };
+            }
+
+            public ExerciseDetails GetThisExerciseDetails(int thisExerciseDetailIndex)
+            {
+                return WorkoutManager.Instance.SavedExercises[thisExerciseDetailIndex];
             }
         }
 
         #endregion
 
         //TODO: There is still room for improvement
-        public float CalculateWorkoutVolume(int index)
+        public float CalculateWorkoutVolume(Workout workout)
         {
-            if (index < 0 || index >= SavedWorkouts.Count)
-            {
-                return -1; // when workout is not set or index is out of range
-            }
-
-            return SavedWorkouts[index].Exercises
+            return workout.Exercises
                 .SelectMany(exercise => exercise.Series)
                 .Where(series => series.IsDone)
                 .Sum(series => series.WeightOnRep * series.AmountOfReps);
+        }
+
+        public void AddWorkoutToDoneWorkouts(Workout workout)
+        {
+            DoneWorkouts.Add(workout);
+
+            //When the progress page was opened, we have to add this separately to it
+            if (UIManager.Instance.CurrentProgressPage is not null)
+            {
+                float volumeOfThisWorkout = CalculateWorkoutVolume(workout);
+                UIManager.Instance.CurrentProgressPage.AddNewValue(volumeOfThisWorkout);
+            }
+
         }
     }
 }

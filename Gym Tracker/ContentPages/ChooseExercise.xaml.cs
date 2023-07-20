@@ -36,7 +36,7 @@ public partial class ChooseExercise : ContentPage
         string searchText = ((Entry)sender).Text.ToLower();
 
         // Filter exercises based on the search text
-        List<Exercise> filteredExercises = WorkoutManager.Instance.SavedExercises
+        List<ExerciseDetails> filteredExercises = WorkoutManager.Instance.SavedExercises
             .Where(exercise => exercise.Name.ToLower().Contains(searchText))
             .ToList();
 
@@ -46,11 +46,11 @@ public partial class ChooseExercise : ContentPage
         GenerateExerciseGrid(filteredExercises);
     }
 
-    public void GenerateExerciseGrid(List<Exercise> exercises)
+    public void GenerateExerciseGrid(List<ExerciseDetails> exerciseDetails)
     {
-        for (int i = 0; i < exercises.Count; i++)
+        for (int i = 0; i < exerciseDetails.Count; i++)
         {
-            WorkoutManager.Exercise thisExercise = exercises[i];
+            WorkoutManager.ExerciseDetails thisExercise = exerciseDetails[i];
 
             ExerciseButton thisExerciseButton = new(thisExercise.Name, i, _chooseExerciseHandler, thisExercise.ImagePath);
 

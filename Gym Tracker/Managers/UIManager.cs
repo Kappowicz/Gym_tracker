@@ -12,6 +12,7 @@
         public const string defaultImagePath = "icon_workout.png";
 
         public MainPage CurrentMainPage { get; set; }
+        public Progress CurrentProgressPage { get; set; }
 
         private UIManager()
         {

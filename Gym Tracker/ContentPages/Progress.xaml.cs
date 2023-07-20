@@ -28,6 +28,8 @@ namespace Gym_Tracker
 
             BindingContext = this;
 
+            UIManager.Instance.CurrentProgressPage = this;
+
             GenerateWorkoutVolumePoints();
         }
 
@@ -38,6 +40,11 @@ namespace Gym_Tracker
             // Add a new random value to the series
             double newValue = random.Next(101);
             _valuesOnChart.Add(newValue);
+        }
+
+        public void AddNewValue(float value)
+        {
+            _valuesOnChart.Add(value);
         }
 
         private async void OptionsButtonClicked(object sender, EventArgs e)

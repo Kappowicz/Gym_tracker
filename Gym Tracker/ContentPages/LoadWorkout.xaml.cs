@@ -24,7 +24,7 @@ public partial class LoadWorkout : ContentPage
 
         //Update displayed workout volume
         //TODO: Check if some series was done, if no then don't calculate volume
-        _thisWorkoutVolume = WorkoutManager.Instance.CalculateWorkoutVolume(WorkoutManager.Instance.CurrentWorkoutIndex);
+        _thisWorkoutVolume = WorkoutManager.Instance.CalculateWorkoutVolume(WorkoutManager.Instance.SavedWorkouts[WorkoutManager.Instance.CurrentWorkoutIndex]);
         LoadWorkoutVolumeText.Text = $"Workout Volume: {_thisWorkoutVolume}kg. Workout Index = {WorkoutManager.Instance.CurrentWorkoutIndex}";
 
         if (WorkoutManager.Instance.IsWorkoutStarted)
@@ -42,9 +42,11 @@ public partial class LoadWorkout : ContentPage
     {
         for (int i = 0; i < WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises.Count; i++)
         {
+            WorkoutManager.Exercise thisExercise = WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[i];
+
             Button currentButton = new()
             {
-                Text = WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[i].Name,
+                Text = thisExercise.GetThisExerciseDetails(thisExercise.ThisExerciseDetailsIndex).Name,
                 HorizontalOptions = LayoutOptions.Center,
             };
 
@@ -94,8 +96,11 @@ public partial class LoadWorkout : ContentPage
 
         if (_thisWorkoutVolume > 0)
         {
-            //TODO: save workout and send to InsertPageBefore workout with exercises and series actually done
-            Navigation.InsertPageBefore(new WorkoutSummary(WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex]), this);
+            //TODO: Save only done exercises and series to this variable
+            WorkoutManager.Workout thisDoneWorkout = WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex];
+            WorkoutManager.Instance.AddWorkoutToDoneWorkouts(thisDoneWorkout);
+
+            Navigation.InsertPageBefore(new WorkoutSummary(thisDoneWorkout), this);
         }
 
         _ = Navigation.PopAsync();

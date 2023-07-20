@@ -23,12 +23,22 @@ public partial class WorkoutSummary : ContentPage
         //TODO: Change this to class SummaryButton
         for (int i = 0; i < _displayedWorkout.Exercises.Count; i++)
         {
-            //TODO: Calculate this exercise volume
-            float currentExerciseVolume = 11f;
+            WorkoutManager.Exercise thisExercise = _displayedWorkout.Exercises[i];
+
+            float currentExerciseVolume = 0;
+
+            for (int j = 0; j < _displayedWorkout.Exercises[i].Series.Count; j++)
+            {
+                WorkoutManager.Series thisSerie = _displayedWorkout.Exercises[i].Series[j];
+
+                //there we don't have to check if exercise was done because after
+                //clicking "save workout" we will pass only exercises and series which were done
+                currentExerciseVolume += thisSerie.WeightOnRep * thisSerie.AmountOfReps;
+            }
 
             Button currentExerciseButton = new()
             {
-                Text = _displayedWorkout.Exercises[i].Name,
+                Text = thisExercise.GetThisExerciseDetails(i).Name,
                 HorizontalOptions = LayoutOptions.Fill
             };
 
@@ -37,7 +47,11 @@ public partial class WorkoutSummary : ContentPage
                 Text = currentExerciseVolume.ToString()
             };
 
-            float previousWorkoutThisExerciseVolume = 12f;
+            float previousWorkoutThisExerciseVolume = 0;
+            if (thisExercise.GetThisExerciseDetails(i).PreviousThisExerciseVolume.Count > 0)
+            {
+                previousWorkoutThisExerciseVolume = thisExercise.GetThisExerciseDetails(i).PreviousThisExerciseVolume[^1];
+            }
 
             Image currentExerciseImage = new()
             {
