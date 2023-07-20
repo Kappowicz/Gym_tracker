@@ -13,6 +13,6 @@
         <Button Text="Progress charts created with LiveCharts2" Clicked="ProgressChartsButtonClicked" />
         <Button Text="Stadistics icons created by Freepik - Flaticon" Clicked="StadisticsIconButtonClicked" />
         <Button Text="Workout icons created by ultimatearm - Flaticon" Clicked="WorkoutIconButtonClicked" />
-        <Button Text="Up-arrow icons created by gungyoga04 - Flaticon" Clicked="UpDownArrowButtonClicked" />
+        <Button Text="Up-arrow icons created by gungyoga04 - Flaticon" Clicked="UpArrowButtonClicked" />
     </VerticalStackLayout>
 </ContentPage>
