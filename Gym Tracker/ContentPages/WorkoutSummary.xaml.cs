@@ -2,7 +2,7 @@ using Gym_Tracker.Managers;
 
 namespace Gym_Tracker;
 
-public partial class WorkoutSummary : ContentPage
+public sealed partial class WorkoutSummary : ContentPage
 {
     private readonly WorkoutManager.Workout _displayedWorkout;
 
@@ -27,9 +27,9 @@ public partial class WorkoutSummary : ContentPage
 
             float currentExerciseVolume = 0;
 
-            for (int j = 0; j < _displayedWorkout.Exercises[i].Series.Count; j++)
+            for (int j = 0; j < thisExercise.Series.Count; j++)
             {
-                WorkoutManager.Series thisSerie = _displayedWorkout.Exercises[i].Series[j];
+                WorkoutManager.Series thisSerie = thisExercise.Series[j];
 
                 //there we don't have to check if exercise was done because after
                 //clicking "save workout" we will pass only exercises and series which were done
@@ -38,7 +38,7 @@ public partial class WorkoutSummary : ContentPage
 
             Button currentExerciseButton = new()
             {
-                Text = thisExercise.GetThisExerciseDetails(i).Name,
+                Text = WorkoutManager.GetThisExerciseDetails(i).Name,
                 HorizontalOptions = LayoutOptions.Fill
             };
 
@@ -48,9 +48,9 @@ public partial class WorkoutSummary : ContentPage
             };
 
             float previousWorkoutThisExerciseVolume = 0;
-            if (thisExercise.GetThisExerciseDetails(i).PreviousThisExerciseVolume.Count > 0)
+            if (WorkoutManager.GetThisExerciseDetails(i).PreviousThisExerciseVolume.Count > 0)
             {
-                previousWorkoutThisExerciseVolume = thisExercise.GetThisExerciseDetails(i).PreviousThisExerciseVolume[^1];
+                previousWorkoutThisExerciseVolume = WorkoutManager.GetThisExerciseDetails(i).PreviousThisExerciseVolume[^1];
             }
 
             Image currentExerciseImage = new()

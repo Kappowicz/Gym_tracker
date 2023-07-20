@@ -1,6 +1,6 @@
 ﻿namespace Gym_Tracker.Managers
 {
-    internal class UIManager
+    internal sealed class UIManager
     {
         private static readonly Lazy<UIManager> lazyInstance = new(() => new UIManager()); //Singleton
         public static UIManager Instance => lazyInstance.Value;

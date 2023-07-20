@@ -5,7 +5,7 @@ using static Gym_Tracker.Managers.WorkoutManager;
 
 namespace Gym_Tracker;
 
-public partial class ChooseExercise : ContentPage
+public sealed partial class ChooseExercise : ContentPage
 {
     private readonly IChosenIndex _chooseExerciseHandler;
 

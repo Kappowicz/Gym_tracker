@@ -1,6 +1,6 @@
 namespace Gym_Tracker;
 
-public partial class AboutPage : ContentPage
+public sealed partial class AboutPage : ContentPage
 {
     public AboutPage()
     {

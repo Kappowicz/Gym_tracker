@@ -3,20 +3,14 @@ using Gym_Tracker.Managers;
 
 namespace Gym_Tracker;
 
-public partial class LoadExercise : ContentPage
+public sealed partial class LoadExercise : ContentPage
 {
     private readonly int _thisWorkoutIndex;
     private readonly int _thisExerciseIndex;
 
-    //TODO: Add "start workout" button and logic
     public LoadExercise(int workoutIndex, int exerciseIndex)
     {
         InitializeComponent();
-
-        if (LoadExerciseVerticalStackLayout.Count == 1)
-        {
-            workoutIndex = 0;
-        }
 
         _thisWorkoutIndex = workoutIndex;
         _thisExerciseIndex = exerciseIndex;

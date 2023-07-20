@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace Gym_Tracker
 {
-    public partial class Progress : ContentPage
+    public sealed partial class Progress : ContentPage
     {
         public ISeries[] Series { get; set; }
 

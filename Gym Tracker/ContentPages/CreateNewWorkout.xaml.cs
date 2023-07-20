@@ -4,7 +4,7 @@ using static Gym_Tracker.Managers.WorkoutManager;
 
 namespace Gym_Tracker;
 
-public partial class CreateNewWorkout : ContentPage, IChosenIndex
+public sealed partial class CreateNewWorkout : ContentPage, IChosenIndex
 {
     private Workout _currentlyCreatedWorkout;
 

@@ -3,7 +3,7 @@ using Gym_Tracker.Managers;
 
 namespace Gym_Tracker.Buttons
 {
-    internal class ExerciseButton : ContentView
+    internal sealed class ExerciseButton : ContentView
     {
         public Grid ExerciseButtonGrid { get; }
 

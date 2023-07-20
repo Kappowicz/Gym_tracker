@@ -2,7 +2,7 @@
 
 namespace Gym_Tracker.Buttons
 {
-    internal class SeriesButton : ContentView
+    internal sealed class SeriesButton : ContentView
     {
         public Grid SeriesButtonGrid { get; }
         public bool IsSeriesDone { get; set; }

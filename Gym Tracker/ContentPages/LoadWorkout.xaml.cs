@@ -2,7 +2,7 @@ using Gym_Tracker.Managers;
 
 namespace Gym_Tracker;
 
-public partial class LoadWorkout : ContentPage
+public sealed partial class LoadWorkout : ContentPage
 {
     private readonly int _thisWorkoutIndex;
     private float _thisWorkoutVolume;
@@ -24,7 +24,7 @@ public partial class LoadWorkout : ContentPage
 
         //Update displayed workout volume
         //TODO: Check if some series was done, if no then don't calculate volume
-        _thisWorkoutVolume = WorkoutManager.Instance.CalculateWorkoutVolume(WorkoutManager.Instance.SavedWorkouts[WorkoutManager.Instance.CurrentWorkoutIndex]);
+        _thisWorkoutVolume = WorkoutManager.CalculateWorkoutVolume(WorkoutManager.Instance.SavedWorkouts[WorkoutManager.Instance.CurrentWorkoutIndex]);
         LoadWorkoutVolumeText.Text = $"Workout Volume: {_thisWorkoutVolume}kg. Workout Index = {WorkoutManager.Instance.CurrentWorkoutIndex}";
 
         if (WorkoutManager.Instance.IsWorkoutStarted)
@@ -46,7 +46,7 @@ public partial class LoadWorkout : ContentPage
 
             Button currentButton = new()
             {
-                Text = thisExercise.GetThisExerciseDetails(thisExercise.ThisExerciseDetailsIndex).Name,
+                Text = WorkoutManager.GetThisExerciseDetails(thisExercise.ThisExerciseDetailsIndex).Name,
                 HorizontalOptions = LayoutOptions.Center,
             };
 

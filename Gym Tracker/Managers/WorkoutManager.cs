@@ -1,6 +1,6 @@
 ﻿namespace Gym_Tracker.Managers
 {
-    public class WorkoutManager
+    public sealed class WorkoutManager
     {
         private static readonly Lazy<WorkoutManager> lazyInstance = new(() => new WorkoutManager());
         public static WorkoutManager Instance => lazyInstance.Value;
@@ -158,17 +158,12 @@
                     new Series(1,2)
                 };
             }
-
-            public ExerciseDetails GetThisExerciseDetails(int thisExerciseDetailIndex)
-            {
-                return WorkoutManager.Instance.SavedExercises[thisExerciseDetailIndex];
-            }
         }
 
         #endregion
 
         //TODO: There is still room for improvement
-        public float CalculateWorkoutVolume(Workout workout)
+        public static float CalculateWorkoutVolume(Workout workout)
         {
             return workout.Exercises
                 .SelectMany(exercise => exercise.Series)
@@ -187,6 +182,10 @@
                 UIManager.Instance.CurrentProgressPage.AddNewValue(volumeOfThisWorkout);
             }
 
+        }
+        public static ExerciseDetails GetThisExerciseDetails(int thisExerciseDetailIndex)
+        {
+            return WorkoutManager.Instance.SavedExercises[thisExerciseDetailIndex];
         }
     }
 }
