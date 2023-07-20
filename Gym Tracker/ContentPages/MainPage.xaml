@@ -4,14 +4,14 @@
              x:Class="Gym_Tracker.MainPage">
     <ScrollView>
         <VerticalStackLayout x:Name="MainPageVerticalStackLayout"
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+                        Margin="20"
+                        Spacing="10"
+                        VerticalOptions="Center">
             <Label
                 Text="Choose or create workout: "
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
-                HorizontalOptions="Center" />
+                HorizontalTextAlignment="Center" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

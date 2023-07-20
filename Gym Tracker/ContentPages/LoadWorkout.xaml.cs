@@ -25,7 +25,7 @@ public sealed partial class LoadWorkout : ContentPage
         //Update displayed workout volume
         //TODO: Check if some series was done, if no then don't calculate volume
         _thisWorkoutVolume = WorkoutManager.CalculateWorkoutVolume(WorkoutManager.Instance.SavedWorkouts[WorkoutManager.Instance.CurrentWorkoutIndex]);
-        LoadWorkoutVolumeText.Text = $"Workout Volume: {_thisWorkoutVolume}kg. Workout Index = {WorkoutManager.Instance.CurrentWorkoutIndex}";
+        LoadWorkoutVolumeText.Text = $"Workout Volume: {_thisWorkoutVolume}kg.";
 
         if (WorkoutManager.Instance.IsWorkoutStarted)
         {

@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Gym_Tracker.AboutPage"
              Title="AboutPage">
-    <VerticalStackLayout Spacing="10" Margin="10">
+    <VerticalStackLayout 
+                        Margin="20"
+                        Spacing="10">
         <HorizontalStackLayout Spacing="10">
             <Label FontSize="22" FontAttributes="Bold" Text="GymTracker Application" VerticalOptions="End" />
             <Label FontSize="22" Text="v0.01" VerticalOptions="End" />
