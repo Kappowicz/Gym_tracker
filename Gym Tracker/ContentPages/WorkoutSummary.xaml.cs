@@ -38,7 +38,7 @@ public sealed partial class WorkoutSummary : ContentPage
 
             Button currentExerciseButton = new()
             {
-                Text = WorkoutManager.GetThisExerciseDetails(i).Name,
+                Text = WorkoutManager.GetThisExerciseDetails(thisExercise.ThisExerciseDetailsIndex).Name,
                 HorizontalOptions = LayoutOptions.Fill
             };
 
@@ -48,9 +48,9 @@ public sealed partial class WorkoutSummary : ContentPage
             };
 
             float previousWorkoutThisExerciseVolume = 0;
-            if (WorkoutManager.GetThisExerciseDetails(i).PreviousThisExerciseVolume.Count > 0)
+            if (WorkoutManager.GetThisExerciseDetails(thisExercise.ThisExerciseDetailsIndex).PreviousThisExerciseVolume.Count > 0)
             {
-                previousWorkoutThisExerciseVolume = WorkoutManager.GetThisExerciseDetails(i).PreviousThisExerciseVolume[^1];
+                previousWorkoutThisExerciseVolume = WorkoutManager.GetThisExerciseDetails(thisExercise.ThisExerciseDetailsIndex).PreviousThisExerciseVolume[^1];
             }
 
             Image currentExerciseImage = new()
