@@ -22,7 +22,7 @@ namespace Gym_Tracker.Buttons
                 Text = amountOfReps.ToString(),
                 TextColor = Color.FromRgb(255, 255, 255),
                 HorizontalTextAlignment = TextAlignment.Center,
-                BackgroundColor = isSeriesDone ? Color.FromRgb(127, 255, 0) : Color.FromRgb(128, 128, 128)
+                Background = isSeriesDone ? Color.FromRgb(127, 255, 0) : Color.FromRgb(128, 128, 128)
             };
 
             _weightOnRepLabel = new()
@@ -30,7 +30,7 @@ namespace Gym_Tracker.Buttons
                 Text = weightOnRep.ToString(),
                 TextColor = Color.FromRgb(255, 255, 255),
                 HorizontalTextAlignment = TextAlignment.Center,
-                BackgroundColor = isSeriesDone ? Color.FromRgb(127, 255, 0) : Color.FromRgb(128, 128, 128)
+                Background = isSeriesDone ? Color.FromRgb(127, 255, 0) : Color.FromRgb(128, 128, 128)
             };
 
             _doneButton = new()
@@ -74,14 +74,14 @@ namespace Gym_Tracker.Buttons
 
             if (IsSeriesDone)
             {
-                _amountOfRepsLabel.BackgroundColor = Color.FromRgb(128, 128, 128);
-                _weightOnRepLabel.BackgroundColor = Color.FromRgb(128, 128, 128);
+                _amountOfRepsLabel.Background = Color.FromRgb(128, 128, 128);
+                _weightOnRepLabel.Background = Color.FromRgb(128, 128, 128);
                 _doneButton.Text = "Done";
             }
             else
             {
-                _amountOfRepsLabel.BackgroundColor = Color.FromRgb(127, 255, 0);
-                _weightOnRepLabel.BackgroundColor = Color.FromRgb(127, 255, 0);
+                _amountOfRepsLabel.Background = Color.FromRgb(127, 255, 0);
+                _weightOnRepLabel.Background = Color.FromRgb(127, 255, 0);
                 _doneButton.Text = "Cancel";
             }
 
