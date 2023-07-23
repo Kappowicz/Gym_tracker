@@ -187,5 +187,30 @@
         {
             return WorkoutManager.Instance.SavedExercises[thisExerciseDetailIndex];
         }
+
+        //TODO: optimize to add to list after every done workout, don't need to calculate this all in one place and time
+        public string[] GetAllDoneExercisesNames()
+        {
+            if (DoneWorkouts.Count == 0)
+            {
+                return Array.Empty<string>();
+            }
+
+            List<string> exerciseNames = new();
+
+            for (int i = 0; i < DoneWorkouts.Count; i++)
+            {
+                for (int j = 0; j < DoneWorkouts[i].Exercises.Count; j++)
+                {
+                    string thisExerciseName = WorkoutManager.GetThisExerciseDetails(DoneWorkouts[i].Exercises[j].ThisExerciseDetailsIndex).Name;
+                    if (!exerciseNames.Contains(thisExerciseName))
+                    {
+                        exerciseNames.Add(thisExerciseName);
+                    }
+                }
+            }
+
+            return exerciseNames.ToArray();
+        }
     }
 }

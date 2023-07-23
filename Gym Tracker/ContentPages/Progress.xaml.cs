@@ -49,7 +49,11 @@ namespace Gym_Tracker
 
         private async void OptionsButtonClicked(object sender, EventArgs e)
         {
-            string selectedOption = await DisplayActionSheet("Options", "Cancel", null, "Workout Volume", "Bench Press One Rep Max");
+            string[] existingOptions = new string[] { "Workout Volume", "Bench Press One Rep Max" };
+            string[] additionalOptions = WorkoutManager.Instance.GetAllDoneExercisesNames();
+            string[] allOptions = existingOptions.Concat(additionalOptions).ToArray();
+
+            string selectedOption = await DisplayActionSheet("Options", "Cancel", null, allOptions);
 
             switch (selectedOption)
             {
@@ -65,8 +69,18 @@ namespace Gym_Tracker
                     OptionsButton.Text = "Bench Press One Rep Max";
                     AddRandomValue();
                     break;
-                default: //just cancel the DisplayActionSheet when "Cancel" or outside of the Sheet's window is clicked
+                default:
+                    if (selectedOption == "Cancel" || String.IsNullOrEmpty(selectedOption))
+                    {
+                        //just cancel the DisplayActionSheet when "Cancel" or outside of the Sheet's window is clicked
+                        break;
+                    }
+                    //TODO: Display selected exercise volume
+                    _valuesOnChart.Clear();
+                    OptionsButton.Text = selectedOption;
+                    AddRandomValue();
                     break;
+
             }
         }
 
