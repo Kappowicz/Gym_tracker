@@ -20,7 +20,7 @@ public sealed partial class AboutPage : ContentPage
     {
         try
         {
-            await Launcher.OpenAsync(url);
+            _ = await Launcher.OpenAsync(url);
         }
         catch (Exception ex)
         {
