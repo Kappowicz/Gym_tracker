@@ -70,7 +70,7 @@ namespace Gym_Tracker
                     AddRandomValue();
                     break;
                 default:
-                    if (selectedOption == "Cancel" || String.IsNullOrEmpty(selectedOption))
+                    if (selectedOption == "Cancel" || string.IsNullOrEmpty(selectedOption))
                     {
                         //just cancel the DisplayActionSheet when "Cancel" or outside of the Sheet's window is clicked
                         break;
