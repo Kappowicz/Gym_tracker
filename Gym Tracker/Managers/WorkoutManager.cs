@@ -212,5 +212,29 @@
 
             return exerciseNames.ToArray();
         }
+
+        public static void DeleteUndoneExercisesAndSeries(ref Workout workout)
+        {
+            for (int i = 0; i < workout.Exercises.Count; i++)
+            {
+                Exercise thisExercise = workout.Exercises[i];
+
+                for (int j = 0; j < thisExercise.Series.Count; j++)
+                {
+                    if (!thisExercise.Series[j].IsDone)
+                    {
+                        thisExercise.Series.RemoveAt(j);
+                        j--;
+                    }
+                }
+
+                //Delete empty exercises
+                if (thisExercise.Series.Count == 0)
+                {
+                    workout.Exercises.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
     }
 }
