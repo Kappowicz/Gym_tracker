@@ -3,11 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Gym_Tracker.ChooseExercise"
              Title="ChooseExercise">
-    <VerticalStackLayout x:Name="ChooseExerciseVerticalStackLayout"
+    <VerticalStackLayout
                         Margin="20"
                         Spacing="10">
         <Entry x:Name="ExerciseName"
         Placeholder="Enter exercise name to search"
         TextChanged="OnExerciseNameSearchTextChanged" />
+        <ScrollView Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal" x:Name="MuscleGroupsHorizontalStackLayout" Spacing="5">
+                
+            </StackLayout>
+        </ScrollView>
+        <VerticalStackLayout x:Name="ChooseExerciseVerticalStackLayout"
+                            Margin="20"
+                            Spacing="10">
+        </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

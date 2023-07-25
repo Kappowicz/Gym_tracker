@@ -39,9 +39,9 @@
 
             SavedExercises = new List<ExerciseDetails> //Default exercises
             {
-                new ExerciseDetails("Bench Press", new List<float>(){10,10}),
-                new ExerciseDetails("Squats"),
-                new ExerciseDetails("Lat Pull ups")
+                new ExerciseDetails("Bench Press", MusclesGroups.Chest, new List<float>(){10,10}),
+                new ExerciseDetails("Squats", MusclesGroups.Legs),
+                new ExerciseDetails("Lat Pull ups", MusclesGroups.Back)
             };
 
             DoneWorkouts = new List<Workout> {
@@ -67,6 +67,16 @@
         }
 
         #region Workout structures
+
+        public enum MusclesGroups
+        {
+            Default = 0,
+            Arms,
+            Chest,
+            Abs,
+            Legs,
+            Back
+        }
 
         public struct Workout
         {
@@ -103,28 +113,28 @@
         {
             public string Name { get; set; }
 
-            public string ImagePath { get; set; }
+            public string ImagePath { get; set; } = UIManager.defaultImagePath;
 
-            public List<float> PreviousThisExerciseVolume { get; set; }
+            public List<float> PreviousThisExerciseVolume { get; set; } = new List<float>();
 
-            public ExerciseDetails(string name)
+            public MusclesGroups MusclesGroup { get; set; } = MusclesGroups.Default;
+
+            public ExerciseDetails(string name, MusclesGroups muscleGroup)
             {
                 Name = name;
-                ImagePath = UIManager.defaultImagePath;
-                PreviousThisExerciseVolume = new List<float>();
+                MusclesGroup = muscleGroup;
             }
 
             public ExerciseDetails(string name, string imagePath)
             {
                 Name = name;
                 ImagePath = imagePath;
-                PreviousThisExerciseVolume = new List<float>();
             }
 
-            public ExerciseDetails(string name, List<float> previousThisExerciseVolume)
+            public ExerciseDetails(string name, MusclesGroups muscleGroup, List<float> previousThisExerciseVolume)
             {
                 Name = name;
-                ImagePath = UIManager.defaultImagePath;
+                MusclesGroup = muscleGroup;
                 PreviousThisExerciseVolume = previousThisExerciseVolume;
             }
 
