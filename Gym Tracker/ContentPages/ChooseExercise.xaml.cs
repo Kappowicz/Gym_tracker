@@ -91,18 +91,47 @@ public sealed partial class ChooseExercise : ContentPage
 
     private void CalculateAndDisplayExercises()
     {
-        // Filter exercises based on the search text and selected muscle group
-        List<ExerciseDetails> filteredExercises = WorkoutManager.Instance.SavedExercises
-            .Where(exercise => exercise.Name.ToLower().Contains(_currentSearchedText))
-            .Where(exercise => exercise.MusclesGroup == _selectedMusclesGroups ||
-            _selectedMusclesGroups == WorkoutManager.MusclesGroups.Default)
-            .ToList();
+        Dictionary<ExerciseDetails, int> filteredExercises = new();
+
+        for (int i = 0; i < WorkoutManager.Instance.SavedExercises.Count; i++)
+        {
+            WorkoutManager.ExerciseDetails thisExercise = WorkoutManager.Instance.SavedExercises[i];
+
+            if (!thisExercise.Name.ToLower().Contains(_currentSearchedText))
+            {
+                continue;
+            }
+
+            if (thisExercise.MusclesGroup != _selectedMusclesGroups)
+            {
+                if (_selectedMusclesGroups != WorkoutManager.MusclesGroups.Default)
+                {
+                    continue;
+                }
+            }
+
+            filteredExercises.Add(thisExercise, i);
+        }
 
         DeleteAllExerciseGrids();
 
         GenerateExerciseGrid(filteredExercises);
     }
 
+    private void GenerateExerciseGrid(Dictionary<ExerciseDetails, int> exerciseDetails)
+    {
+        for (int i = 0; i < exerciseDetails.Count; i++)
+        {
+            WorkoutManager.ExerciseDetails thisExercise = exerciseDetails.ElementAt(i).Key;
+            int thisExerciseIndex = exerciseDetails.ElementAt(i).Value;
+
+            ExerciseButton thisExerciseButton = new(thisExercise.Name, thisExerciseIndex, _chooseExerciseHandler, thisExercise.ImagePath);
+
+            ChooseExerciseVerticalStackLayout.Children.Add(thisExerciseButton.ExerciseButtonGrid);
+        }
+    }
+
+    //Generate whole list first time, so don't need to check anything
     private void GenerateExerciseGrid(List<ExerciseDetails> exerciseDetails)
     {
         for (int i = 0; i < exerciseDetails.Count; i++)
