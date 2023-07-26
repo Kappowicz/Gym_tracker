@@ -7,7 +7,7 @@ namespace Gym_Tracker
 {
     public sealed partial class Progress : ContentPage
     {
-        private readonly ISeries[] _series;
+        public ISeries[] Series { get; set; } //this has to be public to graph to work correctly
         private readonly ObservableCollection<double> _valuesOnChart;
 
         public Progress()
@@ -21,9 +21,9 @@ namespace Gym_Tracker
                 Fill = null
             };
 
-            _series = new ISeries[] { lineSeries };
+            Series = new ISeries[] { lineSeries };
 
-            _valuesOnChart = (ObservableCollection<double>)((LineSeries<double>)_series[0]).Values;
+            _valuesOnChart = (ObservableCollection<double>)((LineSeries<double>)Series[0]).Values;
 
             BindingContext = this;
 
