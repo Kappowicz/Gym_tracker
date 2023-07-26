@@ -18,7 +18,7 @@ public sealed partial class LoadExercise : ContentPage
         GenerateSeriesButtons();
     }
 
-    public void GenerateSeriesButtons()
+    private void GenerateSeriesButtons()
     {
         for (int i = 0; i < WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series.Count; i++)
         {

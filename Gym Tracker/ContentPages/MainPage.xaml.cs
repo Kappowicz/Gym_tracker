@@ -21,7 +21,7 @@ public sealed partial class MainPage : ContentPage
         WorkoutManager.Instance.CurrentWorkoutIndex = -1;
     }
 
-    public void InitializeWorkoutButtons()
+    private void InitializeWorkoutButtons()
     {
         for (int i = WorkoutManager.Instance.SavedWorkouts.Count - 1; i >= 0; i--) //Show the workouts from new to last
         {
@@ -38,7 +38,7 @@ public sealed partial class MainPage : ContentPage
         }
     }
 
-    public void InitializeCreateWorkoutButton()
+    private void InitializeCreateWorkoutButton()
     {
         Button createWorkoutButton = new()
         {
@@ -51,12 +51,12 @@ public sealed partial class MainPage : ContentPage
         createWorkoutButton.Clicked += OnCreateNewWorkoutButtonClicked;
     }
 
-    public void OnCreateNewWorkoutButtonClicked(object sender, EventArgs e)
+    private void OnCreateNewWorkoutButtonClicked(object sender, EventArgs e)
     {
         _ = Navigation.PushAsync(new CreateNewWorkout());
     }
 
-    public void OnLoadWorkoutButtonClicked(int index)
+    private void OnLoadWorkoutButtonClicked(int index)
     {
         Console.WriteLine("(Load Workout) This button index: " + index);
 

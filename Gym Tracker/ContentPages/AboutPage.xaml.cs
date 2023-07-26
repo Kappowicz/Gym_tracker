@@ -28,7 +28,7 @@ public sealed partial class AboutPage : ContentPage
         }
     }
 
-    public async Task DisplayPopUpErrorURLMessage(string message)
+    private async Task DisplayPopUpErrorURLMessage(string message)
     {
         await DisplayAlert("URL Error", $"Error occurred while opening this URL: {message}.", "OK");
     }

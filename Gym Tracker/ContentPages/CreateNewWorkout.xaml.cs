@@ -15,7 +15,7 @@ public sealed partial class CreateNewWorkout : ContentPage, IChosenIndex
         _currentlyCreatedWorkout = new Workout();
     }
 
-    public void SaveAndGoBackButtonClicked(object sender, EventArgs e)
+    private void SaveAndGoBackButtonClicked(object sender, EventArgs e)
     {
         if (!IsWorkoutNameCorrectAndAvaliable())
         {
@@ -29,7 +29,7 @@ public sealed partial class CreateNewWorkout : ContentPage, IChosenIndex
         _ = Navigation.PopAsync();
     }
 
-    public void SaveWorkout()
+    private void SaveWorkout()
     {
         _currentlyCreatedWorkout.Name = WorkoutName.Text;
 
@@ -55,17 +55,17 @@ public sealed partial class CreateNewWorkout : ContentPage, IChosenIndex
         return true;
     }
 
-    public void AddNewExerciseButtonClicked(object sender, EventArgs e)
+    private void AddNewExerciseButtonClicked(object sender, EventArgs e)
     {
         _ = Navigation.PushAsync(new ChooseExercise(this));
     }
 
-    public async Task DisplayPopUpWorkoutNameTaken()
+    private async Task DisplayPopUpWorkoutNameTaken()
     {
         await DisplayAlert("Workout Name", "Workout name is taken.", "OK");
     }
 
-    public async Task DisplayPopUpEmptyWorkoutName()
+    private async Task DisplayPopUpEmptyWorkoutName()
     {
         await DisplayAlert("Workout Name", "Workout name cannot be empty.", "OK");
     }

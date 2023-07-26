@@ -193,6 +193,7 @@
             }
 
         }
+
         public static ExerciseDetails GetThisExerciseDetails(int thisExerciseDetailIndex)
         {
             return WorkoutManager.Instance.SavedExercises[thisExerciseDetailIndex];

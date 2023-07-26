@@ -38,7 +38,7 @@ public sealed partial class LoadWorkout : ContentPage
         StartStopWorkoutButton.Text = _thisWorkoutVolume > 0 ? "Stop workout and save progress" : "Stop workout";
     }
 
-    public void GenerateWorkoutExercises()
+    private void GenerateWorkoutExercises()
     {
         for (int i = 0; i < WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises.Count; i++)
         {
@@ -57,7 +57,7 @@ public sealed partial class LoadWorkout : ContentPage
         }
     }
 
-    public void LoadExerciseButtonClicked(int exerciseIndex)
+    private void LoadExerciseButtonClicked(int exerciseIndex)
     {
         if (!WorkoutManager.Instance.IsWorkoutStarted)
         {
@@ -69,7 +69,7 @@ public sealed partial class LoadWorkout : ContentPage
         _ = Navigation.PushAsync(new LoadExercise(_thisWorkoutIndex, exerciseIndex));
     }
 
-    public void StartStopWorkoutButtonClicked(object sender, EventArgs e)
+    private void StartStopWorkoutButtonClicked(object sender, EventArgs e)
     {
         if (WorkoutManager.Instance.IsWorkoutStarted)
         {

@@ -7,8 +7,7 @@ namespace Gym_Tracker
 {
     public sealed partial class Progress : ContentPage
     {
-        public ISeries[] Series { get; set; }
-
+        private readonly ISeries[] _series;
         private readonly ObservableCollection<double> _valuesOnChart;
 
         public Progress()
@@ -22,9 +21,9 @@ namespace Gym_Tracker
                 Fill = null
             };
 
-            Series = new ISeries[] { lineSeries };
+            _series = new ISeries[] { lineSeries };
 
-            _valuesOnChart = (ObservableCollection<double>)((LineSeries<double>)Series[0]).Values;
+            _valuesOnChart = (ObservableCollection<double>)((LineSeries<double>)_series[0]).Values;
 
             BindingContext = this;
 
@@ -85,7 +84,7 @@ namespace Gym_Tracker
         }
 
         //TODO: Optimize to calculate workout volume after saving workout, don't need to do this all here
-        public void GenerateWorkoutVolumePoints()
+        private void GenerateWorkoutVolumePoints()
         {
             double valueToAdd;
 

@@ -66,7 +66,7 @@ namespace Gym_Tracker.Buttons
             Grid.SetColumn(_doneButton, 2);
         }
 
-        public void DoneButtonClicked()
+        private void DoneButtonClicked()
         {
             WorkoutManager.Series thisSeries = WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[_thisSeriesIndex];
             thisSeries.IsDone = !thisSeries.IsDone;

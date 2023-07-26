@@ -22,12 +22,12 @@ public sealed partial class ChooseExercise : ContentPage
         GenerateAllExercisesGrids();
     }
 
-    public void GenerateAllExercisesGrids()
+    private void GenerateAllExercisesGrids()
     {
         GenerateExerciseGrid(WorkoutManager.Instance.SavedExercises);
     }
 
-    public void DeleteAllExerciseGrids()
+    private void DeleteAllExerciseGrids()
     {
         for (int i = ChooseExerciseVerticalStackLayout.Children.Count - 1; i >= 0; i--)
         {
@@ -35,14 +35,14 @@ public sealed partial class ChooseExercise : ContentPage
         }
     }
 
-    public void OnExerciseNameSearchTextChanged(object sender, TextChangedEventArgs e)
+    private void OnExerciseNameSearchTextChanged(object sender, TextChangedEventArgs e)
     {
         _currentSearchedText = ((Entry)sender).Text.ToLower();
 
         CalculateAndDisplayExercises();
     }
 
-    public void GenerateMusclesGroupButtons()
+    private void GenerateMusclesGroupButtons()
     {
         for (int i = 0; i < Enum.GetValues(typeof(MusclesGroups)).Length; i++)
         {
@@ -55,13 +55,13 @@ public sealed partial class ChooseExercise : ContentPage
             };
 
             int capturedValue = i;
-            thisButton.Clicked += (sender, e) => OnMusclesGroupsButtonClicked(sender, e, capturedValue);
+            thisButton.Clicked += (sender, e) => OnMusclesGroupsButtonClicked(sender, capturedValue);
 
             MuscleGroupsHorizontalStackLayout.Add(thisButton);
         }
     }
 
-    private void OnMusclesGroupsButtonClicked(object sender, EventArgs e, int value)
+    private void OnMusclesGroupsButtonClicked(object sender, int value)
     {
         SetDefaultAllMuscleGroupButtonsColors();
 
@@ -77,7 +77,7 @@ public sealed partial class ChooseExercise : ContentPage
         CalculateAndDisplayExercises();
     }
 
-    public void SetDefaultAllMuscleGroupButtonsColors()
+    private void SetDefaultAllMuscleGroupButtonsColors()
     {
         for (int i = 0; i < MuscleGroupsHorizontalStackLayout.Children.Count; i++)
         {
@@ -89,7 +89,7 @@ public sealed partial class ChooseExercise : ContentPage
         }
     }
 
-    public void CalculateAndDisplayExercises()
+    private void CalculateAndDisplayExercises()
     {
         // Filter exercises based on the search text and selected muscle group
         List<ExerciseDetails> filteredExercises = WorkoutManager.Instance.SavedExercises
@@ -103,7 +103,7 @@ public sealed partial class ChooseExercise : ContentPage
         GenerateExerciseGrid(filteredExercises);
     }
 
-    public void GenerateExerciseGrid(List<ExerciseDetails> exerciseDetails)
+    private void GenerateExerciseGrid(List<ExerciseDetails> exerciseDetails)
     {
         for (int i = 0; i < exerciseDetails.Count; i++)
         {
