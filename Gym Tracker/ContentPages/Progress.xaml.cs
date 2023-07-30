@@ -54,7 +54,7 @@ namespace Gym_Tracker
         private async void OptionsButtonClicked(object sender, EventArgs e)
         {
             string[] existingOptions = new string[] { "Workout Volume", "Bench Press One Rep Max" };
-            Dictionary<string, int> additionalOptions = WorkoutManager.Instance.GetAllDoneExercisesNames();
+            Dictionary<string, int> additionalOptions = WorkoutManager.Instance.GetAllDoneExercisesNamesAndIndexes();
             string[] allOptions = existingOptions.Concat(additionalOptions.Keys).ToArray();
 
             string selectedOption = await DisplayActionSheet("Options", "Cancel", null, allOptions);
@@ -67,11 +67,7 @@ namespace Gym_Tracker
                     GenerateWorkoutVolumePoints();
                     break;
                 case "Bench Press One Rep Max":
-                    //TODO: Add functionality of one rep max calculator with existing data, something like this:
-                    //https://www.muscleandstrength.com/tools/bench-press-calculator
-                    _valuesOnChart.Clear();
-                    OptionsButton.Text = "Bench Press One Rep Max";
-                    AddRandomValue();
+                    GenerateOneRepMaxBenchPressPoints();
                     break;
                 default:
                     if (selectedOption == "Cancel" || string.IsNullOrEmpty(selectedOption))
@@ -84,6 +80,45 @@ namespace Gym_Tracker
                     break;
 
             }
+        }
+
+        private void GenerateOneRepMaxBenchPressPoints()
+        {
+            _valuesOnChart.Clear();
+            OptionsButton.Text = "Bench Press One Rep Max";
+
+            for (int i = 0; i < WorkoutManager.Instance.DoneWorkouts.Count; i++)
+            {
+                float maxValue = 0;
+
+                for (int j = 0; j < WorkoutManager.Instance.DoneWorkouts[i].Exercises.Count; j++)
+                {
+                    WorkoutManager.Exercise thisExerccise = WorkoutManager.Instance.DoneWorkouts[i].Exercises[j];
+
+                    if (WorkoutManager.GetThisExerciseDetails(thisExerccise.ThisExerciseDetailsIndex).Name != "Bench Press")
+                    {
+                        continue;
+                    }
+
+                    for (int k = 0; k < thisExerccise.Series.Count; k++)
+                    {
+                        //it displays only the best series to really calculate one rep max
+                        float OneRepMaxOfThisSerie = CalculateOneRepMax(thisExerccise.Series[k].AmountOfReps,
+                            thisExerccise.Series[k].WeightOnRep);
+                        maxValue = float.Max(maxValue, OneRepMaxOfThisSerie);
+                    }
+                }
+
+                //this will only display values for workouts with bench press
+                AddNewValue(maxValue);
+            }
+        }
+
+        private static float CalculateOneRepMax(int amountOfReps, float weightOnRep)
+        {
+            //https://www.omnicalculator.com/sports/bench-press
+            float output = weightOnRep * (1 + (amountOfReps / 30f));
+            return output;
         }
 
         //TODO: Optimize 
@@ -111,8 +146,8 @@ namespace Gym_Tracker
 
                     for (int k = 0; k < WorkoutManager.Instance.DoneWorkouts[i].Exercises[j].Series.Count; k++)
                     {
-                        valueToAdd += WorkoutManager.Instance.DoneWorkouts[i].Exercises[j].Series[k].WeightOnRep *
-                             WorkoutManager.Instance.DoneWorkouts[i].Exercises[j].Series[k].AmountOfReps;
+                        valueToAdd += WorkoutManager.Instance.DoneWorkouts[i].Exercises[j].Series[k].AmountOfReps *
+                             WorkoutManager.Instance.DoneWorkouts[i].Exercises[j].Series[k].WeightOnRep;
                     }
                 }
 

@@ -18,10 +18,12 @@
             SavedWorkouts = new List<Workout> //Default workouts
             {
                 new Workout(
-                    "Full Body Workout",
+                    "Chest Workout",
                     new List<Exercise>()
                     {
-                        new Exercise(1)
+                        new Exercise(0),
+                        new Exercise(0),
+                        new Exercise(0)
                     }),
                 new Workout(
                     "Full Body Workout",
@@ -186,9 +188,9 @@
                 ThisExerciseDetailsIndex = thisExerciseDetailIndex;
                 Series = new List<Series>()
                 {
-                    new Series(1,2),
-                    new Series(1,2),
-                    new Series(1,2)
+                    new Series(10,50),
+                    new Series(10,50),
+                    new Series(10,50)
                 };
             }
         }
@@ -224,7 +226,7 @@
         }
 
         //TODO: optimize to add to list after every done workout, don't need to calculate this all in one place and time
-        public Dictionary<string, int> GetAllDoneExercisesNames()
+        public Dictionary<string, int> GetAllDoneExercisesNamesAndIndexes()
         {
             if (DoneWorkouts.Count == 0)
             {

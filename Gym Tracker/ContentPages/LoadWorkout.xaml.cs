@@ -98,7 +98,7 @@ public sealed partial class LoadWorkout : ContentPage
         {
             //TODO: Save only done exercises and series to this variable
             WorkoutManager.Workout thisDoneWorkout = WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex];
-            WorkoutManager.Workout copiedWorkout = new WorkoutManager.Workout(thisDoneWorkout);
+            WorkoutManager.Workout copiedWorkout = new(thisDoneWorkout);
 
             WorkoutManager.DeleteUndoneExercisesAndSeries(ref copiedWorkout);
             WorkoutManager.Instance.AddWorkoutToDoneWorkouts(copiedWorkout);
