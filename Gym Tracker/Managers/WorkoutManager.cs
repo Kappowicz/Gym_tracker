@@ -92,7 +92,12 @@
             public Workout(Workout workout)
             {
                 Name = workout.Name;
-                Exercises = new(workout.Exercises);
+                Exercises = new List<Exercise>(workout.Exercises.Count);
+                for (int i = 0; i < workout.Exercises.Count; i++)
+                {
+                    // Create a real exercises copy to make sure we are not referencing old workout's exercises
+                    Exercises.Add(new Exercise(workout.Exercises[i]));
+                }
             }
 
             public Workout()
