@@ -41,16 +41,21 @@ namespace Gym_Tracker
             _valuesOnChart.Add(newValue);
         }
 
-        public void AddNewValue(float value)
+        public void AddNewValue(float valueToAdd)
         {
-            _valuesOnChart.Add(value);
+            if (valueToAdd <= 0)
+            {
+                return;
+            }
+
+            _valuesOnChart.Add(valueToAdd);
         }
 
         private async void OptionsButtonClicked(object sender, EventArgs e)
         {
             string[] existingOptions = new string[] { "Workout Volume", "Bench Press One Rep Max" };
-            string[] additionalOptions = WorkoutManager.Instance.GetAllDoneExercisesNames();
-            string[] allOptions = existingOptions.Concat(additionalOptions).ToArray();
+            Dictionary<string, int> additionalOptions = WorkoutManager.Instance.GetAllDoneExercisesNames();
+            string[] allOptions = existingOptions.Concat(additionalOptions.Keys).ToArray();
 
             string selectedOption = await DisplayActionSheet("Options", "Cancel", null, allOptions);
 
@@ -71,22 +76,54 @@ namespace Gym_Tracker
                 default:
                     if (selectedOption == "Cancel" || string.IsNullOrEmpty(selectedOption))
                     {
-                        //just cancel the DisplayActionSheet when "Cancel" or outside of the Sheet's window is clicked
-                        break;
+                        break; //just cancel the DisplayActionSheet when "Cancel" or outside of the Sheet's window is clicked
                     }
-                    //TODO: Display selected exercise volume
-                    _valuesOnChart.Clear();
-                    OptionsButton.Text = selectedOption;
-                    AddRandomValue();
+
+                    GenerateExercisePoints(additionalOptions[selectedOption]);
+
                     break;
 
+            }
+        }
+
+        //TODO: Optimize 
+        public void GenerateExercisePoints(int exerciseIndex)
+        {
+            if (exerciseIndex < 0 || exerciseIndex > WorkoutManager.Instance.SavedExercises.Count - 1)
+            {
+                return;
+            }
+
+            _valuesOnChart.Clear();
+
+            float valueToAdd;
+
+            for (int i = 0; i < WorkoutManager.Instance.DoneWorkouts.Count; i++)
+            {
+                valueToAdd = 0;
+
+                for (int j = 0; j < WorkoutManager.Instance.DoneWorkouts[i].Exercises.Count; j++)
+                {
+                    if (WorkoutManager.Instance.DoneWorkouts[i].Exercises[j].ThisExerciseDetailsIndex != exerciseIndex)
+                    {
+                        continue;
+                    }
+
+                    for (int k = 0; k < WorkoutManager.Instance.DoneWorkouts[i].Exercises[j].Series.Count; k++)
+                    {
+                        valueToAdd += WorkoutManager.Instance.DoneWorkouts[i].Exercises[j].Series[k].WeightOnRep *
+                             WorkoutManager.Instance.DoneWorkouts[i].Exercises[j].Series[k].AmountOfReps;
+                    }
+                }
+
+                AddNewValue(valueToAdd);
             }
         }
 
         //TODO: Optimize to calculate workout volume after saving workout, don't need to do this all here
         private void GenerateWorkoutVolumePoints()
         {
-            double valueToAdd;
+            float valueToAdd;
 
             for (int i = 0; i < WorkoutManager.Instance.DoneWorkouts.Count; i++)
             {
@@ -101,7 +138,7 @@ namespace Gym_Tracker
                     }
                 }
 
-                _valuesOnChart.Add(valueToAdd);
+                AddNewValue(valueToAdd);
             }
         }
     }

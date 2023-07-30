@@ -89,6 +89,12 @@
                 Exercises = exercises;
             }
 
+            public Workout(Workout workout)
+            {
+                Name = workout.Name;
+                Exercises = new(workout.Exercises);
+            }
+
             public Workout()
             {
                 Name = "";
@@ -106,6 +112,12 @@
             {
                 AmountOfReps = amountOfReps;
                 WeightOnRep = weightOnRep;
+            }
+
+            public Series(Series series)
+            {
+                AmountOfReps = series.AmountOfReps;
+                WeightOnRep = series.WeightOnRep;
             }
         }
 
@@ -152,10 +164,16 @@
 
             public List<Series> Series { get; set; }
 
-            public Exercise(int thisExerciseDetailIndex, List<Series> series)
+            public Exercise(int thisExerciseDetailsIndex, List<Series> series)
             {
-                ThisExerciseDetailsIndex = thisExerciseDetailIndex;
+                ThisExerciseDetailsIndex = thisExerciseDetailsIndex;
                 Series = series;
+            }
+
+            public Exercise(Exercise exercise)
+            {
+                ThisExerciseDetailsIndex = exercise.ThisExerciseDetailsIndex;
+                Series = new(exercise.Series);
             }
 
             public Exercise(int thisExerciseDetailIndex)
@@ -185,6 +203,7 @@
         {
             DoneWorkouts.Add(workout);
 
+            //TODO: Check if last opened section in progresspage is workoutvolume
             //When the progress page was opened, we have to add this separately to it
             if (UIManager.Instance.CurrentProgressPage is not null)
             {
@@ -200,28 +219,28 @@
         }
 
         //TODO: optimize to add to list after every done workout, don't need to calculate this all in one place and time
-        public string[] GetAllDoneExercisesNames()
+        public Dictionary<string, int> GetAllDoneExercisesNames()
         {
             if (DoneWorkouts.Count == 0)
             {
-                return Array.Empty<string>();
+                return new Dictionary<string, int>();
             }
 
-            List<string> exerciseNames = new();
+            Dictionary<string, int> exercises = new();
 
             for (int i = 0; i < DoneWorkouts.Count; i++)
             {
                 for (int j = 0; j < DoneWorkouts[i].Exercises.Count; j++)
                 {
-                    string thisExerciseName = WorkoutManager.GetThisExerciseDetails(DoneWorkouts[i].Exercises[j].ThisExerciseDetailsIndex).Name;
-                    if (!exerciseNames.Contains(thisExerciseName))
+                    WorkoutManager.ExerciseDetails thisExercise = WorkoutManager.GetThisExerciseDetails(DoneWorkouts[i].Exercises[j].ThisExerciseDetailsIndex);
+                    if (!exercises.ContainsKey(thisExercise.Name))
                     {
-                        exerciseNames.Add(thisExerciseName);
+                        exercises.Add(thisExercise.Name, DoneWorkouts[i].Exercises[j].ThisExerciseDetailsIndex);
                     }
                 }
             }
 
-            return exerciseNames.ToArray();
+            return exercises;
         }
 
         public static void DeleteUndoneExercisesAndSeries(ref Workout workout)
