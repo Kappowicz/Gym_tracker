@@ -48,7 +48,9 @@ namespace Gym_Tracker
                 return;
             }
 
-            _valuesOnChart.Add(valueToAdd);
+            float roundedValueToAdd = (float)Math.Floor(valueToAdd);
+
+            _valuesOnChart.Add(roundedValueToAdd);
         }
 
         private async void OptionsButtonClicked(object sender, EventArgs e)
