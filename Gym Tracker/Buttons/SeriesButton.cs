@@ -7,8 +7,8 @@ namespace Gym_Tracker.Buttons
         public Grid SeriesButtonGrid { get; }
         public bool IsSeriesDone { get; set; }
 
-        private readonly Label _amountOfRepsLabel;
-        private readonly Label _weightOnRepLabel;
+        private readonly Entry _amountOfRepsEntry;
+        private readonly Entry _weightOnRepEntry;
         private readonly Button _doneButton;
 
         private readonly int _thisWorkoutIndex;
@@ -17,26 +17,27 @@ namespace Gym_Tracker.Buttons
 
         public SeriesButton(int amountOfReps, float weightOnRep, int thisWorkoutIndex, int thisExerciseIndex, int thisSeriesIndex, bool isSeriesDone = false)
         {
-            _amountOfRepsLabel = new()
+            _amountOfRepsEntry = new Entry
             {
                 Text = amountOfReps.ToString(),
-                TextColor = Color.FromRgb(255, 255, 255),
                 HorizontalTextAlignment = TextAlignment.Center,
-                Background = isSeriesDone ? Color.FromRgb(127, 255, 0) : Color.FromRgb(128, 128, 128)
+                Keyboard = Keyboard.Numeric,
             };
+            _amountOfRepsEntry.TextChanged += (sender, e) => AmountOfRepsEntryTextChanged();
 
-            _weightOnRepLabel = new()
+            _weightOnRepEntry = new()
             {
                 Text = weightOnRep.ToString(),
-                TextColor = Color.FromRgb(255, 255, 255),
                 HorizontalTextAlignment = TextAlignment.Center,
-                Background = isSeriesDone ? Color.FromRgb(127, 255, 0) : Color.FromRgb(128, 128, 128)
+                Keyboard = Keyboard.Numeric,
             };
+            _weightOnRepEntry.TextChanged += (sender, e) => WeightOnRepEntryTextChanged();
 
             _doneButton = new()
             {
                 Text = isSeriesDone ? "Cancel" : "Done",
-                HorizontalOptions = LayoutOptions.Fill
+                HorizontalOptions = LayoutOptions.Fill,
+                Background = isSeriesDone ? Color.FromRgb(128, 255, 0) : Color.FromRgb(255, 255, 255),
             };
 
             _thisWorkoutIndex = thisWorkoutIndex;
@@ -52,18 +53,56 @@ namespace Gym_Tracker.Buttons
             SeriesButtonGrid.ColumnDefinitions.Add(new ColumnDefinition());
             SeriesButtonGrid.ColumnDefinitions.Add(new ColumnDefinition());
 
-            SeriesButtonGrid.Children.Add(_amountOfRepsLabel);
-            SeriesButtonGrid.Children.Add(_weightOnRepLabel);
+            SeriesButtonGrid.Children.Add(_amountOfRepsEntry);
+            SeriesButtonGrid.Children.Add(_weightOnRepEntry);
             SeriesButtonGrid.Children.Add(_doneButton);
 
-            Grid.SetRow(_amountOfRepsLabel, 0);
-            Grid.SetColumn(_amountOfRepsLabel, 0);
+            Grid.SetRow(_amountOfRepsEntry, 0);
+            Grid.SetColumn(_amountOfRepsEntry, 0);
 
-            Grid.SetRow(_weightOnRepLabel, 0);
-            Grid.SetColumn(_weightOnRepLabel, 1);
+            Grid.SetRow(_weightOnRepEntry, 0);
+            Grid.SetColumn(_weightOnRepEntry, 1);
 
             Grid.SetRow(_doneButton, 0);
             Grid.SetColumn(_doneButton, 2);
+        }
+
+        private void AmountOfRepsEntryTextChanged()
+        {
+            if (string.IsNullOrEmpty(_amountOfRepsEntry.Text))
+            {
+                _amountOfRepsEntry.Text = "1";
+                ChangeValueOfAmountOfReps(1);
+                return;
+            }
+
+            ChangeValueOfAmountOfReps(int.Parse(_amountOfRepsEntry.Text));
+        }
+
+        private void ChangeValueOfAmountOfReps(int value)
+        {
+            WorkoutManager.Series thisSeries = WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[_thisSeriesIndex];
+            thisSeries.AmountOfReps = value;
+            WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[_thisSeriesIndex] = thisSeries;
+        }
+
+        private void WeightOnRepEntryTextChanged()
+        {
+            if (string.IsNullOrEmpty(_weightOnRepEntry.Text))
+            {
+                _weightOnRepEntry.Text = "1";
+                ChangeValueOfWeightOnRep(1);
+                return;
+            }
+
+            ChangeValueOfWeightOnRep(float.Parse(_weightOnRepEntry.Text));
+        }
+
+        private void ChangeValueOfWeightOnRep(float value)
+        {
+            WorkoutManager.Series thisSeries = WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[_thisSeriesIndex];
+            thisSeries.WeightOnRep = value;
+            WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[_thisSeriesIndex] = thisSeries;
         }
 
         private void DoneButtonClicked()
@@ -74,14 +113,12 @@ namespace Gym_Tracker.Buttons
 
             if (IsSeriesDone)
             {
-                _amountOfRepsLabel.Background = Color.FromRgb(128, 128, 128);
-                _weightOnRepLabel.Background = Color.FromRgb(128, 128, 128);
+                _doneButton.Background = Color.FromRgb(255, 255, 255);
                 _doneButton.Text = "Done";
             }
             else
             {
-                _amountOfRepsLabel.Background = Color.FromRgb(127, 255, 0);
-                _weightOnRepLabel.Background = Color.FromRgb(127, 255, 0);
+                _doneButton.Background = Color.FromRgb(128, 255, 0);
                 _doneButton.Text = "Cancel";
             }
 
