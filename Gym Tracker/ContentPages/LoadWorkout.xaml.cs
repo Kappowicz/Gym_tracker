@@ -15,6 +15,10 @@ public sealed partial class LoadWorkout : ContentPage
 
         WorkoutManager.Instance.CurrentWorkoutIndex = thisWorkoutIndex;
 
+        WorkoutManager.Workout thisWorkout = WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex];
+
+        LoadWorkoutContentPage.Title = thisWorkout.Name;
+
         GenerateWorkoutExercises();
     }
 

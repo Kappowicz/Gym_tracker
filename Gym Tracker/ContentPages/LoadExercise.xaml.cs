@@ -15,6 +15,10 @@ public sealed partial class LoadExercise : ContentPage
         _thisWorkoutIndex = workoutIndex;
         _thisExerciseIndex = exerciseIndex;
 
+        WorkoutManager.Exercise thisExercise = WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex];
+
+        LoadExerciseContentPage.Title = WorkoutManager.GetThisExerciseDetails(thisExercise.ThisExerciseDetailsIndex).Name;
+
         GenerateSeriesButtons();
     }
 
