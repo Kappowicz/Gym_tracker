@@ -11,6 +11,8 @@ public sealed partial class LoadWorkout : ContentPage
     {
         InitializeComponent();
 
+        NavigatedTo += (sender, e) => LoadWorkoutWasLoaded();
+
         _thisWorkoutIndex = thisWorkoutIndex;
 
         WorkoutManager.Instance.CurrentWorkoutIndex = thisWorkoutIndex;
@@ -22,10 +24,8 @@ public sealed partial class LoadWorkout : ContentPage
         GenerateWorkoutExercises();
     }
 
-    protected override void OnAppearing()
+    private void LoadWorkoutWasLoaded()
     {
-        base.OnAppearing();
-
         //Update displayed workout volume
         //TODO: Check if some series was done, if no then don't calculate volume
         _thisWorkoutVolume = WorkoutManager.CalculateWorkoutVolume(WorkoutManager.Instance.SavedWorkouts[WorkoutManager.Instance.CurrentWorkoutIndex]);

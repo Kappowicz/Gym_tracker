@@ -1,5 +1,4 @@
 ﻿using Gym_Tracker.Managers;
-
 namespace Gym_Tracker.Buttons
 {
     internal sealed class SeriesButton : ContentView
@@ -23,7 +22,7 @@ namespace Gym_Tracker.Buttons
                 HorizontalTextAlignment = TextAlignment.Center,
                 Keyboard = Keyboard.Numeric,
             };
-            _amountOfRepsEntry.TextChanged += (sender, e) => AmountOfRepsEntryTextChanged();
+            _amountOfRepsEntry.Unfocused += (sender, e) => AmountOfRepsEntryUnfocused();
 
             _weightOnRepEntry = new()
             {
@@ -31,7 +30,7 @@ namespace Gym_Tracker.Buttons
                 HorizontalTextAlignment = TextAlignment.Center,
                 Keyboard = Keyboard.Numeric,
             };
-            _weightOnRepEntry.TextChanged += (sender, e) => WeightOnRepEntryTextChanged();
+            _weightOnRepEntry.Unfocused += (sender, e) => WeightOnRepEntryUnfocused();
 
             _doneButton = new()
             {
@@ -67,12 +66,41 @@ namespace Gym_Tracker.Buttons
             Grid.SetColumn(_doneButton, 2);
         }
 
-        private void AmountOfRepsEntryTextChanged()
+        public void LoadExerciseDisappearing()
+        {
+            _ = SetDefaultValueIfNullAmountOfReps();
+
+            _ = SetDefaultValueIfNullWeightOnRep();
+        }
+
+        private bool SetDefaultValueIfNullAmountOfReps()
         {
             if (string.IsNullOrEmpty(_amountOfRepsEntry.Text))
             {
                 _amountOfRepsEntry.Text = "1";
                 ChangeValueOfAmountOfReps(1);
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool SetDefaultValueIfNullWeightOnRep()
+        {
+            if (string.IsNullOrEmpty(_weightOnRepEntry.Text))
+            {
+                _weightOnRepEntry.Text = "1";
+                ChangeValueOfWeightOnRep(1);
+                return true;
+            }
+
+            return false;
+        }
+
+        private void AmountOfRepsEntryUnfocused()
+        {
+            if (SetDefaultValueIfNullAmountOfReps())
+            {
                 return;
             }
 
@@ -86,12 +114,10 @@ namespace Gym_Tracker.Buttons
             WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[_thisSeriesIndex] = thisSeries;
         }
 
-        private void WeightOnRepEntryTextChanged()
+        private void WeightOnRepEntryUnfocused()
         {
-            if (string.IsNullOrEmpty(_weightOnRepEntry.Text))
+            if (SetDefaultValueIfNullWeightOnRep())
             {
-                _weightOnRepEntry.Text = "1";
-                ChangeValueOfWeightOnRep(1);
                 return;
             }
 
