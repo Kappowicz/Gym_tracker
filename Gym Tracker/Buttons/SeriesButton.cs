@@ -32,29 +32,18 @@ namespace Gym_Tracker.Buttons
             };
             _weightOnRepEntry.Unfocused += (sender, e) => WeightOnRepEntryUnfocused();
 
-            _doneButton = new()
-            {
-                Text = isSeriesDone ? "Cancel" : "Done",
-                HorizontalOptions = LayoutOptions.Fill,
-                Background = isSeriesDone ? Color.FromRgb(128, 255, 0) : Color.FromRgb(255, 255, 255),
-            };
-
             _thisWorkoutIndex = thisWorkoutIndex;
             _thisExerciseIndex = thisExerciseIndex;
             _thisSeriesIndex = thisSeriesIndex;
             IsSeriesDone = isSeriesDone;
 
-            _doneButton.Clicked += (sender, e) => DoneButtonClicked();
-
             SeriesButtonGrid = new Grid();
             SeriesButtonGrid.RowDefinitions.Add(new RowDefinition());
-            SeriesButtonGrid.ColumnDefinitions.Add(new ColumnDefinition());
             SeriesButtonGrid.ColumnDefinitions.Add(new ColumnDefinition());
             SeriesButtonGrid.ColumnDefinitions.Add(new ColumnDefinition());
 
             SeriesButtonGrid.Children.Add(_amountOfRepsEntry);
             SeriesButtonGrid.Children.Add(_weightOnRepEntry);
-            SeriesButtonGrid.Children.Add(_doneButton);
 
             Grid.SetRow(_amountOfRepsEntry, 0);
             Grid.SetColumn(_amountOfRepsEntry, 0);
@@ -62,8 +51,29 @@ namespace Gym_Tracker.Buttons
             Grid.SetRow(_weightOnRepEntry, 0);
             Grid.SetColumn(_weightOnRepEntry, 1);
 
-            Grid.SetRow(_doneButton, 0);
-            Grid.SetColumn(_doneButton, 2);
+            if (WorkoutManager.Instance.StartedWorkoutIndex == thisWorkoutIndex)
+            {
+                _doneButton = new()
+                {
+                    Text = isSeriesDone ? "Cancel" : "Done",
+                    HorizontalOptions = LayoutOptions.Fill,
+                    Background = isSeriesDone ? Color.FromRgb(128, 255, 0) : Color.FromRgb(255, 255, 255),
+                };
+
+                _doneButton.Clicked += (sender, e) => DoneButtonClicked();
+
+                SeriesButtonGrid.ColumnDefinitions.Add(new ColumnDefinition());
+
+                SeriesButtonGrid.Children.Add(_doneButton);
+
+                Grid.SetRow(_doneButton, 0);
+                Grid.SetColumn(_doneButton, 2);
+            }
+            else //if it's not started workout, disable option to change values
+            {
+                _amountOfRepsEntry.IsReadOnly = true;
+                _weightOnRepEntry.IsReadOnly = true;
+            }
         }
 
         public void LoadExerciseDisappearing()

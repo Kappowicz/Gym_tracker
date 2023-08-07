@@ -4,7 +4,7 @@
              x:Class="Gym_Tracker.MainPage"
              Title="Main Menu">
     <ScrollView>
-        <VerticalStackLayout x:Name="MainPageVerticalStackLayout"
+        <VerticalStackLayout
                         Margin="20"
                         Spacing="10"
                         VerticalOptions="Center">
@@ -13,6 +13,12 @@
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
                 HorizontalTextAlignment="Center" />
+            <VerticalStackLayout x:Name="MainPageVerticalStackLayout"
+                        Margin="20"
+                        Spacing="10"
+                        VerticalOptions="Center">
+
+            </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

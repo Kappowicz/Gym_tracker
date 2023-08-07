@@ -9,16 +9,18 @@ public sealed partial class MainPage : ContentPage
         InitializeComponent();
 
         UIManager.Instance.CurrentMainPage = this;
-
-        InitializeWorkoutButtons();
-        InitializeCreateWorkoutButton();
     }
 
     protected override void OnAppearing()
     {
-        base.OnDisappearing();
+        MainPageVerticalStackLayout.Children.Clear();
 
         WorkoutManager.Instance.CurrentWorkoutIndex = -1;
+
+        InitializeWorkoutButtons();
+        InitializeCreateWorkoutButton();
+
+        base.OnAppearing();
     }
 
     private void InitializeWorkoutButtons()
@@ -30,6 +32,14 @@ public sealed partial class MainPage : ContentPage
                 Text = WorkoutManager.Instance.SavedWorkouts[i].Name,
                 HorizontalOptions = LayoutOptions.Center,
             };
+
+            if (WorkoutManager.Instance.IsWorkoutStarted)
+            {
+                if (WorkoutManager.Instance.StartedWorkoutIndex == i)
+                {
+                    currentButton.Background = Color.FromRgb(128, 255, 0);
+                }
+            }
 
             MainPageVerticalStackLayout.Children.Add(currentButton);
 

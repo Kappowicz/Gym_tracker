@@ -21,6 +21,11 @@ public sealed partial class LoadWorkout : ContentPage
 
         LoadWorkoutContentPage.Title = thisWorkout.Name;
 
+        if (WorkoutManager.Instance.IsWorkoutStarted && WorkoutManager.Instance.StartedWorkoutIndex != _thisWorkoutIndex)
+        {
+            StartStopWorkoutButton.Background = Color.FromRgb(128, 128, 128);
+        }
+
         GenerateWorkoutExercises();
     }
 
@@ -39,6 +44,11 @@ public sealed partial class LoadWorkout : ContentPage
 
     private void SetStopWorkoutText()
     {
+        if (WorkoutManager.Instance.StartedWorkoutIndex != _thisWorkoutIndex)
+        {
+            return;
+        }
+
         StartStopWorkoutButton.Text = _thisWorkoutVolume > 0 ? "Stop workout and save progress" : "Stop workout";
     }
 
@@ -75,6 +85,11 @@ public sealed partial class LoadWorkout : ContentPage
 
     private void StartStopWorkoutButtonClicked(object sender, EventArgs e)
     {
+        if (WorkoutManager.Instance.StartedWorkoutIndex != _thisWorkoutIndex && WorkoutManager.Instance.StartedWorkoutIndex != -1)
+        {
+            return;
+        }
+
         if (WorkoutManager.Instance.IsWorkoutStarted)
         {
             StopWorkout();
@@ -88,6 +103,7 @@ public sealed partial class LoadWorkout : ContentPage
     private void StartWorkout()
     {
         WorkoutManager.Instance.IsWorkoutStarted = true;
+        WorkoutManager.Instance.StartedWorkoutIndex = _thisWorkoutIndex;
 
         SetStopWorkoutText();
     }
@@ -95,6 +111,7 @@ public sealed partial class LoadWorkout : ContentPage
     private void StopWorkout()
     {
         WorkoutManager.Instance.IsWorkoutStarted = false;
+        WorkoutManager.Instance.StartedWorkoutIndex = -1;
 
         StartStopWorkoutButton.Text = "Start workout";
 

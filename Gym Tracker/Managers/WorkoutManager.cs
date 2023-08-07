@@ -7,6 +7,7 @@
 
         public int CurrentWorkoutIndex { get; set; } = -1; // -1 = unset
         public bool IsWorkoutStarted { get; set; } = false;
+        public int StartedWorkoutIndex { get; set; } = -1;
 
         //TODO: These Saved values will be loaded from save file 
         public List<Workout> DoneWorkouts { get; set; }
