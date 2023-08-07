@@ -16,5 +16,6 @@
         <Button Text="Stadistics icons created by Freepik - Flaticon" Clicked="StadisticsIconButtonClicked" />
         <Button Text="Workout icons created by ultimatearm - Flaticon" Clicked="WorkoutIconButtonClicked" />
         <Button Text="Up-arrow icons created by gungyoga04 - Flaticon" Clicked="UpArrowButtonClicked" />
+        <Button Text="Equal icons created by Smashicons - Flaticon" Clicked="EqualButtonClicked" />
     </VerticalStackLayout>
 </ContentPage>

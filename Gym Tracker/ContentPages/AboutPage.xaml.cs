@@ -10,6 +10,7 @@ public sealed partial class AboutPage : ContentPage
     private const string StadisticsIconUrl = "https://www.flaticon.com/free-icons/stadistics";
     private const string WorkoutIconUrl = "https://www.flaticon.com/free-icons/workout";
     private const string UpArrowIconUrl = "https://www.flaticon.com/free-icons/up-arrow";
+    private const string EqualIconUrl = "https://www.flaticon.com/free-icons/equal";
 
     public AboutPage()
     {
@@ -56,5 +57,10 @@ public sealed partial class AboutPage : ContentPage
     private async void UpArrowButtonClicked(object sender, EventArgs e)
     {
         await OpenUrlAsync(UpArrowIconUrl);
+    }
+
+    private async void EqualButtonClicked(object sender, EventArgs e)
+    {
+        await OpenUrlAsync(EqualIconUrl);
     }
 }

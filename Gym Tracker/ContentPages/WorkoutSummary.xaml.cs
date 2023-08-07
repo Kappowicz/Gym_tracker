@@ -8,6 +8,7 @@ public sealed partial class WorkoutSummary : ContentPage
 
     private const string UpArrowImagePath = "up_arrow.png";
     private const string DownArrowImagePath = "down_arrow.png";
+    private const string EqualImagePath = "equal.png";
 
     public WorkoutSummary(WorkoutManager.Workout doneWorkout)
     {
@@ -55,11 +56,14 @@ public sealed partial class WorkoutSummary : ContentPage
 
             Image currentExerciseImage = new()
             {
-                Source = currentExerciseVolume > previousWorkoutThisExerciseVolume ? UpArrowImagePath : DownArrowImagePath,
+                Source = currentExerciseVolume > previousWorkoutThisExerciseVolume ? UpArrowImagePath :
+                 currentExerciseVolume == previousWorkoutThisExerciseVolume ? EqualImagePath : DownArrowImagePath,
                 MaximumHeightRequest = 50,
                 MaximumWidthRequest = 50,
             };
             //_displayedWorkout.Exercises.Clicked += (sender, e) => chooseExerciseHandler.IndexChosen(thisExerciseIndex);
+
+            WorkoutManager.GetThisExerciseDetails(thisExercise.ThisExerciseDetailsIndex).PreviousThisExerciseVolume.Add(currentExerciseVolume);
 
             Grid currentExerciseGrid = new();
             currentExerciseGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto }); // Image column
