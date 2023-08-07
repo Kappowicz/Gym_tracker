@@ -4,8 +4,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Gym_Tracker.LoadExercise"
              Title="LoadExercise">
-    <VerticalStackLayout x:Name="LoadExerciseVerticalStackLayout"
+    <ScrollView>
+        <VerticalStackLayout x:Name="LoadExerciseVerticalStackLayout"
                         Margin="20"
                         Spacing="10">
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

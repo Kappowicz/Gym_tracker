@@ -6,17 +6,42 @@ namespace Gym_Tracker.Buttons
         public Grid SeriesButtonGrid { get; }
         public bool IsSeriesDone { get; set; }
 
+        private readonly LoadExercise _parentLoadExercise;
         private readonly Entry _amountOfRepsEntry;
         private readonly Entry _weightOnRepEntry;
         private readonly Button _doneButton;
+        private readonly Button _deleteButton;
 
         private readonly int _thisWorkoutIndex;
         private readonly int _thisExerciseIndex;
-        private readonly int _thisSeriesIndex;
 
-        public SeriesButton(int amountOfReps, float weightOnRep, int thisWorkoutIndex, int thisExerciseIndex, int thisSeriesIndex, bool isSeriesDone = false)
+        public int ThisSeriesIndex { get; set; }
+
+        public SeriesButton(int amountOfReps, float weightOnRep, int thisWorkoutIndex, int thisExerciseIndex, int thisSeriesIndex, LoadExercise loadExercise, bool isSeriesDone = false)
         {
-            _amountOfRepsEntry = new Entry
+            SeriesButtonGrid = new Grid();
+            SeriesButtonGrid.RowDefinitions.Add(new RowDefinition());
+            SeriesButtonGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            SeriesButtonGrid.ColumnDefinitions.Add(new ColumnDefinition());
+
+            if (WorkoutManager.Instance.StartedWorkoutIndex == thisWorkoutIndex)
+            {
+                _deleteButton = new()
+                {
+                    Text = "Delete"
+                };
+
+                _deleteButton.Clicked += (sender, e) => DeleteButtonClicked();
+
+                SeriesButtonGrid.ColumnDefinitions.Add(new ColumnDefinition());
+
+                SeriesButtonGrid.Children.Add(_deleteButton);
+
+                Grid.SetRow(_deleteButton, 0);
+                Grid.SetColumn(_deleteButton, 0);
+            }
+
+            _amountOfRepsEntry = new()
             {
                 Text = amountOfReps.ToString(),
                 HorizontalTextAlignment = TextAlignment.Center,
@@ -32,24 +57,20 @@ namespace Gym_Tracker.Buttons
             };
             _weightOnRepEntry.Unfocused += (sender, e) => WeightOnRepEntryUnfocused();
 
+            _parentLoadExercise = loadExercise;
             _thisWorkoutIndex = thisWorkoutIndex;
             _thisExerciseIndex = thisExerciseIndex;
-            _thisSeriesIndex = thisSeriesIndex;
+            ThisSeriesIndex = thisSeriesIndex;
             IsSeriesDone = isSeriesDone;
-
-            SeriesButtonGrid = new Grid();
-            SeriesButtonGrid.RowDefinitions.Add(new RowDefinition());
-            SeriesButtonGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            SeriesButtonGrid.ColumnDefinitions.Add(new ColumnDefinition());
 
             SeriesButtonGrid.Children.Add(_amountOfRepsEntry);
             SeriesButtonGrid.Children.Add(_weightOnRepEntry);
 
             Grid.SetRow(_amountOfRepsEntry, 0);
-            Grid.SetColumn(_amountOfRepsEntry, 0);
+            Grid.SetColumn(_amountOfRepsEntry, WorkoutManager.Instance.StartedWorkoutIndex == thisWorkoutIndex ? 1 : 0);
 
             Grid.SetRow(_weightOnRepEntry, 0);
-            Grid.SetColumn(_weightOnRepEntry, 1);
+            Grid.SetColumn(_weightOnRepEntry, WorkoutManager.Instance.StartedWorkoutIndex == thisWorkoutIndex ? 2 : 1);
 
             if (WorkoutManager.Instance.StartedWorkoutIndex == thisWorkoutIndex)
             {
@@ -67,7 +88,7 @@ namespace Gym_Tracker.Buttons
                 SeriesButtonGrid.Children.Add(_doneButton);
 
                 Grid.SetRow(_doneButton, 0);
-                Grid.SetColumn(_doneButton, 2);
+                Grid.SetColumn(_doneButton, 3);
             }
             else //if it's not started workout, disable option to change values
             {
@@ -119,9 +140,9 @@ namespace Gym_Tracker.Buttons
 
         private void ChangeValueOfAmountOfReps(int value)
         {
-            WorkoutManager.Series thisSeries = WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[_thisSeriesIndex];
+            WorkoutManager.Series thisSeries = WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[ThisSeriesIndex];
             thisSeries.AmountOfReps = value;
-            WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[_thisSeriesIndex] = thisSeries;
+            WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[ThisSeriesIndex] = thisSeries;
         }
 
         private void WeightOnRepEntryUnfocused()
@@ -136,16 +157,16 @@ namespace Gym_Tracker.Buttons
 
         private void ChangeValueOfWeightOnRep(float value)
         {
-            WorkoutManager.Series thisSeries = WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[_thisSeriesIndex];
+            WorkoutManager.Series thisSeries = WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[ThisSeriesIndex];
             thisSeries.WeightOnRep = value;
-            WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[_thisSeriesIndex] = thisSeries;
+            WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[ThisSeriesIndex] = thisSeries;
         }
 
         private void DoneButtonClicked()
         {
-            WorkoutManager.Series thisSeries = WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[_thisSeriesIndex];
+            WorkoutManager.Series thisSeries = WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[ThisSeriesIndex];
             thisSeries.IsDone = !thisSeries.IsDone;
-            WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[_thisSeriesIndex] = thisSeries;
+            WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[ThisSeriesIndex] = thisSeries;
 
             if (IsSeriesDone)
             {
@@ -159,6 +180,11 @@ namespace Gym_Tracker.Buttons
             }
 
             IsSeriesDone = !IsSeriesDone;
+        }
+
+        private void DeleteButtonClicked()
+        {
+            _parentLoadExercise.DeleteSeriesButtonClicked(ThisSeriesIndex);
         }
     }
 }

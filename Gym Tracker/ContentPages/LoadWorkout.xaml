@@ -4,18 +4,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Gym_Tracker.LoadWorkout"
              Title="LoadWorkout">
-    <AbsoluteLayout>
-        <VerticalStackLayout  x:Name="LoadWorkoutVerticalStackLayout" 
-                        Margin="20"
-                        Spacing="10"
-                              AbsoluteLayout.LayoutBounds="0.5, 0" 
-                              AbsoluteLayout.LayoutFlags="PositionProportional">
-            <Label x:Name="LoadWorkoutVolumeText" Text="Workout Volume: 0kg."
-                 AbsoluteLayout.LayoutBounds="0.5,0"
-                 AbsoluteLayout.LayoutFlags="PositionProportional"  />
-        </VerticalStackLayout>
-        <Button x:Name="StartStopWorkoutButton" Text="Start workout" Clicked="StartStopWorkoutButtonClicked"
-                 AbsoluteLayout.LayoutBounds="0.5,1"
-                 AbsoluteLayout.LayoutFlags="PositionProportional"  />
-    </AbsoluteLayout>
+    <ScrollView>
+        <AbsoluteLayout>
+            <VerticalStackLayout  x:Name="LoadWorkoutVerticalStackLayout" 
+                            Margin="20"
+                            Spacing="10"
+                                  AbsoluteLayout.LayoutBounds="0.5, 0" 
+                                  AbsoluteLayout.LayoutFlags="PositionProportional">
+                <Label x:Name="LoadWorkoutVolumeText" Text="Workout Volume: 0kg."
+                     AbsoluteLayout.LayoutBounds="0.5,0"
+                     AbsoluteLayout.LayoutFlags="PositionProportional"  />
+            </VerticalStackLayout>
+            <Button x:Name="StartStopWorkoutButton" Text="Start workout" Clicked="StartStopWorkoutButtonClicked"
+                     AbsoluteLayout.LayoutBounds="0.5,1"
+                     AbsoluteLayout.LayoutFlags="PositionProportional"  />
+        </AbsoluteLayout>
+    </ScrollView>
 </ContentPage>

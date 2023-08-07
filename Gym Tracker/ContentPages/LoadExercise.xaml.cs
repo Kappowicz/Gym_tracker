@@ -30,11 +30,37 @@ public sealed partial class LoadExercise : ContentPage
         {
             WorkoutManager.Series thisSeries = WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[i];
 
-            SeriesButton thisSeriesButton = new(thisSeries.AmountOfReps, thisSeries.WeightOnRep, _thisWorkoutIndex, _thisExerciseIndex, i, thisSeries.IsDone);
+            SeriesButton thisSeriesButton = new(thisSeries.AmountOfReps, thisSeries.WeightOnRep, _thisWorkoutIndex, _thisExerciseIndex, i, this, thisSeries.IsDone);
             _seriesButtons.Add(thisSeriesButton);
 
             LoadExerciseVerticalStackLayout.Add(thisSeriesButton.SeriesButtonGrid);
         }
+
+        if (WorkoutManager.Instance.StartedWorkoutIndex == _thisWorkoutIndex)
+        {
+            Button createNewSeriesButton = new()
+            {
+                Text = "Create New Series",
+            };
+
+            createNewSeriesButton.Clicked += (sender, e) => CreateNewSeriesButtonClicked();
+
+            LoadExerciseVerticalStackLayout.Add(createNewSeriesButton);
+        }
+    }
+
+    private void CreateNewSeriesButtonClicked()
+    {
+        WorkoutManager.Series seriesToAdd = WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series.Count > 0
+            ? new(WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series[^1])
+            : new(1, 1);
+        WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series.Add(seriesToAdd);
+
+        int thisSeriesIndex = WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series.Count - 1;
+        SeriesButton thisSeriesButton = new(seriesToAdd.AmountOfReps, seriesToAdd.WeightOnRep, _thisWorkoutIndex, _thisExerciseIndex, thisSeriesIndex, this, seriesToAdd.IsDone);
+        _seriesButtons.Add(thisSeriesButton);
+
+        LoadExerciseVerticalStackLayout.Insert(LoadExerciseVerticalStackLayout.Children.Count - 1, thisSeriesButton.SeriesButtonGrid);
     }
 
     //TODO: Change this to some better event handling option
@@ -46,5 +72,17 @@ public sealed partial class LoadExercise : ContentPage
         }
 
         base.OnDisappearing();
+    }
+
+    public void DeleteSeriesButtonClicked(int deletedSeriesButtonIndex)
+    {
+        LoadExerciseVerticalStackLayout.RemoveAt(deletedSeriesButtonIndex);
+        _seriesButtons.RemoveAt(deletedSeriesButtonIndex);
+        WorkoutManager.Instance.SavedWorkouts[_thisWorkoutIndex].Exercises[_thisExerciseIndex].Series.RemoveAt(deletedSeriesButtonIndex);
+
+        for (int i = deletedSeriesButtonIndex; i < _seriesButtons.Count; i++)
+        {
+            _seriesButtons[i].ThisSeriesIndex--;
+        }
     }
 }
