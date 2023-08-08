@@ -8,7 +8,7 @@ namespace Gym_Tracker;
 public sealed partial class ChooseExercise : ContentPage
 {
     private readonly IChosenIndex _chooseExerciseHandler;
-    private WorkoutManager.MusclesGroups _selectedMusclesGroups = MusclesGroups.Default;
+    private WorkoutManager.MusclesGroups _selectedMusclesGroups = MusclesGroups.All;
     private string _currentSearchedText = "";
 
     public ChooseExercise(IChosenIndex chooseExerciseHandler)
@@ -52,6 +52,7 @@ public sealed partial class ChooseExercise : ContentPage
             {
                 Text = thisMuscleGroup.ToString(),
                 CornerRadius = 20,
+                Background = thisMuscleGroup == _selectedMusclesGroups ? Color.FromRgb(128, 255, 0) : Color.FromRgb(255, 255, 255),
             };
 
             int capturedValue = i;
@@ -104,7 +105,7 @@ public sealed partial class ChooseExercise : ContentPage
 
             if (thisExercise.MusclesGroup != _selectedMusclesGroups)
             {
-                if (_selectedMusclesGroups != WorkoutManager.MusclesGroups.Default)
+                if (_selectedMusclesGroups != WorkoutManager.MusclesGroups.All)
                 {
                     continue;
                 }

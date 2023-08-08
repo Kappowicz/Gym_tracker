@@ -82,7 +82,7 @@ public sealed partial class MainPage : ContentPage
         };
 
         currentButton.Clicked += (sender, e) => OnLoadWorkoutButtonClicked(WorkoutManager.Instance.SavedWorkouts.Count - 1);
-        MainPageVerticalStackLayout.Children.Insert(UIManager.NewWorkoutButtonInMainMenuIndex, currentButton);
+        MainPageVerticalStackLayout.Children.Add(currentButton);
     }
 }
 

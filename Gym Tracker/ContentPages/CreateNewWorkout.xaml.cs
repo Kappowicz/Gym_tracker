@@ -83,6 +83,6 @@ public sealed partial class CreateNewWorkout : ContentPage, IChosenIndex
             HorizontalOptions = LayoutOptions.Fill
         };
 
-        CreateNewWorkoutVerticalStackLayout.Insert(UIManager.NewExerciseButtonInCreateNewWorkoutIndex, currentButton);
+        CreateNewWorkoutVerticalStackLayout.Add(currentButton);
     }
 }

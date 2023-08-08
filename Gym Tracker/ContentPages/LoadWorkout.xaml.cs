@@ -64,7 +64,7 @@ public sealed partial class LoadWorkout : ContentPage
                 HorizontalOptions = LayoutOptions.Center,
             };
 
-            LoadWorkoutVerticalStackLayout.Children.Insert(UIManager.NewExerciseInLoadWorkoutIndex, currentButton);
+            LoadWorkoutVerticalStackLayout.Children.Add(currentButton);
 
             int currentIndex = i; //this makes pass to function actual index of currently created button
             currentButton.Clicked += (sender, e) => LoadExerciseButtonClicked(currentIndex);

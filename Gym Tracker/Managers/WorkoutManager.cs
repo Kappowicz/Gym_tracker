@@ -73,7 +73,7 @@
 
         public enum MusclesGroups
         {
-            Default = 0,
+            All = 0,
             Arms,
             Chest,
             Abs,
@@ -137,7 +137,7 @@
 
             public List<float> PreviousThisExerciseVolume { get; set; } = new List<float>();
 
-            public MusclesGroups MusclesGroup { get; set; } = MusclesGroups.Default;
+            public MusclesGroups MusclesGroup { get; set; } = MusclesGroups.All;
 
             public ExerciseDetails(string name, MusclesGroups muscleGroup)
             {

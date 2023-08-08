@@ -3,16 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Gym_Tracker.CreateNewWorkout"
              Title="CreateNewWorkout">
-    <VerticalStackLayout x:Name="CreateNewWorkoutVerticalStackLayout"
-                        Margin="20"
-                        Spacing="10">
-        <Label 
-            Text="There will be whole ui to create new workout"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Entry x:Name="WorkoutName"
-            Placeholder="Enter workout name" />
-        <Button Text="Add New Exercise" Clicked="AddNewExerciseButtonClicked" />
-        <Button Text="Save And Go Back" Clicked="SaveAndGoBackButtonClicked" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout
+                            Margin="20"
+                            Spacing="10">
+            <Entry x:Name="WorkoutName"
+                Placeholder="Enter workout name" />
+            <VerticalStackLayout x:Name="CreateNewWorkoutVerticalStackLayout"
+                            Margin="20"
+                            Spacing="10">
+                <Button Text="Add New Exercise" Clicked="AddNewExerciseButtonClicked" />
+                <Button Text="Save And Go Back" Clicked="SaveAndGoBackButtonClicked" />
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
