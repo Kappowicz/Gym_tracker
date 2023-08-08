@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Gym_Tracker.CreateNewWorkout"
-             Title="CreateNewWorkout">
+<ContentPage
+    x:Class="Gym_Tracker.CreateNewWorkout"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="CreateNewWorkout">
     <ScrollView>
-        <VerticalStackLayout
-                            Margin="20"
-                            Spacing="10">
-            <Entry x:Name="WorkoutName"
-                Placeholder="Enter workout name" />
-            <VerticalStackLayout x:Name="CreateNewWorkoutVerticalStackLayout"
-                            Margin="20"
-                            Spacing="10">
-                <Button Text="Add New Exercise" Clicked="AddNewExerciseButtonClicked" />
-                <Button Text="Save And Go Back" Clicked="SaveAndGoBackButtonClicked" />
+        <VerticalStackLayout Margin="20" Spacing="10">
+            <Entry x:Name="WorkoutName" Placeholder="Enter workout name" />
+            <VerticalStackLayout
+                x:Name="CreateNewWorkoutVerticalStackLayout"
+                Margin="20"
+                Spacing="10">
+                <Button Clicked="AddNewExerciseButtonClicked" Text="Add New Exercise" />
+                <Button Clicked="SaveAndGoBackButtonClicked" Text="Save And Go Back" />
             </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>

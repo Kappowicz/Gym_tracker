@@ -218,7 +218,6 @@
                 float volumeOfThisWorkout = CalculateWorkoutVolume(workout);
                 UIManager.Instance.CurrentProgressPage.AddNewValue(volumeOfThisWorkout);
             }
-
         }
 
         public static ExerciseDetails GetThisExerciseDetails(int thisExerciseDetailIndex)

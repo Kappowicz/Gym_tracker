@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Gym_Tracker.ChooseExercise"
-             Title="ChooseExercise">
+<ContentPage
+    x:Class="Gym_Tracker.ChooseExercise"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="ChooseExercise">
     <ScrollView>
-        <VerticalStackLayout
-                            Margin="20"
-                            Spacing="10">
-            <Entry x:Name="ExerciseName"
-            Placeholder="Enter exercise name to search"
-            TextChanged="OnExerciseNameSearchTextChanged" />
+        <VerticalStackLayout Margin="20" Spacing="10">
+            <Entry
+                x:Name="ExerciseName"
+                Placeholder="Enter exercise name to search"
+                TextChanged="OnExerciseNameSearchTextChanged" />
             <ScrollView Orientation="Horizontal">
-                <StackLayout Orientation="Horizontal" x:Name="MuscleGroupsHorizontalStackLayout" Spacing="5">
-                    
-                </StackLayout>
+                <StackLayout
+                    x:Name="MuscleGroupsHorizontalStackLayout"
+                    Orientation="Horizontal"
+                    Spacing="5" />
             </ScrollView>
-            <VerticalStackLayout x:Name="ChooseExerciseVerticalStackLayout"
-                                Margin="20"
-                                Spacing="10">
-            </VerticalStackLayout>
+            <VerticalStackLayout
+                x:Name="ChooseExerciseVerticalStackLayout"
+                Margin="20"
+                Spacing="10" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

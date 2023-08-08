@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Gym_Tracker.AboutPage"
-             Title="AboutPage">
-    <VerticalStackLayout 
-                        Margin="20"
-                        Spacing="10">
+<ContentPage
+    x:Class="Gym_Tracker.AboutPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="AboutPage">
+    <VerticalStackLayout Margin="20" Spacing="10">
         <HorizontalStackLayout Spacing="10">
-            <Label FontSize="22" FontAttributes="Bold" Text="GymTracker Application" VerticalOptions="End" />
-            <Label FontSize="22" Text="v0.01" VerticalOptions="End" />
+            <Label
+                FontAttributes="Bold"
+                FontSize="22"
+                Text="GymTracker Application"
+                VerticalOptions="End" />
+            <Label
+                FontSize="22"
+                Text="v0.01"
+                VerticalOptions="End" />
         </HorizontalStackLayout>
         <Label Text="This app is open source project written in XAML and C# with .NET MAUI." />
-        <Button Text="Github Link" Clicked="OpenGithubLinkButtonClicked" />
-        <Button Text="Progress charts created with LiveCharts2" Clicked="ProgressChartsButtonClicked" />
-        <Button Text="Stadistics icons created by Freepik - Flaticon" Clicked="StadisticsIconButtonClicked" />
-        <Button Text="Workout icons created by ultimatearm - Flaticon" Clicked="WorkoutIconButtonClicked" />
-        <Button Text="Up-arrow icons created by gungyoga04 - Flaticon" Clicked="UpArrowButtonClicked" />
-        <Button Text="Equal icons created by Smashicons - Flaticon" Clicked="EqualButtonClicked" />
+        <Button Clicked="OpenGithubLinkButtonClicked" Text="Github Link" />
+        <Button Clicked="ProgressChartsButtonClicked" Text="Progress charts created with LiveCharts2" />
+        <Button Clicked="StadisticsIconButtonClicked" Text="Stadistics icons created by Freepik - Flaticon" />
+        <Button Clicked="WorkoutIconButtonClicked" Text="Workout icons created by ultimatearm - Flaticon" />
+        <Button Clicked="UpArrowButtonClicked" Text="Up-arrow icons created by gungyoga04 - Flaticon" />
+        <Button Clicked="EqualButtonClicked" Text="Equal icons created by Smashicons - Flaticon" />
     </VerticalStackLayout>
 </ContentPage>

@@ -6,13 +6,11 @@ namespace Gym_Tracker;
 
 public sealed partial class CreateNewWorkout : ContentPage, IChosenIndex
 {
-    private Workout _currentlyCreatedWorkout;
+    private Workout _currentlyCreatedWorkout = new();
 
     public CreateNewWorkout()
     {
         InitializeComponent();
-
-        _currentlyCreatedWorkout = new Workout();
     }
 
     private void SaveAndGoBackButtonClicked(object sender, EventArgs e)

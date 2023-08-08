@@ -1,14 +1,13 @@
 using Gym_Tracker.Buttons;
 using Gym_Tracker.Interfaces;
 using Gym_Tracker.Managers;
-using static Gym_Tracker.Managers.WorkoutManager;
 
 namespace Gym_Tracker;
 
 public sealed partial class ChooseExercise : ContentPage
 {
     private readonly IChosenIndex _chooseExerciseHandler;
-    private WorkoutManager.MusclesGroups _selectedMusclesGroups = MusclesGroups.All;
+    private WorkoutManager.MusclesGroups _selectedMusclesGroups = WorkoutManager.MusclesGroups.All;
     private string _currentSearchedText = "";
 
     public ChooseExercise(IChosenIndex chooseExerciseHandler)
@@ -44,9 +43,9 @@ public sealed partial class ChooseExercise : ContentPage
 
     private void GenerateMusclesGroupButtons()
     {
-        for (int i = 0; i < Enum.GetValues(typeof(MusclesGroups)).Length; i++)
+        for (int i = 0; i < Enum.GetValues(typeof(WorkoutManager.MusclesGroups)).Length; i++)
         {
-            MusclesGroups thisMuscleGroup = (MusclesGroups)Enum.GetValues(typeof(MusclesGroups)).GetValue(i);
+            WorkoutManager.MusclesGroups thisMuscleGroup = (WorkoutManager.MusclesGroups)Enum.GetValues(typeof(WorkoutManager.MusclesGroups)).GetValue(i);
 
             Button thisButton = new()
             {
@@ -72,7 +71,7 @@ public sealed partial class ChooseExercise : ContentPage
             clickedButton.Background = Color.FromRgb(127, 255, 0);
         }
 
-        MusclesGroups[] allMusclesGroups = (MusclesGroups[])Enum.GetValues(typeof(MusclesGroups));
+        WorkoutManager.MusclesGroups[] allMusclesGroups = (WorkoutManager.MusclesGroups[])Enum.GetValues(typeof(WorkoutManager.MusclesGroups));
         _selectedMusclesGroups = allMusclesGroups[value];
 
         CalculateAndDisplayExercises();
@@ -92,7 +91,7 @@ public sealed partial class ChooseExercise : ContentPage
 
     private void CalculateAndDisplayExercises()
     {
-        Dictionary<ExerciseDetails, int> filteredExercises = new();
+        Dictionary<WorkoutManager.ExerciseDetails, int> filteredExercises = new();
 
         for (int i = 0; i < WorkoutManager.Instance.SavedExercises.Count; i++)
         {
@@ -119,7 +118,7 @@ public sealed partial class ChooseExercise : ContentPage
         GenerateExerciseGrid(filteredExercises);
     }
 
-    private void GenerateExerciseGrid(Dictionary<ExerciseDetails, int> exerciseDetails)
+    private void GenerateExerciseGrid(Dictionary<WorkoutManager.ExerciseDetails, int> exerciseDetails)
     {
         for (int i = 0; i < exerciseDetails.Count; i++)
         {
@@ -133,7 +132,7 @@ public sealed partial class ChooseExercise : ContentPage
     }
 
     //Generate whole list first time, so don't need to check anything
-    private void GenerateExerciseGrid(List<ExerciseDetails> exerciseDetails)
+    private void GenerateExerciseGrid(List<WorkoutManager.ExerciseDetails> exerciseDetails)
     {
         for (int i = 0; i < exerciseDetails.Count; i++)
         {
