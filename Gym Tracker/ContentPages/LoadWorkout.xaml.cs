@@ -6,6 +6,7 @@ public sealed partial class LoadWorkout : ContentPage
 {
     private readonly int _thisWorkoutIndex;
     private float _thisWorkoutVolume;
+    private readonly List<Button> _exercisesButtons = new();
 
     public LoadWorkout(int thisWorkoutIndex)
     {
@@ -62,9 +63,11 @@ public sealed partial class LoadWorkout : ContentPage
             {
                 Text = WorkoutManager.GetThisExerciseDetails(thisExercise.ThisExerciseDetailsIndex).Name,
                 HorizontalOptions = LayoutOptions.Center,
+                Background = WorkoutManager.Instance.IsWorkoutStarted ? Color.FromRgb(255, 255, 255) : Color.FromRgb(128, 128, 128),
             };
 
             LoadWorkoutVerticalStackLayout.Children.Add(currentButton);
+            _exercisesButtons.Add(currentButton);
 
             int currentIndex = i; //this makes pass to function actual index of currently created button
             currentButton.Clicked += (sender, e) => LoadExerciseButtonClicked(currentIndex);
@@ -104,6 +107,11 @@ public sealed partial class LoadWorkout : ContentPage
     {
         WorkoutManager.Instance.IsWorkoutStarted = true;
         WorkoutManager.Instance.StartedWorkoutIndex = _thisWorkoutIndex;
+
+        for (int i = 0; i < _exercisesButtons.Count; i++)
+        {
+            _exercisesButtons[i].Background = Color.FromRgb(255, 255, 255);
+        }
 
         SetStopWorkoutText();
     }

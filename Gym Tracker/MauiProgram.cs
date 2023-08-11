@@ -1,4 +1,7 @@
-﻿using SkiaSharp.Views.Maui.Controls.Hosting;
+﻿#if DEBUG
+using Microsoft.Extensions.Logging;
+#endif
+using SkiaSharp.Views.Maui.Controls.Hosting;
 namespace Gym_Tracker;
 
 public static class MauiProgram
