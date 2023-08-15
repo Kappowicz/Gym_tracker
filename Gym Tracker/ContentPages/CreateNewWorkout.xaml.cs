@@ -1,3 +1,4 @@
+using Gym_Tracker.Buttons;
 using Gym_Tracker.Interfaces;
 using Gym_Tracker.Managers;
 using static Gym_Tracker.Managers.WorkoutManager;
@@ -11,6 +12,11 @@ public sealed partial class CreateNewWorkout : ContentPage, IChosenIndex
     public CreateNewWorkout()
     {
         InitializeComponent();
+
+        SetSaveAndGoBackButtonColor();
+
+        CreateNewWorkoutVerticalStackLayout.ChildAdded += (sender, e) => SetSaveAndGoBackButtonColor();
+        CreateNewWorkoutVerticalStackLayout.ChildRemoved += (sender, e) => SetSaveAndGoBackButtonColor();
     }
 
     private void SaveAndGoBackButtonClicked(object sender, EventArgs e)
@@ -25,6 +31,11 @@ public sealed partial class CreateNewWorkout : ContentPage, IChosenIndex
         UIManager.Instance.CurrentMainPage.AddButtonForCreatedWorkout();
 
         _ = Navigation.PopAsync();
+    }
+
+    private void SetSaveAndGoBackButtonColor()
+    {
+        SaveAndGoBackButton.Background = CreateNewWorkoutVerticalStackLayout.Children.Count > 0 ? (Brush)Color.FromRgb(255, 255, 255) : (Brush)Color.FromRgb(128, 128, 128);
     }
 
     private void SaveWorkout()
@@ -75,12 +86,30 @@ public sealed partial class CreateNewWorkout : ContentPage, IChosenIndex
         //there has to be copying constructor to correctly update exercise data later
         _currentlyCreatedWorkout.Exercises.Add(new Exercise(exerciseIndex));
 
-        Button currentButton = new()
+        Grid grid = new();
+        grid.RowDefinitions.Add(new RowDefinition());
+        grid.ColumnDefinitions.Add(new ColumnDefinition());
+        grid.ColumnDefinitions.Add(new ColumnDefinition());
+
+        ExerciseDetails thisExercise = WorkoutManager.Instance.SavedExercises[exerciseIndex];
+
+        ExerciseButton currentButton = new(thisExercise.Name, exerciseIndex, null);
+
+        Button deleteButton = new()
         {
-            Text = WorkoutManager.Instance.SavedExercises[exerciseIndex].Name,
-            HorizontalOptions = LayoutOptions.Fill
+            Text = "Delete",
+            HorizontalOptions = LayoutOptions.Start
         };
 
-        CreateNewWorkoutVerticalStackLayout.Add(currentButton);
+        grid.Children.Add(deleteButton);
+        grid.Children.Add(currentButton.ExerciseButtonGrid);
+
+        Grid.SetRow(deleteButton, 0);
+        Grid.SetColumn(deleteButton, 0);
+
+        Grid.SetRow(currentButton.ExerciseButtonGrid, 0);
+        Grid.SetColumn(currentButton.ExerciseButtonGrid, 1);
+
+        CreateNewWorkoutVerticalStackLayout.Add(grid);
     }
 }
