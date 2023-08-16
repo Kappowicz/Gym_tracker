@@ -1,20 +1,16 @@
 using Gym_Tracker.Buttons;
-using Gym_Tracker.Interfaces;
 using Gym_Tracker.Managers;
 
 namespace Gym_Tracker;
 
 public sealed partial class ChooseExercise : ContentPage
 {
-    private readonly IChosenIndex _chooseExerciseHandler;
     private WorkoutManager.MusclesGroups _selectedMusclesGroups = WorkoutManager.MusclesGroups.All;
     private string _currentSearchedText = "";
 
-    public ChooseExercise(IChosenIndex chooseExerciseHandler)
+    public ChooseExercise()
     {
         InitializeComponent();
-
-        _chooseExerciseHandler = chooseExerciseHandler;
 
         GenerateMusclesGroupButtons();
 
@@ -125,7 +121,10 @@ public sealed partial class ChooseExercise : ContentPage
             WorkoutManager.ExerciseDetails thisExercise = exerciseDetails.ElementAt(i).Key;
             int thisExerciseIndex = exerciseDetails.ElementAt(i).Value;
 
-            ExerciseButton thisExerciseButton = new(thisExercise.Name, thisExerciseIndex, _chooseExerciseHandler, thisExercise.ImagePath);
+            ExerciseButton thisExerciseButton = new(thisExercise.Name, thisExercise.ImagePath);
+
+            int gatherIndex = thisExerciseIndex;
+            thisExerciseButton.ThisExerciseButton.Clicked += (sender, e) => UIManager.Instance.CurrentCreateNewWorkout?.IndexChosen(gatherIndex);
 
             ChooseExerciseVerticalStackLayout.Children.Add(thisExerciseButton.ExerciseButtonGrid);
         }
@@ -138,7 +137,10 @@ public sealed partial class ChooseExercise : ContentPage
         {
             WorkoutManager.ExerciseDetails thisExercise = exerciseDetails[i];
 
-            ExerciseButton thisExerciseButton = new(thisExercise.Name, i, _chooseExerciseHandler, thisExercise.ImagePath);
+            ExerciseButton thisExerciseButton = new(thisExercise.Name, thisExercise.ImagePath);
+
+            int gatherIndex = i;
+            thisExerciseButton.ThisExerciseButton.Clicked += (sender, e) => UIManager.Instance.CurrentCreateNewWorkout?.IndexChosen(gatherIndex);
 
             ChooseExerciseVerticalStackLayout.Children.Add(thisExerciseButton.ExerciseButtonGrid);
         }

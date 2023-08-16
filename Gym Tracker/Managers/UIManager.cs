@@ -9,6 +9,7 @@
 
         public MainPage CurrentMainPage { get; set; }
         public Progress CurrentProgressPage { get; set; }
+        public CreateNewWorkout CurrentCreateNewWorkout { get; set; }
 
         private UIManager()
         {

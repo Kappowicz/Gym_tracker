@@ -1,17 +1,18 @@
 using Gym_Tracker.Buttons;
-using Gym_Tracker.Interfaces;
 using Gym_Tracker.Managers;
 using static Gym_Tracker.Managers.WorkoutManager;
 
 namespace Gym_Tracker;
 
-public sealed partial class CreateNewWorkout : ContentPage, IChosenIndex
+public sealed partial class CreateNewWorkout : ContentPage
 {
     private Workout _currentlyCreatedWorkout = new();
 
     public CreateNewWorkout()
     {
         InitializeComponent();
+
+        UIManager.Instance.CurrentCreateNewWorkout = this;
 
         SetSaveAndGoBackButtonColor();
 
@@ -66,7 +67,7 @@ public sealed partial class CreateNewWorkout : ContentPage, IChosenIndex
 
     private void AddNewExerciseButtonClicked(object sender, EventArgs e)
     {
-        _ = Navigation.PushAsync(new ChooseExercise(this));
+        _ = Navigation.PushAsync(new ChooseExercise());
     }
 
     private async Task DisplayPopUpWorkoutNameTaken()
@@ -93,13 +94,15 @@ public sealed partial class CreateNewWorkout : ContentPage, IChosenIndex
 
         ExerciseDetails thisExercise = WorkoutManager.Instance.SavedExercises[exerciseIndex];
 
-        ExerciseButton currentButton = new(thisExercise.Name, exerciseIndex, null);
+        ExerciseButton currentButton = new(thisExercise.Name);
 
         Button deleteButton = new()
         {
             Text = "Delete",
             HorizontalOptions = LayoutOptions.Start
         };
+
+        deleteButton.Clicked += (sender, e) => DeleteButtonClicked(exerciseIndex);
 
         grid.Children.Add(deleteButton);
         grid.Children.Add(currentButton.ExerciseButtonGrid);
@@ -111,5 +114,12 @@ public sealed partial class CreateNewWorkout : ContentPage, IChosenIndex
         Grid.SetColumn(currentButton.ExerciseButtonGrid, 1);
 
         CreateNewWorkoutVerticalStackLayout.Add(grid);
+    }
+
+    private void DeleteButtonClicked(int index)
+    {
+        //TODO: Fix bug with deleting some exercises from list
+        _currentlyCreatedWorkout.Exercises.RemoveAt(index);
+        CreateNewWorkoutVerticalStackLayout.RemoveAt(index);
     }
 }

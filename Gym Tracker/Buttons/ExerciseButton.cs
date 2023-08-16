@@ -1,16 +1,15 @@
-﻿using Gym_Tracker.Interfaces;
-using Gym_Tracker.Managers;
+﻿using Gym_Tracker.Managers;
 
 namespace Gym_Tracker.Buttons
 {
     internal sealed class ExerciseButton : ContentView
     {
         public Grid ExerciseButtonGrid { get; }
+        public Button ThisExerciseButton { get; }
 
         private readonly Image _exerciseImage;
-        private readonly Button _thisExerciseButton;
 
-        public ExerciseButton(string exerciseName, int thisExerciseIndex, IChosenIndex chooseExerciseHandler, string exerciseImagePath = UIManager.defaultImagePath)
+        public ExerciseButton(string exerciseName, string exerciseImagePath = UIManager.defaultImagePath)
         {
             _exerciseImage = new()
             {
@@ -19,26 +18,24 @@ namespace Gym_Tracker.Buttons
                 MaximumWidthRequest = 50,
             };
 
-            _thisExerciseButton = new()
+            ThisExerciseButton = new()
             {
                 Text = exerciseName,
                 HorizontalOptions = LayoutOptions.Fill
             };
-
-            _thisExerciseButton.Clicked += (sender, e) => chooseExerciseHandler.IndexChosen(thisExerciseIndex);
 
             ExerciseButtonGrid = new();
             ExerciseButtonGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto }); // Image column
             ExerciseButtonGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star }); // Button column
 
             ExerciseButtonGrid.Children.Add(_exerciseImage);
-            ExerciseButtonGrid.Children.Add(_thisExerciseButton);
+            ExerciseButtonGrid.Children.Add(ThisExerciseButton);
 
             Grid.SetRow(_exerciseImage, 0);
             Grid.SetColumn(_exerciseImage, 0);
 
-            Grid.SetRow(_thisExerciseButton, 0);
-            Grid.SetColumn(_thisExerciseButton, 1);
+            Grid.SetRow(ThisExerciseButton, 0);
+            Grid.SetColumn(ThisExerciseButton, 1);
         }
     }
 }
