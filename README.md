@@ -12,15 +12,17 @@ Currently it is being made stricte for Android and Windows (for those who workou
 Maybe later I'll add it also to the Iphone as Apple allows downloading apps from unknown sources.
 
 ### TODO: (things to do before recognizing that the project is out of alpha)
-- Doing workouts (setting exercises as done while doing workouts)
-- Calculating progress based on previously saved workouts,
 - Creating new exercises,
-- Loading workouts,
-- Saving done workout,
-- Loading Screen
+- Option to add new exercises to existing workout
+- Timer which starts after doing a set
+- Make it prettier
 
 ### DONE:
 - Creating new workouts from existing exercises
+- Doing workouts (setting exercises as done while doing workouts)
+- Calculating progress based on previously saved workouts,
+- Loading workouts,
+- Saving done workout,
 
 ### KNOWN ISSUES:
 - You can click button which opens some contentpage several times, which opens several additional contentpages
