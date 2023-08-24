@@ -6,6 +6,7 @@ I will also want to add here some begginer friendly tipps for some subjets relat
 ### Technologies:
 It is being made on [C# .Net MAUI](https://learn.microsoft.com/en-us/dotnet/maui/what-is-maui).
 I also use third party framework to display charts [LiveCharts2](https://lvcharts.com/)
+Maybe in the future there will be support for nothing glyph interface
 
 ### Platforms: 
 Currently it is being made stricte for Android and Windows (for those who workout at home).
@@ -16,6 +17,7 @@ Maybe later I'll add it also to the Iphone as Apple allows downloading apps from
 - Option to add new exercises to existing workout
 - Timer which starts after doing a set
 - Make it prettier
+- Save system
 
 ### DONE:
 - Creating new workouts from existing exercises
