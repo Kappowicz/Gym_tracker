@@ -7,6 +7,7 @@ namespace Gym_Tracker;
 public sealed partial class CreateNewWorkout : ContentPage
 {
     private Workout _currentlyCreatedWorkout = new();
+    private readonly List<ExerciseButtonWithDelete> _buttonsCreated = new();
 
     public CreateNewWorkout()
     {
@@ -87,33 +88,15 @@ public sealed partial class CreateNewWorkout : ContentPage
         //there has to be copying constructor to correctly update exercise data later
         _currentlyCreatedWorkout.Exercises.Add(new Exercise(exerciseIndex));
 
-        Grid grid = new();
-        grid.RowDefinitions.Add(new RowDefinition());
-        grid.ColumnDefinitions.Add(new ColumnDefinition());
-        grid.ColumnDefinitions.Add(new ColumnDefinition());
-
         ExerciseDetails thisExercise = WorkoutManager.Instance.SavedExercises[exerciseIndex];
 
-        ExerciseButton currentButton = new(thisExercise.Name);
+        ExerciseButtonWithDelete currentButton = new(thisExercise.Name, exerciseIndex);
 
-        Button deleteButton = new()
-        {
-            Text = "Delete",
-            HorizontalOptions = LayoutOptions.Start
-        };
+        _buttonsCreated.Add(currentButton);
 
-        deleteButton.Clicked += (sender, e) => DeleteButtonClicked(exerciseIndex);
+        currentButton.DeleteButton.Clicked += (sender, e) => DeleteButtonClicked(exerciseIndex);
 
-        grid.Children.Add(deleteButton);
-        grid.Children.Add(currentButton.ExerciseButtonGrid);
-
-        Grid.SetRow(deleteButton, 0);
-        Grid.SetColumn(deleteButton, 0);
-
-        Grid.SetRow(currentButton.ExerciseButtonGrid, 0);
-        Grid.SetColumn(currentButton.ExerciseButtonGrid, 1);
-
-        CreateNewWorkoutVerticalStackLayout.Add(grid);
+        CreateNewWorkoutVerticalStackLayout.Add(currentButton.ThisExerciseGrid);
     }
 
     private void DeleteButtonClicked(int index)
@@ -121,5 +104,12 @@ public sealed partial class CreateNewWorkout : ContentPage
         //TODO: Fix bug with deleting some exercises from list
         _currentlyCreatedWorkout.Exercises.RemoveAt(index);
         CreateNewWorkoutVerticalStackLayout.RemoveAt(index);
+
+        _buttonsCreated.RemoveAt(index);
+
+        for (int i = index; i < _buttonsCreated.Count - 1; i++)
+        {
+            _buttonsCreated[index].ThisExerciseIndex--;
+        }
     }
 }
